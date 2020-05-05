@@ -66,6 +66,7 @@
                                                     <label for="nome">Descrição</label>
                                                     <input name="descricao_igreja_nacional" type="text" class="form-control" required="">
                                                 </div>
+                                                <div class="form-group col-md-6"></div>
                                                 <div class="form-group col-md-3">
                                                     <label for="nome">Sigla</label>
                                                     <input name="sigla" type="text" class="form-control" required="">

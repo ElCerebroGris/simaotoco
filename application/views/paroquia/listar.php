@@ -61,7 +61,7 @@
                     <div class="container-fluid">
                         <?php if ($this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
-                                <a href="<?= base_url() ?>provincia_eclesiastica/add" class="btn btn-info">Adicionar</a>
+                                <a href="<?= base_url() ?>paroquia/add" class="btn btn-info">Adicionar</a>
                             </h5>
                         <?php } ?>
                         <div class="row">

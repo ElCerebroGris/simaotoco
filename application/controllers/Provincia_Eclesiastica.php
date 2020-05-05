@@ -15,12 +15,15 @@ class Provincia_Eclesiastica extends CI_Controller {
     }
 
     public function listar() {
+        $this->db->join('igreja_nacional', 
+        'igreja_nacional.id_igreja_nacional=provincia_eclesiastica.id_igreja_nacional');
         $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
         $this->load->view('provincia_eclesiastica/listar', $dados);
     }
 
     public function add() {
-        $this->load->view('provincia_eclesiastica/add');
+        $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
+        $this->load->view('provincia_eclesiastica/add', $dados);
     }
 
     public function addPost() {

@@ -15,12 +15,14 @@ class Classe extends CI_Controller {
     }
 
     public function listar() {
+        $this->db->join('paroquia', 'paroquia.id_paroquia=classe.id_paroquia');
         $dados['classes'] = $this->db->get('classe')->result();
         $this->load->view('classe/listar', $dados);
     }
 
     public function add() {
-        $this->load->view('classe/add');
+        $dados['paroquias'] = $this->db->get('paroquia')->result();
+        $this->load->view('classe/add', $dados);
     }
 
     public function addPost() {

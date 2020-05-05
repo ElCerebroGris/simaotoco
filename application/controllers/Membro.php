@@ -54,12 +54,12 @@ class Membro extends CI_Controller {
 
         $data['id_nacionalidade'] = $this->input->post('nacionalidade');
         $data['id_tribo'] = $this->input->post('tribo');
-        $data['igreja_nacionais'] = $this->input->post('igreja_nacional');
+        $data['id_igreja_nacional'] = $this->input->post('igreja_nacional');
         $data['id_provincia_eclesiastica'] = $this->input->post('provincia_eclesiastica');
         $data['id_paroquia'] = $this->input->post('paroquia');
         $data['Id_classe'] = $this->input->post('classe');
         $data['data_admissao'] = $this->input->post('data_admissao');
-        $data['data_bapitsmo'] = $this->input->post('data_bapitsmo');
+        $data['data_baptismo'] = $this->input->post('data_baptismo');
         $data['id_categoria'] = $this->input->post('categoria');
         $data['id_funcao'] = $this->input->post('funcao');
         $data['data_nascimento'] = $this->input->post('data_nascimento');

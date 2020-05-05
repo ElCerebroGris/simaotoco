@@ -15,12 +15,15 @@ class Paroquia extends CI_Controller {
     }
 
     public function listar() {
+        $this->db->join('provincia_eclesiastica',
+         'provincia_eclesiastica.id_provincia_eclesiastica=paroquia.id_provincia_eclesiastica');
         $dados['paroquias'] = $this->db->get('paroquia')->result();
         $this->load->view('paroquia/listar', $dados);
     }
 
     public function add() {
-        $this->load->view('paroquia/add');
+        $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
+        $this->load->view('paroquia/add', $dados);
     }
 
     public function addPost() {

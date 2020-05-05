@@ -59,17 +59,18 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?=base_url()?>funcao/addPost">
+                                    <form role="form" method="post" action="<?=base_url()?>provincia_eclesiastica/addPost">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Igreja Nacional</label>
                                                     <select name="igreja_nacional" class="form-control select3" style="width: 100%;">
                                                         <?php foreach ($igreja_nacionais as $n) {?>
-                                                            <option value="<?= $n->id_igreja_nacional ?>"><?= $n->descricao_igrja_nacional ?></option>
+                                                            <option value="<?= $n->id_igreja_nacional ?>"><?= $n->descricao_igreja_nacional ?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>
+                                                <div class="form-group col-md-6"></div>
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Descrição</label>
                                                     <input name="descricao_provincia_eclesiastica" type="text" class="form-control" required="">

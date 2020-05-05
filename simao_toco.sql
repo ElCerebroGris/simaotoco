@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Maio-2020 às 22:43
+-- Generation Time: 05-Maio-2020 às 23:22
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.11
 
@@ -67,6 +67,13 @@ CREATE TABLE `classe` (
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `classe`
+--
+
+INSERT INTO `classe` (`id_classe`, `descricao_classe`, `id_paroquia`, `data_criacao`, `data_atualizacao`) VALUES
+(1, 'Homens 1', 1, '2020-05-05 21:03:38', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -147,7 +154,12 @@ CREATE TABLE `identificacao` (
 
 INSERT INTO `identificacao` (`id_identificacao`, `descricao_identificacao`, `tipo_identificacao`, `data_criacao`) VALUES
 (1, '1234', 1, '2020-05-03 20:25:16'),
-(2, '0000', 1, '2020-05-03 22:49:12');
+(2, '0000', 1, '2020-05-03 22:49:12'),
+(7, '111111111', 1, '2020-05-05 21:10:50'),
+(8, '121212', 1, '2020-05-05 21:17:16'),
+(9, '3333', 1, '2020-05-05 21:18:20'),
+(11, '777', 1, '2020-05-05 21:20:51'),
+(12, '12121212112', 1, '2020-05-05 21:22:03');
 
 -- --------------------------------------------------------
 
@@ -163,6 +175,13 @@ CREATE TABLE `igreja_nacional` (
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `igreja_nacional`
+--
+
+INSERT INTO `igreja_nacional` (`id_igreja_nacional`, `descricao_igreja_nacional`, `sigla`, `indicador_telefonico`, `data_criacao`, `data_atualizacao`) VALUES
+(1, 'Angola', 'ANG', '+244', '2020-05-05 20:51:15', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -183,7 +202,7 @@ CREATE TABLE `membro` (
   `id_paroquia` int(11) NOT NULL,
   `id_classe` int(11) NOT NULL,
   `data_admissao` varchar(10) NOT NULL,
-  `data_bapitsmo` varchar(10) NOT NULL,
+  `data_baptismo` varchar(10) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `id_funcao` int(11) NOT NULL,
   `data_nascimento` varchar(30) NOT NULL,
@@ -198,9 +217,10 @@ CREATE TABLE `membro` (
 -- Extraindo dados da tabela `membro`
 --
 
-INSERT INTO `membro` (`id_membro`, `nome_membro`, `nome_pai`, `nome_mae`, `id_identificacao`, `id_nacionalidade`, `id_tribo`, `id_igreja_nacional`, `id_provincia_eclesiastica`, `id_paroquia`, `id_classe`, `data_admissao`, `data_bapitsmo`, `id_categoria`, `id_funcao`, `data_nascimento`, `estado_civil`, `id_localidade`, `telefone`, `endereco`, `data_criacao`) VALUES
+INSERT INTO `membro` (`id_membro`, `nome_membro`, `nome_pai`, `nome_mae`, `id_identificacao`, `id_nacionalidade`, `id_tribo`, `id_igreja_nacional`, `id_provincia_eclesiastica`, `id_paroquia`, `id_classe`, `data_admissao`, `data_baptismo`, `id_categoria`, `id_funcao`, `data_nascimento`, `estado_civil`, `id_localidade`, `telefone`, `endereco`, `data_criacao`) VALUES
 (1, 'AAA', 'BBB', 'CCC', 1, 1, 0, 0, 0, 0, 0, '', '', 0, 0, '2020-05-21', 1, 1, 'lll', 'lll', '2020-05-03 20:25:16'),
-(2, 'Mario', 'MMM', 'AAA', 2, 1, 0, 0, 0, 0, 0, '', '', 0, 0, '2020-05-20', 1, 1, '', '', '2020-05-03 22:49:13');
+(2, 'Mario', 'MMM', 'AAA', 2, 1, 0, 0, 0, 0, 0, '', '', 0, 0, '2020-05-20', 1, 1, '', '', '2020-05-03 22:49:13'),
+(3, 'LLLL', 'LLLL', 'LLLL', 12, 1, 1, 1, 1, 1, 1, '2020-05-12', '2020-05-21', 1, 1, '2020-05-18', 1, 1, '', '', '2020-05-05 21:22:03');
 
 -- --------------------------------------------------------
 
@@ -300,6 +320,13 @@ CREATE TABLE `paroquia` (
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `paroquia`
+--
+
+INSERT INTO `paroquia` (`id_paroquia`, `descricao_paroquia`, `id_provincia_eclesiastica`, `data_criacao`, `data_atualizacao`) VALUES
+(1, 'Sede', 1, '2020-05-05 20:58:59', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -313,6 +340,13 @@ CREATE TABLE `provincia_eclesiastica` (
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `provincia_eclesiastica`
+--
+
+INSERT INTO `provincia_eclesiastica` (`id_provincia_eclesiastica`, `descricao_provincia_eclesiastica`, `id_igreja_nacional`, `data_criacao`, `data_atualizacao`) VALUES
+(1, 'Luanda', 1, '2020-05-05 20:54:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -531,7 +565,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `classe`
 --
 ALTER TABLE `classe`
-  MODIFY `id_classe` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_classe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `estado_civil`
@@ -549,19 +583,19 @@ ALTER TABLE `funcao`
 -- AUTO_INCREMENT for table `identificacao`
 --
 ALTER TABLE `identificacao`
-  MODIFY `id_identificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_identificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `igreja_nacional`
 --
 ALTER TABLE `igreja_nacional`
-  MODIFY `id_igreja_nacional` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_igreja_nacional` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `membro`
 --
 ALTER TABLE `membro`
-  MODIFY `id_membro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_membro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `membro_documento`
@@ -597,13 +631,13 @@ ALTER TABLE `pagamento`
 -- AUTO_INCREMENT for table `paroquia`
 --
 ALTER TABLE `paroquia`
-  MODIFY `id_paroquia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_paroquia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `provincia_eclesiastica`
 --
 ALTER TABLE `provincia_eclesiastica`
-  MODIFY `id_provincia_eclesiastica` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_provincia_eclesiastica` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tipo_documento`

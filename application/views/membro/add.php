@@ -109,7 +109,7 @@
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Paroquia</label>
                                                     <select name="paroquia" class="form-control select3" style="width: 100%;">
-                                                        <?php foreach ($paroquia as $n) { ?>
+                                                        <?php foreach ($paroquias as $n) { ?>
                                                             <option value="<?= $n->id_paroquia ?>"><?= $n->descricao_paroquia ?></option>
                                                         <?php } ?>
                                                     </select>
@@ -136,7 +136,7 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Função</label>
-                                                    <select name="categoria" class="form-control select3" style="width: 100%;">
+                                                    <select name="funcao" class="form-control select3" style="width: 100%;">
                                                         <?php foreach ($funcoes as $n) { ?>
                                                             <option value="<?= $n->id_funcao ?>"><?= $n->descricao_funcao ?></option>
                                                         <?php } ?>

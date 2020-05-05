@@ -83,7 +83,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($igrejas_nacionais as $q) { ?>
+                                                <?php foreach ($igreja_nacionais as $q) { ?>
                                                     <tr>
                                                         <td><?= $q->descricao_igreja_nacional ?></td>
                                                         <td><?= $q->sigla ?></td>

@@ -63,13 +63,14 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">Igreja Nacional</label>
-                                                    <select name="provincia_eclesiastica" class="form-control select3" style="width: 100%;">
+                                                    <label for="nome">Paroquia</label>
+                                                    <select name="paroquia" class="form-control select3" style="width: 100%;">
                                                         <?php foreach ($paroquias as $n) {?>
                                                             <option value="<?= $n->id_paroquia ?>"><?= $n->descricao_paroquia ?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>
+                                                <div class="form-group col-md-6"></div>
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Descrição</label>
                                                     <input name="descricao_classe" type="text" class="form-control" required="">
@@ -114,7 +115,5 @@
         <script src="<?=base_url()?>libs/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
         <!-- AdminLTE App -->
         <script src="<?=base_url()?>libs/dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="<?=base_url()?>libs/dist/js/demo.js"></script>
     </body>
 </html>
