@@ -4,12 +4,7 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= base_url() ?>reserva/add" class="nav-link">Nova Reserva</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= base_url() ?>hospede/add" class="nav-link">Novo Hospede</a>
-        </li>
+	
     </ul>
 
     <!-- Right navbar links -->

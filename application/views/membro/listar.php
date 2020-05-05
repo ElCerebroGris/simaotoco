@@ -42,7 +42,12 @@
                         <?php } ?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Membros</h1>
+								
+								<?php if ($this->session->userdata('nivel') == 1) { ?>
+                            <h5 class="mb-2">
+                                <a href="<?= base_url() ?>membro/add" class="btn btn-outline-primary btn-sm	">Adicionar</a>
+                            </h5>
+                        <?php } ?>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -59,11 +64,7 @@
                 <section class="content">
 
                     <div class="container-fluid">
-                        <?php if ($this->session->userdata('nivel') == 1) { ?>
-                            <h5 class="mb-2">
-                                <a href="<?= base_url() ?>membro/add" class="btn btn-info">Adicionar</a>
-                            </h5>
-                        <?php } ?>
+                        
                         <div class="row">
                             <div class="col-12">
                                 <!-- Default box -->
@@ -72,8 +73,8 @@
                                         <h3 class="card-title">Lista de Membros</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
+                                    <div class="card-body table-responsive" >
+                                        <table id="example1" class="table table-bordered table-striped table-sm table-f-s-2"   cellspacing="0">
                                             <thead>
                                                 <tr>
                                                     <th>Nome</th>
@@ -81,26 +82,20 @@
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style="color:black">
                                                 <?php foreach ($membros as $q) { ?>
                                                     <tr>
-                                                        <td><a href="<?= base_url('membro/ver/' . $q->id_membro) ?>"><?= $q->nome_membro ?></a></td>
+                                                        <td><a style="color:black !important" href="<?= base_url('membro/ver/' . $q->id_membro) ?>"><?= $q->nome_membro ?></a></td>
                                                         <td><?= $q->descricao_identificacao ?></td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-primary">Ativar</a>
-                                                            <a href="#" class="btn btn-danger">Desativar</a>
-                                                            <a href="#" class="btn btn-info">Editar</a>
+                                                        <td class="text-center">
+                                                            <a href="#" class="btn btn-primary btn-sm">Ativar</a>
+                                                            <a href="#" class="btn btn-danger btn-sm">Desativar</a>
+                                                            <a href="#" class="btn btn-info btn-sm">Editar</a>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Nome</th>
-                                                    <th>Identificação</th>
-                                                    <th>Opções</th>
-                                                </tr>
-                                            </tfoot>
+                                            
                                         </table>
                                     </div>
                                     <!-- /.card-body -->

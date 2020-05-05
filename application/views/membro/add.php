@@ -99,19 +99,19 @@
                                         <!-- /.card-header -->
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                     <label for="nome">Nome Completo</label>
                                                     <input name="nome_membro" type="text" class="form-control" required="">
                                                 </div>
-                                                <div class="form-group col-md-6"></div>
-                                            </div>
+                                             
+                                          
 
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
+                                       
+                                                <div class="form-group col-md-4">
                                                     <label for="nome">Nome do Pai</label>
                                                     <input name="nome_pai" type="text" class="form-control" required="">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                     <label for="nome">Nome da nãe</label>
                                                     <input name="nome_mae" type="text" class="form-control" required="">
                                                 </div>
