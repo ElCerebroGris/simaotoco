@@ -91,7 +91,43 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">Tribo</label>
+                                                    <label for="nome">Igreja Nacional</label>
+                                                    <select name="igreja_nacional" class="form-control select3" style="width: 100%;">
+                                                        <?php foreach ($igreja_nacionais as $n) { ?>
+                                                            <option value="<?= $n->id_igreja_nacional ?>"><?= $n->descricao_igreja_nacional ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Provincia Eclesiastica</label>
+                                                    <select name="provincia_eclesiastica" class="form-control select3" style="width: 100%;">
+                                                        <?php foreach ($provincia_eclesiasticas as $n) { ?>
+                                                            <option value="<?= $n->id_provincia_eclesiastica ?>"><?= $n->descricao_provincia_eclesiastica ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Paroquia</label>
+                                                    <select name="paroquia" class="form-control select3" style="width: 100%;">
+                                                        <?php foreach ($paroquia as $n) { ?>
+                                                            <option value="<?= $n->id_paroquia ?>"><?= $n->descricao_paroquia ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Classe</label>
+                                                    <select name="classe" class="form-control select3" style="width: 100%;">
+                                                        <?php foreach ($classes as $n) { ?>
+                                                            <option value="<?= $n->id_classe ?>"><?= $n->descricao_classe ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Data de admissão</label>
+                                                    <input name="data_admissao" type="date" class="form-control" required="">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Categoria</label>
                                                     <select name="categoria" class="form-control select3" style="width: 100%;">
                                                         <?php foreach ($categorias as $n) { ?>
                                                             <option value="<?= $n->id_categoria ?>"><?= $n->descricao_categoria ?></option>
@@ -99,8 +135,12 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">Data de admissão</label>
-                                                    <input name="data_admissao" type="date" class="form-control" required="">
+                                                    <label for="nome">Função</label>
+                                                    <select name="categoria" class="form-control select3" style="width: 100%;">
+                                                        <?php foreach ($funcoes as $n) { ?>
+                                                            <option value="<?= $n->id_funcao ?>"><?= $n->descricao_funcao ?></option>
+                                                        <?php } ?>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Data de baptismo</label>

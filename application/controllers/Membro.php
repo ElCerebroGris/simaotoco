@@ -34,7 +34,12 @@ class Membro extends CI_Controller {
         $dados['estado_civil'] = $this->db->get('estado_civil')->result();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $dados['tribos'] = $this->db->get('tribo')->result();
+        $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
+        $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
+        $dados['paroquias'] = $this->db->get('paroquia')->result();
+        $dados['classes'] = $this->db->get('classe')->result();
         $dados['categorias'] = $this->db->get('categoria')->result();
+        $dados['funcoes'] = $this->db->get('funcao')->result();
         $dados['tipo_identificacao'] = $this->db->get('tipo_identificacao')->result();
         $this->load->view('membro/add', $dados);
     }
@@ -49,9 +54,14 @@ class Membro extends CI_Controller {
 
         $data['id_nacionalidade'] = $this->input->post('nacionalidade');
         $data['id_tribo'] = $this->input->post('tribo');
+        $data['igreja_nacionais'] = $this->input->post('igreja_nacional');
+        $data['id_provincia_eclesiastica'] = $this->input->post('provincia_eclesiastica');
+        $data['id_paroquia'] = $this->input->post('paroquia');
+        $data['Id_classe'] = $this->input->post('classe');
         $data['data_admissao'] = $this->input->post('data_admissao');
         $data['data_bapitsmo'] = $this->input->post('data_bapitsmo');
         $data['id_categoria'] = $this->input->post('categoria');
+        $data['id_funcao'] = $this->input->post('funcao');
         $data['data_nascimento'] = $this->input->post('data_nascimento');
         $data['estado_civil'] = $this->input->post('estado_civil');
         $data['id_localidade'] = 1;
