@@ -77,16 +77,35 @@
 
                                     <div class="card card-success">
                                         <div class="card-header">
-                                            <h3 class="card-title">Dados da Paróquia</h3>
+                                            <h3 class="card-title">Dados Eclasisaticos</h3>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">####</label>
-                                                    <input name="nome_membro" type="text" class="form-control">
+                                                    <label for="nome">Tribo</label>
+                                                    <select name="tribo" class="form-control select3" style="width: 100%;">
+                                                        <?php foreach ($tribos as $n) { ?>
+                                                            <option value="<?= $n->id_tribo ?>"><?= $n->descricao_tribo ?></option>
+                                                        <?php } ?>
+                                                    </select>
                                                 </div>
-                                                <div class="form-group col-md-6"></div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Tribo</label>
+                                                    <select name="categoria" class="form-control select3" style="width: 100%;">
+                                                        <?php foreach ($categorias as $n) { ?>
+                                                            <option value="<?= $n->id_categoria ?>"><?= $n->descricao_categoria ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Data de admissão</label>
+                                                    <input name="data_admissao" type="date" class="form-control" required="">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Data de baptismo</label>
+                                                    <input name="data_baptismo" type="date" class="form-control" required="">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

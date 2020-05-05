@@ -63,7 +63,15 @@
                     <a href="<?= base_url() ?>nacionalidade" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
-                            Nacionalidade
+                            Nacionalidades
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>tribo" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Tribos
                         </p>
                     </a>
                 </li>

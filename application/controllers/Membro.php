@@ -33,6 +33,8 @@ class Membro extends CI_Controller {
     public function add() {
         $dados['estado_civil'] = $this->db->get('estado_civil')->result();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
+        $dados['tribos'] = $this->db->get('tribo')->result();
+        $dados['categorias'] = $this->db->get('categoria')->result();
         $dados['tipo_identificacao'] = $this->db->get('tipo_identificacao')->result();
         $this->load->view('membro/add', $dados);
     }
@@ -46,6 +48,10 @@ class Membro extends CI_Controller {
         $data1['tipo_identificacao'] = $this->input->post('tipo');
 
         $data['id_nacionalidade'] = $this->input->post('nacionalidade');
+        $data['id_tribo'] = $this->input->post('tribo');
+        $data['data_admissao'] = $this->input->post('data_admissao');
+        $data['data_bapitsmo'] = $this->input->post('data_bapitsmo');
+        $data['id_categoria'] = $this->input->post('categoria');
         $data['data_nascimento'] = $this->input->post('data_nascimento');
         $data['estado_civil'] = $this->input->post('estado_civil');
         $data['id_localidade'] = 1;
