@@ -63,14 +63,6 @@
                 </li>
                 <li class="nav-header">Administração</li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>nacionalidade" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>
-                            Nacionalidade
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="<?= base_url() ?>usuario" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
@@ -78,7 +70,70 @@
                         </p>
                     </a>
                 </li>
-                
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>classe" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Classes
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>paroquia" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Paroquias
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>provincia_eclesiastica" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Provincias Eclesiasticas
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>tribo" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Tribos
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>igreja_nacional" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Igrejas Nacionais
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>nacionalidade" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Nacionalidades
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>categoria" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Categorias
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>funcao" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Funções
+                        </p>
+                    </a>
+                </li>    
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
