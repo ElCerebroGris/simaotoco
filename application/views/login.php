@@ -45,6 +45,14 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php if ($this->session->flashdata('sms') != null) { ?>
+                                <div class="alert alert-danger">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <?= $this->session->flashdata('sms'); ?>
+                                </div>
+                        <?php } ?>
+
                         <div class="row">
                             <!-- /.col -->
                             <div class="col-12">

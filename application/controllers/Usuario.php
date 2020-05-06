@@ -86,19 +86,23 @@ class Usuario extends CI_Controller {
 
         $this->db->where('nome_usuario', $nome_usuario);
         $this->db->where('senha', $senha);
+        $this->db->join('membro', 'membro.id_membro=usuario.id_membro');
         $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
         $data['usuarios'] = $this->db->get('usuario')->result();
 
         if (count($data['usuarios']) == 1) {
             $dados['id_usuario'] = $data['usuarios'][0]->id_usuario;
-            //$dados['nome_completo'] = $data['usuarios'][0]->nome_completo;
+            $dados['nome_completo'] = $data['usuarios'][0]->nome_membro;
             $dados['nome_usuario'] = $data['usuarios'][0]->nome_usuario;
             $dados['logado'] = true;
             $dados['nivel'] = $data['usuarios'][0]->codigo_nivel_usuario;
             $dados['descricao'] = $data['usuarios'][0]->descricao_nivel_usuario;
             $this->session->set_userdata($dados);
+            redirect('welcome');
         }
-        redirect('welcome');
+        $this->session->set_flashdata('sms', 'Usuário/senha incorretos');
+        redirect('welcome/entrar');
+        //redirect('welcome');
     }
 
     public function remover($id = null) {
