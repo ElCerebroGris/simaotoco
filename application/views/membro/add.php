@@ -84,7 +84,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Tribo</label>
-                                                    <select name="tribo" class="form-control select3" style="width: 100%;">
+                                                    <select name="tribo" class="form-control select3" style="width: 100%;">  
                                                         <?php foreach ($tribos as $n) { ?>
                                                             <option value="<?= $n->id_tribo ?>"><?= $n->descricao_tribo ?></option>
                                                         <?php } ?>

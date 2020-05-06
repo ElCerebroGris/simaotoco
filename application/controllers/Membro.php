@@ -15,13 +15,25 @@ class Membro extends CI_Controller {
     }
 
     public function listar() {
+        $this->db->join('nacionalidade', 'nacionalidade.id_nacionalidade=membro.id_nacionalidade');
         $this->db->join('identificacao', 'identificacao.id_identificacao=membro.id_identificacao');
         $dados['membros'] = $this->db->get('membro')->result();
+        
         $this->load->view('membro/listar', $dados);
     }
 
     public function ver($id = null) {
         $this->db->where('id_membro', $id);
+        $this->db->join('igreja_nacional', 'igreja_nacional.id_igreja_nacional=membro.id_igreja_nacional');
+        $this->db->join('provincia_eclesiastica', 
+        'provincia_eclesiastica.id_provincia_eclesiastica=membro.id_provincia_eclesiastica');
+        $this->db->join('paroquia', 'paroquia.id_paroquia=membro.id_paroquia');
+        $this->db->join('classe', 'classe.id_classe=membro.id_classe');
+        $this->db->join('categoria', 'categoria.id_categoria=membro.id_categoria');
+        $this->db->join('funcao', 'funcao.id_funcao=membro.id_funcao');
+        $this->db->join('tribo', 'tribo.id_tribo=membro.id_tribo');
+        $this->db->join('estado_civil', 'estado_civil.id_estado_civil=membro.id_estado_civil');
+        $this->db->join('nacionalidade', 'nacionalidade.id_nacionalidade=membro.id_nacionalidade');
         $this->db->join('identificacao', 'identificacao.id_identificacao=membro.id_identificacao');
         $dados['membros'] = $this->db->get('membro')->result();
         
@@ -63,7 +75,7 @@ class Membro extends CI_Controller {
         $data['id_categoria'] = $this->input->post('categoria');
         $data['id_funcao'] = $this->input->post('funcao');
         $data['data_nascimento'] = $this->input->post('data_nascimento');
-        $data['estado_civil'] = $this->input->post('estado_civil');
+        $data['id_estado_civil'] = $this->input->post('estado_civil');
         $data['id_localidade'] = 1;
         $data['telefone'] = $this->input->post('telefone');
         $data['endereco'] = $this->input->post('endereco');
