@@ -44,6 +44,7 @@
 <script src="<?= base_url() ?>libs/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url() ?>libs/dist/js/adminlte.js"></script>
+<script src="<?= base_url() ?>libs/dist/js/wizard.js"></script>
 
 <script>
     $(function () {

@@ -41,11 +41,38 @@ class Documento extends CI_Controller {
         $data['telefone'] = $this->input->post('telefone');
         $data['endereco'] = $this->input->post('endereco');
 
-        $data['id_identificacao'] = $dados1['identificacao'][0]->id_identificacao;
+        $data['id_identificacao'] = $data['identificacao'][0]->id_identificacao;
         if ($this->db->insert('documento', $data)) {
             $this->session->set_flashdata('sms', 'Reserva adicionado com sucesso');
             redirect('documento/listar');
         }
+    }
+
+    public function cerdidao($user_id = NULL)
+    {
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'margin_left' => 5,
+            'margin_right' => 5,
+            'margin_top' => 5,
+            'margin_bottom' => 5,
+            'margin_header' => 0,
+            'margin_footer' => 0
+        ]);
+
+        $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
+        $html = $this->load->view('membro/docs/certidao_casamento', $data)->output->final_output;
+
+        $mpdf->SetProtection(array('print'));
+        $mpdf->SetTitle("Certidão de Casamento");
+        //$mpdf->SetWatermarkText("Paid");
+        //$mpdf->showWatermarkText = true;
+        //$mpdf->watermark_font = 'DejaVuSansCondensed';
+        $mpdf->watermarkTextAlpha = 0.1;
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->SetFooter('Asadsaddas', 'E');
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('cartao_de_membro.pdf', 'I');
     }
 
 }
