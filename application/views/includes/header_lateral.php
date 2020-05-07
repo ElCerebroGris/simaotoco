@@ -104,6 +104,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= base_url() ?>area" class="nav-link">
+                        <i class="nav-icon fas fa-pray"></i>
+                        <p>
+                            Area
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url() ?>igreja_nacional" class="nav-link">
                         <i class="nav-icon fas fa-sun"></i>
                         <p>

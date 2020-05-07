@@ -1,4 +1,3 @@
-
             <!-- Navbar -->
             <?php include APPPATH . 'views/includes/header.php'; ?>
             <!-- /.navbar -->
@@ -43,11 +42,24 @@
                             <!-- /.col -->
                             <div class="col-md-3 col-sm-6 col-12">
                                 <div class="info-box">
-                                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+                                    <span class="info-box-icon bg-success"><i class="fa fa-pray"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Total de </span>
+                                        <span class="info-box-text">Total de Tribo</span>
                                         <span class="info-box-number"></span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-danger"><i class="far fa-sun"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Total de Igrejas Nacionais</span>
+                                        <span class="info-box-number"><?= count($usuarios) ?></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -59,21 +71,8 @@
                                     <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Total de </span>
-                                        <span class="info-box-number"></span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Total de Usuários</span>
-                                        <span class="info-box-number"><?= count($usuarios) ?></span>
+                                        <span class="info-box-text">Total de Documentos</span>
+                                        <span class="info-box-number">12</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>

@@ -106,8 +106,11 @@ class Usuario extends CI_Controller {
             $dados['nivel'] = $data['usuarios'][0]->codigo_nivel_usuario;
             $dados['descricao'] = $data['usuarios'][0]->descricao_nivel_usuario;
             $this->session->set_userdata($dados);
+            redirect('welcome');
         }
-        redirect('welcome');
+        $this->session->set_flashdata('sms', 'Usuário/senha incorretos');
+        redirect('welcome/entrar');
+        //redirect('welcome');
     }
     
     public function recuperar_senha() {
