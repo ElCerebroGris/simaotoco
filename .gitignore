@@ -20,6 +20,10 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 
+#ITEL Devs
+application/config/config.php
+application/config/database.php
+
 ### CodeIgniter Patch ###
 
 ### VisualStudioCode ###
@@ -28,8 +32,6 @@ application/logs/*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-/.dist/
-.editorconfig
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files

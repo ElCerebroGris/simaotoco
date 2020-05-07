@@ -1,8 +1,8 @@
 
-            <!-- Navbar -->
             <?php include APPPATH . 'views/includes/header.php'; ?>
             <!-- /.navbar -->
 
+         
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -18,14 +18,14 @@
                             <div class="col-sm-6">
                             <?php if ($this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
-                                <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Adicionar</a>
+                                <a href="<?= base_url() ?>classe/add" class="btn btn-outline-primary btn-sm	">Adicionar</a>
                             </h5>
                         <?php } ?>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Documentos</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Classes</a></li>
                                     <li class="breadcrumb-item active">Listar</li>
                                 </ol>
                             </div>
@@ -43,37 +43,37 @@
                                 <!-- Default box -->
                                 <div class="card card-success">
                                     <div class="card-header">
-                                        <h3 class="card-title">Lista de Documentos</h3>
+                                        <h3 class="card-title">Lista de Classes</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped table-sm table-f-s-2">
                                             <thead>
                                                 <tr>
-                                                    <th>Membro</th>
-                                                    <th>Documento</th>
-                                                    <th>Usuário</th>
-                                                    <th>Data</th>
-                                                    <th>Estado</th>
+                                                    <th>Nome</th>
+                                                    <th>Paroquia</th>
+                                                    <th>Opções</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="color:black">
-                                                <?php foreach ($documentos as $u) { ?>
+                                                <?php foreach ($classes as $q) { ?>
                                                     <tr>
-                                                        <td><?= $u->nome_membro ?></td>
-                                                        <td><?= $u->descricao_documento ?></td>
-                                                        <td><?= $u->nome_usuario ?></td>
-                                                        <td><?= $u->estado ?></td>
+                                                    <td><?= $q->descricao_classe ?></td>
+                                                        <td><?= $q->descricao_paroquia ?></td>
+                                                        
+                                                        <td class="text-center" width="20%">
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
+                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                        </td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Membro</th>
-                                                    <th>Documento</th>
-                                                    <th>Usuário</th>
-                                                    <th>Data</th>
-                                                    <th>Estado</th>
+                                                    <th>Nome</th>
+                                                    <th>Paroquias</th>
+                                                    <th>Opções</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -90,5 +90,3 @@
             <!-- /.content-wrapper -->
 
             <?php include APPPATH . 'views/includes/footer.php'; ?>
-
-          
