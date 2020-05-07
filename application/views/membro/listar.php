@@ -85,7 +85,7 @@
                                                 <?php foreach ($membros as $q) { ?>
                                                     <tr>
                                                         <td><a href="<?= base_url('membro/ver/' . $q->id_membro) ?>"><?= $q->nome_membro ?></a></td>
-                                                        <td><?= $q->descricao_identificacao ?></td>
+                                                        <td><?= $q->nome ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-primary">Ativar</a>
                                                             <a href="#" class="btn btn-danger">Desativar</a>
