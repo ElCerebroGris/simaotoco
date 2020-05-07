@@ -90,6 +90,7 @@
                                                             <a href="#" class="btn btn-primary">Ativar</a>
                                                             <a href="#" class="btn btn-danger">Desativar</a>
                                                             <a href="#" class="btn btn-info">Editar</a>
+                                                            <a href="<?= base_url('membro/cartao/' . $q->id_membro)?>" class="btn btn-info"><i class="fa fa-id-card"></i> Cartão</a>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
