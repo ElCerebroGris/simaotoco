@@ -11,19 +11,23 @@ class Tribo extends CI_Controller {
     }
 
     public function index() {
+        $this->verificar_acesso();
         redirect('tribo/listar');
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $dados['tribos'] = $this->db->get('tribo')->result();
         $this->load->view('tribo/listar', $dados);
     }
 
     public function add() {
+        $this->verificar_acesso();
         $this->load->view('tribo/add');
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['descricao_tribo'] = $this->input->post('descricao_tribo');
 
         if ($this->db->insert('tribo', $data)) {

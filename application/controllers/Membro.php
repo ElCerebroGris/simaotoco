@@ -11,16 +11,19 @@ class Membro extends CI_Controller {
     }
 
     public function index() {
+        $this->verificar_acesso();
         redirect('membro/listar');
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $this->db->join('identificacao', 'identificacao.id_identificacao=membro.id_identificacao');
         $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('membro/listar', $dados);
     }
 
     public function ver($id = null) {
+        $this->verificar_acesso();
         $this->db->where('id_membro', $id);
         $this->db->join('identificacao', 'identificacao.id_identificacao=membro.id_identificacao');
         $dados['membros'] = $this->db->get('membro')->result();
@@ -31,6 +34,7 @@ class Membro extends CI_Controller {
     }
 
     public function add() {
+        $this->verificar_acesso();
         $dados['estado_civil'] = $this->db->get('estado_civil')->result();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $dados['tribos'] = $this->db->get('tribo')->result();
@@ -45,6 +49,7 @@ class Membro extends CI_Controller {
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['nome_membro'] = $this->input->post('nome_membro');
         $data['nome_pai'] = $this->input->post('nome_pai');
         $data['nome_mae'] = $this->input->post('nome_mae');
@@ -80,14 +85,4 @@ class Membro extends CI_Controller {
             }
         }
     }
-
-    public function remover($id = null) {
-        $this->verificar_acesso();
-
-        $this->db->where('id_reserva', $id);
-        $this->db->delete('reserva');
-
-        redirect('reserva');
-    }
-
 }

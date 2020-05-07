@@ -19,10 +19,12 @@ class Usuario extends CI_Controller {
     }
 
     public function index() {
+        $this->verificar_acesso();
         redirect('usuario/listar');
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $this->db->where('id_usuario !=', $this->session->userdata('id_usuario'));
         $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
         $dados['usuarios'] = $this->db->get('usuario')->result();
@@ -31,6 +33,7 @@ class Usuario extends CI_Controller {
     }
     
     public function perfil() {
+        $this->verificar_acesso();
         $this->db->where('id_usuario', $this->session->userdata('id_usuario'));
         $this->db->join('funcionario', 'funcionario.id_funcionario=usuario.id_funcionario');
         $this->db->join('cargo', 'cargo.codigo_cargo=funcionario.codigo_cargo');
@@ -43,12 +46,13 @@ class Usuario extends CI_Controller {
     }
 
     public function add() {
+        $this->verificar_acesso();
         $dados['niveis'] = $this->db->get('nivel_usuario')->result();
         $this->load->view('usuario/add', $dados);
     }
 
     public function addPost() {
-        
+        $this->verificar_acesso();
         $data['nome_usuario'] = $this->input->post('nome_usuario');
         $data['senha'] = $this->input->post('senha');
         $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
@@ -62,7 +66,7 @@ class Usuario extends CI_Controller {
     }
     
     public function perfilPost() {
-        
+        $this->verificar_acesso();
         $data['nome_usuario'] = $this->input->post('nome_usuario');
         $data['senha'] = $this->input->post('senha');
         
@@ -99,23 +103,6 @@ class Usuario extends CI_Controller {
             $this->session->set_userdata($dados);
         }
         redirect('welcome');
-    }
-
-    public function remover($id = null) {
-        $this->verificar_acesso();
-        $this->db->where('id_usuario', $id);
-        $dados['usuarios'] = $this->db->get('usuario')->result();
-
-        //$this->nivel_usuario();
-        $this->db->where('id_usuario', $id);
-        $this->db->delete('usuario');
-
-
-        $this->load->model('Log_Model', 'log_model');
-        $sms = 'removeu o usuario ' . $dados['usuarios'][0]->nome_usuario . ' do sistema';
-        $this->log_model->adicionar('Remover', $sms);
-
-        redirect('usuario');
     }
     
     public function recuperar_senha() {
