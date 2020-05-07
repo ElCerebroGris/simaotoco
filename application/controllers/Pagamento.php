@@ -15,36 +15,30 @@ class Pagamento extends CI_Controller {
     }
 
     public function listar() {
-        $this->db->join('membro', 'membro.id_membro=membro_documento.id_membro');
+        
+        $this->db->join('membro', 'membro.membro_id=pagamento.membro_id');
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $this->db->join('usuario', 'usuario.usuario_id=pagamento.usuario_id');
         $dados['pagamentos'] = $this->db->get('pagamento')->result();
         $this->load->view('pagamento/listar', $dados);
     }
 
     public function add() {
-        $dados['tipo_documento'] = $this->db->get('tipo_documento')->result();
-        $dados['pagamentos'] = $this->db->get('membro')->result();
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('pagamento/add', $dados);
     }
 
     public function addPost() {
-        $data['nome_membro'] = $this->input->post('nome_membro');
-        $data['nome_pai'] = $this->input->post('nome_pai');
-        $data['nome_mae'] = $this->input->post('nome_mae');
+        $data['membro_id'] = $this->input->post('membro');
+        $data['usuario_id'] = $this->session->userdata('id_usuario');
+        $data['tipo_pagamento'] = $this->input->post('tipo_pagamento');
+        $data['valor'] = $this->input->post('valor');
+        $data['mes_referencia'] = $this->input->post('mes_referencia');
 
-        $data1['descricao_identificacao'] = $this->input->post('identificacao');
-        $data1['tipo_identificacao'] = $this->input->post('tipo');
-
-        $data['id_nacionalidade'] = $this->input->post('nacionalidade');
-        $data['data_nascimento'] = $this->input->post('data_nascimento');
-        $data['estado_civil'] = $this->input->post('estado_civil');
-        $data['id_localidade'] = 1;
-        $data['telefone'] = $this->input->post('telefone');
-        $data['endereco'] = $this->input->post('endereco');
-
-        $data['id_identificacao'] = $data1['identificacao'][0]->id_identificacao;
         if ($this->db->insert('pagamento', $data)) {
-            $this->session->set_flashdata('sms', 'Reserva adicionado com sucesso');
-            redirect('documento/listar');
+            $this->session->set_flashdata('sms', 'Pagamento registrado com sucesso');
+            redirect('pagamento/listar');
         }
     }
 

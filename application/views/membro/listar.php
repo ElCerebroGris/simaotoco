@@ -59,7 +59,7 @@
                                             <tbody style="color:black">
                                                 <?php foreach ($membros as $q) { ?>
                                                     <tr>
-                                                        <td><a style="color:black !important" href="<?= base_url('membro/ver/' . $q->id_membro) ?>"><?= $q->nome_membro ?></a></td>
+                                                        <td><a style="color:black !important" href="<?= base_url('membro/ver/' . $q->membro_id) ?>"><?= $q->pessoa_nome ?></a></td>
                                                         <td><?= $q->descricao_identificacao ?></td>
                                                         <td class="text-center" width="20%">
                                                             <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
