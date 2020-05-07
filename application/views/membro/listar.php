@@ -20,6 +20,7 @@
 								<?php if ($this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
                                 <a href="<?= base_url() ?>membro/add" class="btn btn-outline-primary btn-sm	">Adicionar</a>
+                                <a href="<?= base_url() ?>membro/casamento" class="btn btn-outline-primary btn-sm	">Novo Casamento</a>
                             </h5>
                         <?php } ?>
                             </div>
