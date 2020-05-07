@@ -32,9 +32,10 @@ class Migrate extends CI_Controller
             if (!$this->migration->version($version)) {
                 echo 'Error' . $this->migration->error_string();
             } else {
-                echo 'Migrations '.$version.' ran successfully!\n';
+                //echo 'Migrations '.$version.' ran successfully!\n';
             }
         }
+        echo 'Migrations ran successfully!';
     }
 
 }
