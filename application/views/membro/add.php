@@ -57,7 +57,7 @@
                                                     <label for="nome">Tribo</label>
                                                     <select name="tribo" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($tribos as $n) { ?>
-                                                            <option value="<?= $n->id_tribo ?>"><?= $n->descricao_tribo ?></option>
+                                                            <option value="<?= $n->tribo_id ?>"><?= $n->descricao_tribo ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -65,7 +65,7 @@
                                                     <label for="nome">Igreja Nacional</label>
                                                     <select name="igreja_nacional" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($igreja_nacionais as $n) { ?>
-                                                            <option value="<?= $n->id_igreja_nacional ?>"><?= $n->descricao_igreja_nacional ?></option>
+                                                            <option value="<?= $n->igreja_nacional_id ?>"><?= $n->descricao_igreja_nacional ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -73,7 +73,7 @@
                                                     <label for="nome">Provincia Eclesiastica</label>
                                                     <select name="provincia_eclesiastica" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($provincia_eclesiasticas as $n) { ?>
-                                                            <option value="<?= $n->id_provincia_eclesiastica ?>"><?= $n->descricao_provincia_eclesiastica ?></option>
+                                                            <option value="<?= $n->provincia_eclesiastica_id ?>"><?= $n->descricao_provincia_eclesiastica ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -81,7 +81,7 @@
                                                     <label for="nome">Paroquia</label>
                                                     <select name="paroquia" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($paroquias as $n) { ?>
-                                                            <option value="<?= $n->id_paroquia ?>"><?= $n->descricao_paroquia ?></option>
+                                                            <option value="<?= $n->paroquia_id ?>"><?= $n->descricao_paroquia ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -89,7 +89,7 @@
                                                     <label for="nome">Classe</label>
                                                     <select name="classe" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($classes as $n) { ?>
-                                                            <option value="<?= $n->id_classe ?>"><?= $n->descricao_classe ?></option>
+                                                            <option value="<?= $n->classe_id ?>"><?= $n->descricao_classe ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -101,7 +101,7 @@
                                                     <label for="nome">Categoria</label>
                                                     <select name="categoria" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($categorias as $n) { ?>
-                                                            <option value="<?= $n->id_categoria ?>"><?= $n->descricao_categoria ?></option>
+                                                            <option value="<?= $n->categoria_id ?>"><?= $n->descricao_categoria ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -109,7 +109,7 @@
                                                     <label for="nome">Função</label>
                                                     <select name="funcao" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($funcoes as $n) { ?>
-                                                            <option value="<?= $n->id_funcao ?>"><?= $n->descricao_funcao ?></option>
+                                                            <option value="<?= $n->funcao_id ?>"><?= $n->descricao_funcao ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -133,10 +133,6 @@
                                                     <label for="nome">Nome Completo</label>
                                                     <input name="nome_membro" type="text" class="form-control" required="">
                                                 </div>
-                                             
-                                          
-
-                                       
                                                 <div class="form-group col-md-4">
                                                     <label for="nome">Nome do Pai</label>
                                                     <input name="nome_pai" type="text" class="form-control" required="">

@@ -15,7 +15,7 @@ class Classe extends CI_Controller {
     }
 
     public function listar() {
-        $this->db->join('paroquia', 'paroquia.id_paroquia=classe.id_paroquia');
+        $this->db->join('paroquia', 'paroquia.paroquia_id=classe.paroquia_id');
         $dados['classes'] = $this->db->get('classe')->result();
         $this->load->view('classe/listar', $dados);
     }

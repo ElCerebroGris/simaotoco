@@ -42,7 +42,7 @@
                                                     <label for="nome">Paroquia</label>
                                                     <select name="paroquia" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($paroquias as $n) {?>
-                                                            <option value="<?=$n->id_paroquia?>"><?=$n->descricao_paroquia?></option>
+                                                            <option value="<?=$n->paroquia_id ?>"><?=$n->descricao_paroquia?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>

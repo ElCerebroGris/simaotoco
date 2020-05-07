@@ -67,19 +67,18 @@ class Membro extends CI_Controller {
         $data1['descricao_identificacao'] = $this->input->post('identificacao');
         $data1['tipo_identificacao'] = $this->input->post('tipo');
 
-        $data['id_nacionalidade'] = $this->input->post('nacionalidade');
-        $data['id_tribo'] = $this->input->post('tribo');
-        $data['id_igreja_nacional'] = $this->input->post('igreja_nacional');
-        $data['id_provincia_eclesiastica'] = $this->input->post('provincia_eclesiastica');
-        $data['id_paroquia'] = $this->input->post('paroquia');
-        $data['Id_classe'] = $this->input->post('classe');
+        $data['nacionalidade_id'] = $this->input->post('nacionalidade');
+        $data['tribo_id'] = $this->input->post('tribo');
+        $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
+        $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
+        $data['paroquia_id'] = $this->input->post('paroquia');
+        $data['classeid_'] = $this->input->post('classe');
         $data['data_admissao'] = $this->input->post('data_admissao');
         $data['data_baptismo'] = $this->input->post('data_baptismo');
-        $data['id_categoria'] = $this->input->post('categoria');
-        $data['id_funcao'] = $this->input->post('funcao');
+        $data['categoriaid_id'] = $this->input->post('categoria');
+        $data['funcao_id'] = $this->input->post('funcao');
         $data['data_nascimento'] = $this->input->post('data_nascimento');
-        $data['id_estado_civil'] = $this->input->post('estado_civil');
-        $data['id_localidade'] = 1;
+        $data['estado_civil_id'] = $this->input->post('estado_civil');
         $data['telefone'] = $this->input->post('telefone');
         $data['endereco'] = $this->input->post('endereco');
 
@@ -88,7 +87,7 @@ class Membro extends CI_Controller {
             $this->db->where('descricao_identificacao', $data1['descricao_identificacao']);
             $dados1['identificacao'] = $this->db->get('identificacao')->result();
 
-            $data['id_identificacao'] = $dados1['identificacao'][0]->id_identificacao;
+            $data['identificacao_id'] = $dados1['identificacao'][0]->id_identificacao;
             if ($this->db->insert('membro', $data)) {
                 $this->session->set_flashdata('sms', 'Reserva adicionado com sucesso');
                 redirect('membro/listar');
