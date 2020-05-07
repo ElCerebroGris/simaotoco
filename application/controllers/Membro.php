@@ -11,18 +11,21 @@ class Membro extends CI_Controller {
     }
 
     public function index() {
+        $this->verificar_acesso();
         redirect('membro/listar');
     }
 
     public function listar() {
-        $this->db->join('nacionalidade', 'nacionalidade.id_nacionalidade=membro.id_nacionalidade');
-        $this->db->join('identificacao', 'identificacao.id_identificacao=membro.id_identificacao');
+        $this->verificar_acesso();
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $this->db->join('identificacao', 'identificacao.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
         
         $this->load->view('membro/listar', $dados);
     }
 
     public function ver($id = null) {
+        $this->verificar_acesso();
         $this->db->where('id_membro', $id);
         $this->db->join('igreja_nacional', 'igreja_nacional.id_igreja_nacional=membro.id_igreja_nacional');
         $this->db->join('provincia_eclesiastica', 
@@ -43,7 +46,7 @@ class Membro extends CI_Controller {
     }
 
     public function add() {
-        $dados['estado_civil'] = $this->db->get('estado_civil')->result();
+        $this->verificar_acesso();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $dados['tribos'] = $this->db->get('tribo')->result();
         $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
@@ -52,11 +55,11 @@ class Membro extends CI_Controller {
         $dados['classes'] = $this->db->get('classe')->result();
         $dados['categorias'] = $this->db->get('categoria')->result();
         $dados['funcoes'] = $this->db->get('funcao')->result();
-        $dados['tipo_identificacao'] = $this->db->get('tipo_identificacao')->result();
         $this->load->view('membro/add', $dados);
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['nome_membro'] = $this->input->post('nome_membro');
         $data['nome_pai'] = $this->input->post('nome_pai');
         $data['nome_mae'] = $this->input->post('nome_mae');
@@ -92,14 +95,4 @@ class Membro extends CI_Controller {
             }
         }
     }
-
-    public function remover($id = null) {
-        $this->verificar_acesso();
-
-        $this->db->where('id_reserva', $id);
-        $this->db->delete('reserva');
-
-        redirect('reserva');
-    }
-
 }

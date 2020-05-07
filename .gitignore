@@ -21,6 +21,10 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 
+#ITEL Devs
+application/config/config.php
+application/config/database.php
+
 ### CodeIgniter Patch ###
 
 ### VisualStudioCode ###
