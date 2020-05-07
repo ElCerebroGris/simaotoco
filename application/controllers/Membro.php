@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../vendor/autoload.php';
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Membro extends CI_Controller
