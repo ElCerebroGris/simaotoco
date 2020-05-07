@@ -35,7 +35,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= base_url() ?>usuario/sair" class="nav-link"><i class="fas fa-power-off"></i> Terminar Sessão</a>
+            <a href="<?= base_url() ?>usuario/sair" class="nav-link text-white"><i class="fas fa-power-off"></i> Terminar Sessão</a>
         </li>
     </ul>
 </nav>

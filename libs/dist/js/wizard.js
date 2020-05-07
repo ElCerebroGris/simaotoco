@@ -10,8 +10,6 @@ $(function () {
         e.preventDefault();
 
         var form = $(this);
-        // var formAction = form.data('action');
-        ($menu ?? '');
         var formData = new FormData(form[0]);
         var formButton = form.find('button');
 

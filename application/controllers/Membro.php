@@ -103,25 +103,25 @@ class Membro extends CI_Controller
                 $json['foto'] = $dados['files'];
                 $json['success'] = true;
                 break;
-            case 'personal':
+            case 'eclesis':
 
-                $dados['personal'] = [
-                    'id' => $postData['identificacao'],
-                    'tipo_id' => $postData['tipo_id']
-                ];
+                // $dados['personal'] = [
+                //     'id' => $postData['identificacao'],
+                //     'tipo_id' => $postData['tipo_id']
+                // ];
                 
-                $this->session->set_userdata($dados);
-                $json['personal'] = $dados['personal'];
+                // $this->session->set_userdata($dados);
+                // $json['personal'] = $dados['personal'];
                 $json['success'] = true;
                 break;
-            case 'other':
-                $dados['other']['nacionalidade'] = $postData['nacionalidade'];
-                $dados['other']['data_nascimento'] = $postData['data_nascimento'];
-                $dados['other']['estado_civil'] = $postData['estado_civil'];
-                $dados['other']['endereco'] = $postData['endereco'];
+            case 'personal':
+                // $dados['other']['nacionalidade'] = $postData['nacionalidade'];
+                // $dados['other']['data_nascimento'] = $postData['data_nascimento'];
+                // $dados['other']['estado_civil'] = $postData['estado_civil'];
+                // $dados['other']['endereco'] = $postData['endereco'];
 
-                $this->session->set_userdata($dados);
-                $json['other'] = $dados['other'];
+                // $this->session->set_userdata($dados);
+                // $json['other'] = $dados['other'];
                 $json['finish'] = true;
                 echo json_encode($this->session->userdata());
                 return;
