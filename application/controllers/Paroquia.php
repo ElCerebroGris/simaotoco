@@ -18,7 +18,7 @@ class Paroquia extends CI_Controller {
     public function listar() {
         $this->verificar_acesso();
         $this->db->join('provincia_eclesiastica',
-         'provincia_eclesiastica.id_provincia_eclesiastica=paroquia.id_provincia_eclesiastica');
+         'provincia_eclesiastica.provincia_eclesiastica_id=paroquia.provincia_eclesiastica_id');
         $dados['paroquias'] = $this->db->get('paroquia')->result();
         $this->load->view('paroquia/listar', $dados);
     }
@@ -31,7 +31,7 @@ class Paroquia extends CI_Controller {
 
     public function addPost() {
         $this->verificar_acesso();
-        $data['id_provincia_eclesiastica'] = $this->input->post('provincia_eclesiastica');
+        $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
         $data['descricao_paroquia'] = $this->input->post('descricao_paroquia');
 
         if ($this->db->insert('paroquia', $data)) {

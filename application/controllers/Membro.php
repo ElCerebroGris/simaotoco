@@ -17,7 +17,8 @@ class Membro extends CI_Controller {
 
     public function listar() {
         $this->verificar_acesso();
-        $this->db->join('identificacao', 'identificacao.id_identificacao=membro.id_identificacao');
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $this->db->join('identificacao', 'identificacao.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('membro/listar', $dados);
     }
@@ -35,7 +36,6 @@ class Membro extends CI_Controller {
 
     public function add() {
         $this->verificar_acesso();
-        $dados['estado_civil'] = $this->db->get('estado_civil')->result();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $dados['tribos'] = $this->db->get('tribo')->result();
         $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
@@ -44,7 +44,6 @@ class Membro extends CI_Controller {
         $dados['classes'] = $this->db->get('classe')->result();
         $dados['categorias'] = $this->db->get('categoria')->result();
         $dados['funcoes'] = $this->db->get('funcao')->result();
-        $dados['tipo_identificacao'] = $this->db->get('tipo_identificacao')->result();
         $this->load->view('membro/add', $dados);
     }
 

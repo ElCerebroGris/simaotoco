@@ -39,7 +39,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Provincia Ecliesastica</label>
-                                                    <select name="provincia_eclesiastica" class="form-control select3" style="width: 100%;">
+                                                    <select name="provincia_eclesiastica" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($provincia_eclesiasticas as $n) {?>
                                                             <option value="<?= $n->id_provincia_eclesiastica ?>"><?= $n->descricao_provincia_eclesiastica ?></option>
                                                         <?php }?>

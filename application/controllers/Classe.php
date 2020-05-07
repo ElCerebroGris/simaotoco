@@ -26,7 +26,7 @@ class Classe extends CI_Controller {
     }
 
     public function addPost() {
-        $data['id_paroquia'] = $this->input->post('paroquia');
+        $data['paroquia_id'] = $this->input->post('paroquia');
         $data['descricao_classe'] = $this->input->post('descricao_classe');
 
         if ($this->db->insert('classe', $data)) {

@@ -20,7 +20,7 @@
                 <img src="<?= base_url() ?>libs/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="<?= base_url() ?>usuario/perfil" class="d-block"><?= $this->session->userdata('nome_usuario') ?></a>
+                <a href="<?= base_url() ?>usuario/perfil" class="d-block"><?= $this->session->userdata('nome_completo') ?></a>
             </div>
         </div>
 

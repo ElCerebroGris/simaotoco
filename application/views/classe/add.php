@@ -40,7 +40,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Paroquia</label>
-                                                    <select name="paroquia" class="form-control select3" style="width: 100%;">
+                                                    <select name="paroquia" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($paroquias as $n) {?>
                                                             <option value="<?=$n->id_paroquia?>"><?=$n->descricao_paroquia?></option>
                                                         <?php }?>
