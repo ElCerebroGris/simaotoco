@@ -1,6 +1,6 @@
 CREATE TABLE `identificacao` (
   `identificacao_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  'pessoa_id' int(11) NOT NULL,
+  `pessoa_id` int(11) NOT NULL,
   `descricao_identificacao` varchar(100) NOT NULL,
   `tipo_identificacao` int(11) NOT NULL,
   `estado_identificacao` int(11) NOT NULL DEFAULT '1',
@@ -10,9 +10,9 @@ CREATE TABLE `identificacao` (
 CREATE TABLE `tribo` (
   `tribo_id` int(11) NOT NULL,
   `descricao_tribo` varchar(35) NOT NULL,
-  'endereco' varchar(100) NOT NULL,
-  'telefone' varchar(30) DEFAULT NULL,
-  'email' varchar(100) DEFAULT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `estado_tribo` int(11) NOT NULL DEFAULT '1',
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
@@ -22,9 +22,9 @@ CREATE TABLE `area` (
   `area_id` int(11) NOT NULL PRIMARY KEY,
   `tribo_id` int(11) NOT NULL,
   `descricao_tribo` varchar(35) NOT NULL,
-  'endereco' varchar(100) NOT NULL,
-  'telefone' varchar(30) DEFAULT NULL,
-  'email' varchar(100) DEFAULT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `estado_area` int(11) NOT NULL DEFAULT '1',
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
@@ -35,9 +35,9 @@ CREATE TABLE `igreja_nacional` (
   `descricao_igreja_nacional` varchar(100) NOT NULL,
   `sigla` varchar(4) NOT NULL,
   `indicador_telefonico` varchar(4) NOT NULL,
-  'endereco' varchar(100) NOT NULL,
-  'telefone' varchar(30) DEFAULT NULL,
-  'email' varchar(100) DEFAULT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `estado_igreja_nacional` int(11) NOT NULL DEFAULT '1',
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
@@ -47,9 +47,9 @@ CREATE TABLE `provincia_eclesiastica` (
   `provincia_eclesiastica_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descricao_provincia_eclesiastica` varchar(40) NOT NULL,
   `id_igreja_nacional` int(4) NOT NULL,
-  'endereco' varchar(100) NOT NULL,
-  'telefone' varchar(30) DEFAULT NULL,
-  'email' varchar(100) DEFAULT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `estado_provincia_eclesiastica` int(11) NOT NULL DEFAULT '1',
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
@@ -59,9 +59,9 @@ CREATE TABLE `paroquia` (
   `id_paroquia` int(11) NOT NULL,
   `descricao_paroquia` varchar(40) NOT NULL,
   `id_provincia_eclesiastica` int(11) NOT NULL,
-  'endereco' varchar(100) NOT NULL,
-  'telefone' varchar(30) DEFAULT NULL,
-  'email' varchar(100) DEFAULT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `estado_paroquia` int(11) NOT NULL DEFAULT '1',
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data_atualizacao` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
@@ -70,9 +70,9 @@ CREATE TABLE `paroquia` (
 CREATE TABLE `classe` (
   `id_classe` int(11) NOT NULL,
   `descricao_classe` varchar(100) NOT NULL,
-  'endereco' varchar(100) NOT NULL,
-  'telefone' varchar(30) DEFAULT NULL,
-  'email' varchar(100) DEFAULT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `id_paroquia` int(11) NOT NULL,
   `estado_classe` int(11) NOT NULL DEFAULT '1',
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -154,6 +154,6 @@ CREATE TABLE `usuario` (
 CREATE TABLE `log` (
   `log_id` int(11) NOT NULL,
   `usuario_id` varchar(30) NOT NULL,
-  'descricao_log' text NOT NULL,
+  `descricao_log` text NOT NULL,
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
