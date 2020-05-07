@@ -65,7 +65,9 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="nome">Tribo</label>
+                                            <input type="hidden" name="action" value="eclesis">
                                             <select name="tribo" class="form-control select2" style="width: 100%;">
+                                                <option value="">asadasd</option>
                                                 <?php foreach ($tribos as $n) { ?>
                                                     <option value="<?= $n->tribo_id ?>"><?= $n->descricao_tribo ?></option>
                                                 <?php } ?>
@@ -98,6 +100,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Classe</label>
                                             <select name="classe" class="form-control select2" style="width: 100%;">
+                                                <option value="">asadasd</option>
                                                 <?php foreach ($classes as $n) { ?>
                                                     <option value="<?= $n->classe_id ?>"><?= $n->descricao_classe ?></option>
                                                 <?php } ?>
@@ -110,6 +113,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Categoria</label>
                                             <select name="categoria" class="form-control select2" style="width: 100%;">
+                                                <option value="">asadasd</option>
                                                 <?php foreach ($categorias as $n) { ?>
                                                     <option value="<?= $n->categoria_id ?>"><?= $n->descricao_categoria ?></option>
                                                 <?php } ?>
@@ -118,6 +122,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Função</label>
                                             <select name="funcao" class="form-control select2" style="width: 100%;">
+                                                <option value="">asadasd</option>
                                                 <?php foreach ($funcoes as $n) { ?>
                                                     <option value="<?= $n->funcao_id ?>"><?= $n->descricao_funcao ?></option>
                                                 <?php } ?>
@@ -151,6 +156,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label for="nome">Nome Completo</label>
+                                            <input type="hidden" name="action" value="personal">
                                             <input name="nome_membro" type="text" class="form-control" required="">
                                         </div>
                                         <div class="form-group col-md-4">
@@ -171,9 +177,10 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Tipo</label>
                                             <select name="tipo" class="form-control select2" style="width: 100%;">
-                                                <?php foreach ($tipo_identificacao as $n) { ?>
-                                                    <option value="<?= $n->id_tipo_identificacao ?>"><?= $n->descricao_tipo_identificacao ?></option>
-                                                <?php } ?>
+                                                <option value="BI">Bilhete de Identidade</option>
+                                                <option value="PASSAPORTE">Bilhete de Identidade</option>
+                                                <option value="CÉDULA">Cédula</option>
+                                                <option value="OUTRO">Outro</option>
                                             </select>
                                         </div>
                                     </div>
@@ -195,16 +202,20 @@
 
                                     <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label for="nome">Estado Civil</label>
-                                            <select name="estado_civil" class="form-control select2" style="width: 100%;">
-                                                <?php foreach ($estado_civil as $n) { ?>
-                                                    <option value="<?= $n->id_estado_civil ?>"><?= $n->descricao_estado_civil ?></option>
-                                                <?php } ?>
+                                            <label for="nome">Sexo</label>
+                                            <select name="sexo" class="form-control select2" style="width: 100%;">
+                                                <option value="MASCULINO">Masculino(a)</option>
+                                                <option value="FEMENINO">Feminino(a)</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="nome">Localidade</label>
-                                            <input name="nome" type="text" class="form-control">
+                                            <label for="nome">Estado Civil</label>
+                                            <select name="estado_civil" class="form-control select2" style="width: 100%;">
+                                                <option value="SOLTEIRO">Solteiro(a)</option>
+                                                <option value="CASADO">Casado(a)</option>
+                                                <option value="DIVORCIADO">Divorciado(a)</option>
+                                                <option value="VIÚVO">Viúvo(a)</option>
+                                            </select>
                                         </div>
                                     </div>
 

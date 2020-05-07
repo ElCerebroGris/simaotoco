@@ -12,26 +12,31 @@ class Membro extends CI_Controller
         }
     }
 
-    public function index() {
+    public function index()
+    {
         $this->verificar_acesso();
         redirect('membro/listar');
     }
 
-    public function listar() {
+    public function listar()
+    {
         $this->verificar_acesso();
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $this->db->join('identificacao', 'identificacao.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
-        
+
         $this->load->view('membro/listar', $dados);
     }
 
-    public function ver($id = null) {
+    public function ver($id = null)
+    {
         $this->verificar_acesso();
         $this->db->where('id_membro', $id);
         $this->db->join('igreja_nacional', 'igreja_nacional.id_igreja_nacional=membro.id_igreja_nacional');
-        $this->db->join('provincia_eclesiastica', 
-        'provincia_eclesiastica.id_provincia_eclesiastica=membro.id_provincia_eclesiastica');
+        $this->db->join(
+            'provincia_eclesiastica',
+            'provincia_eclesiastica.id_provincia_eclesiastica=membro.id_provincia_eclesiastica'
+        );
         $this->db->join('paroquia', 'paroquia.id_paroquia=membro.id_paroquia');
         $this->db->join('classe', 'classe.id_classe=membro.id_classe');
         $this->db->join('categoria', 'categoria.id_categoria=membro.id_categoria');
@@ -47,7 +52,8 @@ class Membro extends CI_Controller
         $this->load->view('membro/ver', $dados);
     }
 
-    public function add() {
+    public function add()
+    {
         $this->verificar_acesso();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $dados['tribos'] = $this->db->get('tribo')->result();
@@ -60,7 +66,8 @@ class Membro extends CI_Controller
         $this->load->view('membro/add', $dados);
     }
 
-    public function addPost() {
+    public function addPost()
+    {
         $this->verificar_acesso();
         $data['nome_membro'] = $this->input->post('nome_membro');
         $data['nome_pai'] = $this->input->post('nome_pai');
@@ -105,33 +112,41 @@ class Membro extends CI_Controller
 
         $action = $postData['action'];
         unset($postData['action']);
-        
+
         switch ($action) {
             case 'foto':
-                $dados['files'] = $_FILES;
-                // $this->session->set_userdata($dados);
-                $json['foto'] = $dados['files'];
+                $this->session->set_userdata('files', $_FILES);
                 $json['success'] = true;
+                // $json['error'] = true;
+                // $json['errMessage'] = 'Formato Inválido!';
                 break;
             case 'eclesis':
 
-                // $dados['personal'] = [
-                //     'id' => $postData['identificacao'],
-                //     'tipo_id' => $postData['tipo_id']
-                // ];
-                
-                // $this->session->set_userdata($dados);
-                // $json['personal'] = $dados['personal'];
+                $dados['eclesiastes'] = [
+                    'tribo' => $postData['tribo'],
+                    'classe' => $postData['classe'],
+                    'data_admissao' => $postData['data_admissao'],
+                    'categoria' => $postData['categoria'],
+                    'data_baptismo' => $postData['data_baptismo'],
+                    'funcao' => $postData['funcao']
+                ];
+
+                $this->session->set_userdata('eclesiastes', $dados['eclesiastes']);
                 $json['success'] = true;
                 break;
             case 'personal':
-                // $dados['other']['nacionalidade'] = $postData['nacionalidade'];
-                // $dados['other']['data_nascimento'] = $postData['data_nascimento'];
-                // $dados['other']['estado_civil'] = $postData['estado_civil'];
-                // $dados['other']['endereco'] = $postData['endereco'];
-
-                // $this->session->set_userdata($dados);
-                // $json['other'] = $dados['other'];
+                $dados['personal'] = [
+                    'nome_membro' => $postData['nome_membro'],
+                    'nome_pai' => $postData['nome_pai'],
+                    'nome_mae' => $postData['nome_mae'],
+                    'identificacao' => $postData['identificacao'],
+                    'data_nascimento' => $postData['data_nascimento'],
+                    'sexo' => $postData['sexo'],
+                    'estado_civil' => $postData['estado_civil'],
+                    'telefone' => $postData['telefone'],
+                    'endereco' => $postData['endereco']
+                ];
+                $this->session->set_userdata('personal', $dados['personal']);
                 $json['finish'] = true;
                 echo json_encode($this->session->userdata());
                 return;
@@ -160,9 +175,6 @@ class Membro extends CI_Controller
 
         $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
         $html = $this->load->view('membro/cartao', $data)->output->final_output;
-        // var_dump($stylesheet);
-        // die();
-        // $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
 
         $mpdf->SetTitle('My Title');
         $mpdf->WriteHTML($html);
