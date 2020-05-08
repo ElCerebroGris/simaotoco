@@ -217,7 +217,7 @@
 
                                     <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label for="nome">Sexo</label>
+                                            <label for="nome">Genero</label>
                                             <select name="sexo" class="form-control select2" style="width: 100%;">
                                                 <option value="MASCULINO">Masculino(a)</option>
                                                 <option value="FEMENINO">Feminino(a)</option>

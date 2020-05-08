@@ -40,7 +40,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Homem</label>
-                                                    <select name="paroquia" class="form-control select2" style="width: 100%;">
+                                                    <select name="membro_homem_id" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($membros_h as $n) {?>
                                                             <option value="<?=$n->membro_id ?>"><?=$n->pessoa_nome?></option>
                                                         <?php }?>
@@ -49,7 +49,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Mulher</label>
-                                                    <select name="paroquia" class="form-control select2" style="width: 100%;">
+                                                    <select name="membro_mulher_id" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($membros_m as $n) {?>
                                                             <option value="<?=$n->membro_id ?>"><?=$n->pessoa_nome?></option>
                                                         <?php }?>
@@ -57,8 +57,23 @@
                                                 </div>
 
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">Descrição</label>
-                                                    <input name="descricao_classe" type="text" class="form-control" required="">
+                                                    <label for="nome">Padrinho</label>
+                                                    <input name="padrinho_nome" type="text" class="form-control" required="">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Madrinha</label>
+                                                    <input name="madrinha_nome" type="text" class="form-control" required="">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Padrinhos casados</label>
+                                                    <select name="padrinhos_casados" class="form-control select2" style="width: 100%;">
+                                                        <option value="SIM">SIM</option> 
+                                                        <option value="NÃO">NÃO</option> 
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Data do casamento</label>
+                                                    <input name="data_casamento" type="date" class="form-control" required="">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                 </div>

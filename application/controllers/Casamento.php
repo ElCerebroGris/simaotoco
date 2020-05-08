@@ -32,12 +32,12 @@ class Casamento extends CI_Controller {
     }
 
     public function addPost() {
-        $data['membro_homem_id'] = $this->input->post('paroquia');
-        $data['membro_mulher_id'] = $this->input->post('descricao_classe');
-        $data['padrinho_nome'] = $this->input->post('descricao_classe');
-        $data['madrinha_nome'] = $this->input->post('descricao_classe');
-        $data['padrinhos_casados'] = $this->input->post('descricao_classe');
-        $data['data_casamento'] = $this->input->post('descricao_classe');
+        $data['membro_homem_id'] = $this->input->post('membro_homem_id');
+        $data['membro_mulher_id'] = $this->input->post('membro_mulher_id');
+        $data['padrinho_nome'] = $this->input->post('padrinho_nome');
+        $data['madrinha_nome'] = $this->input->post('madrinha_nome');
+        $data['padrinhos_casados'] = $this->input->post('padrinhos_casados');
+        $data['data_casamento'] = $this->input->post('data_casamento');
 
         if ($this->db->insert('casamento', $data)) {
             $this->session->set_flashdata('sms', 'casamento adicionado com sucesso');

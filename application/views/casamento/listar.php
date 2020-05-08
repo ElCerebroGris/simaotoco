@@ -61,8 +61,12 @@
                                             <tbody style="color:black">
                                                 <?php foreach ($casamentos as $q) {?>
                                                     <tr>
-                                                    <td><?=$q->descricao_classe?></td>
-                                                        <td><?=$q->descricao_paroquia?></td>
+                                                    <td><?=$q->membro_homem_id?></td>
+                                                        <td><?=$q->membro_mulher_id?></td>
+                                                        <td><?=$q->padrinho_nome?></td>
+                                                        <td><?=$q->madrinha_nome?></td>
+                                                        <td><?=$q->padrinhos_casados?></td>
+                                                        <td><?=$q->data_casamento?></td>
 
                                                         <td class="text-center" width="20%">
                                                         <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
