@@ -67,9 +67,16 @@
                                             <label for="nome">Tribo</label>
                                             <input type="hidden" name="action" value="eclesis">
                                             <select name="tribo" class="form-control select2" style="width: 100%;">
-                                                <option value="">asadasd</option>
                                                 <?php foreach ($tribos as $n) { ?>
                                                     <option value="<?= $n->tribo_id ?>"><?= $n->descricao_tribo ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="nome">Area</label>
+                                            <select name="area" class="form-control select2" style="width: 100%;">
+                                                <?php foreach ($areas as $n) { ?>
+                                                    <option value="<?= $n->area_id ?>"><?= $n->descricao_area ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -100,20 +107,14 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Classe</label>
                                             <select name="classe" class="form-control select2" style="width: 100%;">
-                                                <option value="">asadasd</option>
                                                 <?php foreach ($classes as $n) { ?>
                                                     <option value="<?= $n->classe_id ?>"><?= $n->descricao_classe ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="nome">Data de admissão</label>
-                                            <input name="data_admissao" type="date" class="form-control" required="">
-                                        </div>
-                                        <div class="form-group col-md-6">
                                             <label for="nome">Categoria</label>
                                             <select name="categoria" class="form-control select2" style="width: 100%;">
-                                                <option value="">asadasd</option>
                                                 <?php foreach ($categorias as $n) { ?>
                                                     <option value="<?= $n->categoria_id ?>"><?= $n->descricao_categoria ?></option>
                                                 <?php } ?>
@@ -122,15 +123,18 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Função</label>
                                             <select name="funcao" class="form-control select2" style="width: 100%;">
-                                                <option value="">asadasd</option>
                                                 <?php foreach ($funcoes as $n) { ?>
                                                     <option value="<?= $n->funcao_id ?>"><?= $n->descricao_funcao ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
+                                            <label for="nome">Data de admissão</label>
+                                            <input name="data_admissao" type="date" class="form-control" required="">
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label for="nome">Data de baptismo</label>
-                                            <input name="data_baptismo" type="date" class="form-control" required="">
+                                            <input name="data_baptismo" type="date" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -187,16 +191,27 @@
 
                                     <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label for="nome">Nacinalidade</label>
+                                            <label for="nome">Nacionalidade</label>
                                             <select name="nacionalidade" class="form-control select2" style="width: 100%;">
                                                 <?php foreach ($nacionalidades as $n) { ?>
-                                                    <option value="<?= $n->id_nacionalidade ?>"><?= $n->descricao_nacionalidade ?></option>
+                                                    <option value="<?= $n->nacionalidade_id ?>"><?= $n->descricao_nacionalidade ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Data de nascimento</label>
                                             <input name="data_nascimento" type="date" class="form-control" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="nome">Provincia de Nascimento</label>
+                                            <input name="provincia_nascimento" type="text" class="form-control" required="">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="nome">Municipio de Nascimento</label>
+                                            <input name="municipio_nascimento" type="text" class="form-control" required="">
                                         </div>
                                     </div>
 

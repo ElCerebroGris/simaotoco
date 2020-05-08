@@ -22,7 +22,7 @@ $(function() {
             contentType: false,
             dataType: 'json',
             success: function(data) {
-                console.log(data);
+                //console.log(data);
 
                 if (data.error) {
                     $('.error').html('<p class="alert alert-danger">' + data.errMessage + '</p>').fadeIn(200);
@@ -35,7 +35,8 @@ $(function() {
                 }
 
                 if (data.finish) {
-                    console.log();
+                    //console.log();
+                    location.replace('http://localhost/gestoasimaotoco/membro/addPost')
                 }
             },
             error: function(data) {

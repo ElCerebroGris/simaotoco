@@ -57,6 +57,7 @@ class Membro extends CI_Controller
         $this->verificar_acesso();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $dados['tribos'] = $this->db->get('tribo')->result();
+        $dados['areas'] = $this->db->get('area')->result();
         $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
         $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
         $dados['paroquias'] = $this->db->get('paroquia')->result();
@@ -69,39 +70,50 @@ class Membro extends CI_Controller
     public function addPost()
     {
         $this->verificar_acesso();
-        $data['nome_membro'] = $this->input->post('nome_membro');
-        $data['nome_pai'] = $this->input->post('nome_pai');
-        $data['nome_mae'] = $this->input->post('nome_mae');
-
-        $data1['descricao_identificacao'] = $this->input->post('identificacao');
-        $data1['tipo_identificacao'] = $this->input->post('tipo');
-
-        $data['nacionalidade_id'] = $this->input->post('nacionalidade');
-        $data['tribo_id'] = $this->input->post('tribo');
-        $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
-        $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
-        $data['paroquia_id'] = $this->input->post('paroquia');
-        $data['classeid_'] = $this->input->post('classe');
-        $data['data_admissao'] = $this->input->post('data_admissao');
-        $data['data_baptismo'] = $this->input->post('data_baptismo');
-        $data['categoriaid_id'] = $this->input->post('categoria');
-        $data['funcao_id'] = $this->input->post('funcao');
-        $data['data_nascimento'] = $this->input->post('data_nascimento');
-        $data['estado_civil_id'] = $this->input->post('estado_civil');
-        $data['telefone'] = $this->input->post('telefone');
-        $data['endereco'] = $this->input->post('endereco');
-
-        if ($this->db->insert('identificacao', $data1)) {
-
-            $this->db->where('descricao_identificacao', $data1['descricao_identificacao']);
-            $dados1['identificacao'] = $this->db->get('identificacao')->result();
-
-            $data['identificacao_id'] = $dados1['identificacao'][0]->id_identificacao;
-            if ($this->db->insert('membro', $data)) {
-                $this->session->set_flashdata('sms', 'Reserva adicionado com sucesso');
-                redirect('membro/listar');
-            }
+        //Pessoa
+        //var_dump($this->session->userdata());
+        //die();
+        $data1['nacionalidade_id'] = $this->session->userdata('personal')['nacionalidade'];
+        $data1['pessoa_nome'] = $this->session->userdata('personal')['pessoa_nome'];
+        $data1['nome_pai'] = $this->session->userdata('personal')['nome_pai'];
+        $data1['nome_mae'] = $this->session->userdata('personal')['nome_mae'];
+        $data1['data_nascimento'] = $this->session->userdata('personal')['data_nascimento'];
+        $data1['provincia_nascimento'] = $this->session->userdata('personal')['provincia_nascimento'];
+        $data1['municipio_nascimento'] = $this->session->userdata('personal')['municipio_nascimento'];
+        $data1['telefone'] = $this->session->userdata('personal')['telefone'];
+        $data1['endereco'] = $this->session->userdata('personal')['endereco'];
+        $data1['estado_civil'] = $this->session->userdata('personal')['estado_civil'];
+        $data1['sexo'] = $this->session->userdata('personal')['sexo'];
+        if ($this->db->insert('pessoa', $data1)) {
+            $this->db->where('pessoa_nome', $data1['pessoa_nome']);
+            $dados1['pessoa'] = $this->db->get('pessoa')->result();
+            $pessoa_id = $dados1['pessoa'][0]->pessoa_id;
+        }else {
+            redirect('membro/add');
         }
+
+        //Identificação
+        $data3['pessoa_id'] = $pessoa_id;
+        $data3['descricao_identificacao'] = $this->session->userdata('personal')['identificacao'];
+        $data3['tipo_identificacao'] = $this->session->userdata('personal')['tipo'];
+        if (!$this->db->insert('identificacao', $data3)) {
+            redirect('membro/add');
+        }
+
+        //Membro
+        $data['pessoa_id'] = $pessoa_id;
+        $data['area_id'] = $this->session->userdata('eclesiastes')['area'];
+        $data['classe_id'] = $this->session->userdata('eclesiastes')['classe'];
+        $data['data_admissao'] = $this->session->userdata('eclesiastes')['data_admissao'];
+        $data['data_baptismo'] = $this->session->userdata('eclesiastes')['data_baptismo'];
+        $data['categoria_id'] = $this->session->userdata('eclesiastes')['categoria'];
+        $data['funcao_id'] = $this->session->userdata('eclesiastes')['funcao'];      
+        if ($this->db->insert('membro', $data)) {
+            redirect('membro/listar');
+        }else {
+            redirect('membro/add');
+        }
+        
     }
 
     public function request()
@@ -123,7 +135,7 @@ class Membro extends CI_Controller
             case 'eclesis':
 
                 $dados['eclesiastes'] = [
-                    'tribo' => $postData['tribo'],
+                    'area' => $postData['area'],
                     'classe' => $postData['classe'],
                     'data_admissao' => $postData['data_admissao'],
                     'categoria' => $postData['categoria'],
@@ -136,11 +148,15 @@ class Membro extends CI_Controller
                 break;
             case 'personal':
                 $dados['personal'] = [
-                    'nome_membro' => $postData['nome_membro'],
+                    'pessoa_nome' => $postData['nome_membro'],
                     'nome_pai' => $postData['nome_pai'],
                     'nome_mae' => $postData['nome_mae'],
                     'identificacao' => $postData['identificacao'],
+                    'tipo' => $postData['tipo'],
+                    'nacionalidade' => $postData['nacionalidade'],
                     'data_nascimento' => $postData['data_nascimento'],
+                    'provincia_nascimento' => $postData['provincia_nascimento'],
+                    'municipio_nascimento' => $postData['data_nascimento'],
                     'sexo' => $postData['sexo'],
                     'estado_civil' => $postData['estado_civil'],
                     'telefone' => $postData['telefone'],
@@ -148,8 +164,6 @@ class Membro extends CI_Controller
                 ];
                 $this->session->set_userdata('personal', $dados['personal']);
                 $json['finish'] = true;
-                echo json_encode($this->session->userdata());
-                return;
                 break;
 
             default:
