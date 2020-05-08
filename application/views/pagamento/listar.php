@@ -17,14 +17,14 @@
                             <div class="col-sm-6">
                             <?php if ($this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
-                                <a href="<?= base_url() ?>paroquia/add" class="btn btn-outline-primary btn-sm	">Adicionar</a>
+                                <a href="<?= base_url() ?>pagamento/add" class="btn btn-outline-primary btn-sm	">Novo</a>
                             </h5>
                         <?php } ?>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Paroquias</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Pagamentos</a></li>
                                     <li class="breadcrumb-item active">Listar</li>
                                 </ol>
                             </div>
@@ -42,37 +42,35 @@
                                 <!-- Default box -->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Lista de Paroquias</h3>
+                                        <h3 class="card-title">Lista de Pagamentos</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Nome</th>
-                                                    <th>Provincia Eclesiastica</th>
-                                                    <th>Opções</th>
+                                                    <th>Tipo</th>
+                                                    <th>Membro</th>
+                                                    <th>Usuário</th>
+                                                    <th>Data</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="color:black">
-                                                <?php foreach ($paroquias as $q) { ?>
+                                                <?php foreach ($pagamentos as $q) { ?>
                                                     <tr>
-                                                    <td><?= $q->descricao_paroquia ?></td>
-                                                        <td><?= $q->descricao_provincia_eclesiastica ?></td>
-                                                        
-                                                        <td class="text-center" width="20%">
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
-                                                        </td>
+                                                    <td><?= $q->tipo_pagamento ?></td>
+                                                    <td><?= $q->pessoa_nome ?></td>
+                                                    <td><?= $q->nome_usuario ?></td>
+                                                    <td><?= $q->data_criacao ?></td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Nome</th>
-                                                    <th>Provincias Nacionais</th>
-                                                    <th>Opções</th>
+                                                    <th>Tipo</th>
+                                                    <th>Membro</th>
+                                                    <th>Usuário</th>
+                                                    <th>Data</th>
                                                 </tr>
                                             </tfoot>
                                         </table>

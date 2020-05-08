@@ -9,11 +9,11 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Adicionar Paroquia</h1>
+                                <h1>Novo Pagamento</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Paroquia</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Pagamentos</a></li>
                                 </ol>
                             </div>
                         </div>
@@ -30,24 +30,39 @@
                                 <!-- general form elements -->
                                 <div class="card card-success">
                                     <div class="card-header">
-                                        <h3 class="card-title">Dados da Paroquia</h3>
+                                        <h3 class="card-title">Dados do Pagamento</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?=base_url()?>paroquia/addPost">
+                                    <form role="form" method="post" action="<?=base_url()?>pagamento/addPost">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">Provincia Ecliesastica</label>
-                                                    <select name="provincia_eclesiastica" class="form-control select2" style="width: 100%;">
-                                                        <?php foreach ($provincia_eclesiasticas as $n) {?>
-                                                            <option value="<?= $n->id_provincia_eclesiastica ?>"><?= $n->descricao_provincia_eclesiastica ?></option>
+                                                    <label for="nome">Membro</label>
+                                                    <select name="membro" class="form-control select2" style="width: 100%;">
+                                                        <?php foreach ($membros as $n) {?>
+                                                            <option value="<?= $n->membro_id ?>"><?= $n->pessoa_nome ?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">Descrição</label>
-                                                    <input name="descricao_paroquia" type="text" class="form-control" required="">
+                                                    <label for="nome">Tipo de Pagamento</label>
+                                                    <select name="tipo_pagamento" class="form-control select2" style="width: 100%;">
+                                                        <option value="DIZIMO">DIZIMO</option>
+                                                        <option value="QUOTA">QUOTA</option>
+                                                        <option value="OFERTAS">OFERTAS</option>
+                                                        <option value="OUTRO">OUTRO</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Valor</label>
+                                                    <input name="valor" type="text" class="form-control" required="">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Mês de referencia</label>
+                                                    <input name="mes_referencia" type="month" class="form-control" required="">
                                                 </div>
                                                 
                                             </div>
