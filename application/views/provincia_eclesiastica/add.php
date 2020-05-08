@@ -1,4 +1,3 @@
-
             <!-- Navbar -->
             <?php include APPPATH . 'views/includes/header.php';?>
             <!-- /.navbar -->
@@ -40,9 +39,9 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Igreja Nacional</label>
-                                                    <select name="igreja_nacional" class="form-control select3" style="width: 100%;">
+                                                    <select name="igreja_nacional" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($igreja_nacionais as $n) {?>
-                                                            <option value="<?= $n->id_igreja_nacional ?>"><?= $n->descricao_igreja_nacional ?></option>
+                                                            <option value="<?= $n->igreja_nacional_id ?>"><?= $n->descricao_igreja_nacional ?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>

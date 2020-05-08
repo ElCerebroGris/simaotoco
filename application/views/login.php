@@ -44,12 +44,19 @@
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 						<input class="input100" type="password" placeholder="Password" name="senha" required data-validate = "Password is required">
-					</p>
+                    </p>
+                    <?php if ($this->session->flashdata('sms') != null) { ?>
+                                <div class="alert alert-danger">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <?= $this->session->flashdata('sms'); ?>
+                                </div>
+                        <?php } ?>
 					
                     <button type="submit">Entrar</button>
                 </form>
                 <p> <a class="txt2 p-t-12" href="<?= base_url() ?>usuario/recuperar_senha"> Esqueceu a senha?</a></p>
-            </div>
+            <!-- /.login-logo -->
+        
         </div>
     </main>
 	

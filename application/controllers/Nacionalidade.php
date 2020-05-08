@@ -11,19 +11,23 @@ class Nacionalidade extends CI_Controller {
     }
 
     public function index() {
+        $this->verificar_acesso();
         redirect('nacionalidade/listar');
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $this->load->view('nacionalidade/listar', $dados);
     }
 
     public function add() {
+        $this->verificar_acesso();
         $this->load->view('nacionalidade/add');
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['pais'] = $this->input->post('pais');
         $data['descricao_nacionalidade'] = $this->input->post('descricao_nacionalidade');
 

@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/windows,codeigniter,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=windows,codeigniter,visualstudiocode
 
@@ -20,6 +19,10 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+
+#ITEL Devs
+application/config/config.php
+application/config/database.php
 
 ### CodeIgniter Patch ###
 

@@ -1,4 +1,3 @@
-
             <!-- Navbar -->
             <?php include APPPATH . 'views/includes/header.php'; ?>
             <!-- /.navbar -->
