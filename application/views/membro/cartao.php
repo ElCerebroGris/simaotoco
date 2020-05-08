@@ -7,21 +7,37 @@
 
     <style>
         <?= $stylesheet; ?>
+        .title{
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .propriety{
+            font-size: 1.1em;
+            text-transform: uppercase;
+        }
+
+        .photo{
+            margin-left: 210px; 
+            margin-top: -60px;
+        }
     </style>
 </head>
 
 <body>
     <br>
-    <table width="100%" style="font-family: helvetica; font-weight: 300; margin-top: 340px" cellpadding="10">
+    <table width="100%" style="margin-top: 340px" cellpadding="10">
         <tr>
-            <td width="60%" style="font-size: 18pt;">
-                <p><span>Nome:</span></p>
-                <p><span>Data de Ingresso:</span></p>
-                <p><span>Paroquia:</span></p>
+            <td width="80%" style="font-size: 18pt; margin-top: -30px;">
+                <p><span class="title">Nome Completo:</span> <span class="propriety">Nome Completo</span></p>
+                <p><span class="title">Cartão de Membro Nº:</span> <span class="propriety">Nome Completo</span></p>
+                <p><span class="title">Categoria:</span> <span class="propriety">Nome Completo</span></p>
+                <p><span class="title">Data de Admissão:</span> <span class="propriety">Nome Completo</span></p>
+                <p><span class="title">Paróquia:</span> <span class="propriety">Nome Completo</span></p>
+                <p><span class="title">Tribo:</span> <span class="propriety">Nome Completo</span></p>
             </td>
-            <td width="40%">&nbsp;</td>
+            <td width="10%">&nbsp;</td>
             <td width="10%">
-                <img class="photo" src="<?= base_url() . 'libs/dist/img/photo3.jpg' ?>" style="margin-left: 200px; border-radius: 50px" width="290px" height="350px" alt="Foto do Membro">
+                <img class="photo" src="<?= base_url() . 'libs/dist/img/photo3.jpg' ?>" width="315px" height="390px" alt="Foto do Membro">
             </td>
         </tr>
     </table>

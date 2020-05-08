@@ -168,7 +168,7 @@ class Membro extends CI_Controller
             'format' => [153.1, 240.9],
             'orientation' => 'L',
             'margin_left' => 10,
-            'margin_right' => 11,
+            'margin_right' => 10,
             'margin_top' => 15,
             'margin_bottom' => 0
         ]);
@@ -176,7 +176,7 @@ class Membro extends CI_Controller
         $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
         $html = $this->load->view('membro/cartao', $data)->output->final_output;
 
-        $mpdf->SetTitle('My Title');
+        $mpdf->SetTitle('Cartão de Membro');
         $mpdf->WriteHTML($html);
         $mpdf->Output('cartao_de_membro.pdf', 'I');
     }
