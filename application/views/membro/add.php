@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="nome">Tirar Foto</label>
-                                            <input name="nome_membro" type="file" accept=".jpg, .jpeg, .png" class="form-control">
+                                            <input name="foto" type="file" accept=".jpg, .jpeg, .png" class="form-control">
                                             <input type="hidden" name="action" value="foto">
                                         </div>
                                     </div>

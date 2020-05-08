@@ -36,7 +36,7 @@ $(function() {
 
                 if (data.finish) {
                     //console.log();
-                    location.replace('http://localhost/gestoasimaotoco/membro/addPost')
+                    location.replace('http://localhost/gestoasimaotoco/membro/listar')
                 }
             },
             error: function(data) {

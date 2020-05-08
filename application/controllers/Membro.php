@@ -71,7 +71,6 @@ class Membro extends CI_Controller
     {
         $this->verificar_acesso();
         //Pessoa
-        //var_dump($this->session->userdata());
         //die();
         $data1['nacionalidade_id'] = $this->session->userdata('personal')['nacionalidade'];
         $data1['pessoa_nome'] = $this->session->userdata('personal')['pessoa_nome'];
@@ -88,7 +87,7 @@ class Membro extends CI_Controller
             $this->db->where('pessoa_nome', $data1['pessoa_nome']);
             $dados1['pessoa'] = $this->db->get('pessoa')->result();
             $pessoa_id = $dados1['pessoa'][0]->pessoa_id;
-        }else {
+        } else {
             redirect('membro/add');
         }
 
@@ -107,13 +106,14 @@ class Membro extends CI_Controller
         $data['data_admissao'] = $this->session->userdata('eclesiastes')['data_admissao'];
         $data['data_baptismo'] = $this->session->userdata('eclesiastes')['data_baptismo'];
         $data['categoria_id'] = $this->session->userdata('eclesiastes')['categoria'];
-        $data['funcao_id'] = $this->session->userdata('eclesiastes')['funcao'];      
+        $data['funcao_id'] = $this->session->userdata('eclesiastes')['funcao'];
         if ($this->db->insert('membro', $data)) {
-            redirect('membro/listar');
-        }else {
+            $this->do_upload($data3['descricao_identificacao']);
+            //redirect('membro/listar');
+        } else {
             redirect('membro/add');
         }
-        
+
     }
 
     public function request()
@@ -125,44 +125,85 @@ class Membro extends CI_Controller
         $action = $postData['action'];
         unset($postData['action']);
 
+        $pessoa = array();
+        $identificacao = array();
+        $eclesiastes = array();
+
         switch ($action) {
             case 'foto':
-                $this->session->set_userdata('files', $_FILES);
-                $json['success'] = true;
-                // $json['error'] = true;
-                // $json['errMessage'] = 'Formato Inválido!';
+                //$json['error'] = true;
+                //$json['errMessage'] = 'Formato Inválido!';
+                if ($this->do_upload($_FILES["foto"]["tmp_name"])) {
+                    $json['success'] = true;
+                } else {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro ao Salvar!';
+                }
                 break;
             case 'eclesis':
 
-                $dados['eclesiastes'] = [
-                    'area' => $postData['area'],
-                    'classe' => $postData['classe'],
+                $eclesiastes = [
+                    'area_id' => $postData['area'],
+                    'classe_id' => $postData['classe'],
                     'data_admissao' => $postData['data_admissao'],
-                    'categoria' => $postData['categoria'],
+                    'categoria_id' => $postData['categoria'],
                     'data_baptismo' => $postData['data_baptismo'],
-                    'funcao' => $postData['funcao']
+                    'funcao_id' => $postData['funcao'],
                 ];
 
-                $this->session->set_userdata('eclesiastes', $dados['eclesiastes']);
+                //$this->session->set_userdata('eclesiastes', $dados['eclesiastes']);
                 $json['success'] = true;
                 break;
             case 'personal':
-                $dados['personal'] = [
+                $pessoa = [
                     'pessoa_nome' => $postData['nome_membro'],
                     'nome_pai' => $postData['nome_pai'],
                     'nome_mae' => $postData['nome_mae'],
-                    'identificacao' => $postData['identificacao'],
-                    'tipo' => $postData['tipo'],
-                    'nacionalidade' => $postData['nacionalidade'],
+                    'nacionalidade_id' => $postData['nacionalidade'],
                     'data_nascimento' => $postData['data_nascimento'],
                     'provincia_nascimento' => $postData['provincia_nascimento'],
                     'municipio_nascimento' => $postData['data_nascimento'],
                     'sexo' => $postData['sexo'],
                     'estado_civil' => $postData['estado_civil'],
                     'telefone' => $postData['telefone'],
-                    'endereco' => $postData['endereco']
+                    'endereco' => $postData['endereco'],
                 ];
-                $this->session->set_userdata('personal', $dados['personal']);
+
+                //$this->session->set_userdata('personal', $dados['personal']);
+
+                //Salvar Pessoa
+                $pessoa_id = null;
+                if ($this->db->insert('pessoa', $pessoa)) {
+                    $this->db->where('pessoa_nome', $pessoa['pessoa_nome']);
+                    $dados1['pessoa'] = $this->db->get('pessoa')->result();
+                    $pessoa_id = $dados1['pessoa'][0]->pessoa_id;
+                } else {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                }
+
+                //Salvar Identificacao
+                $identificacao = [
+                    'pessoa_id' => $pessoa_id,
+                    'descricao_identificacao' => $postData['identificacao'],
+                    'tipo_identificacao' => $postData['tipo'],
+                ];
+                if (!$this->db->insert('identificacao', $identificacao)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                }else{
+                    //Atualizar Foto
+                    rename("./fotos/".$this->session->userdata('foto_atual'), 
+                    "./fotos/".$identificacao['descricao_identificacao']
+                    .$this->session->userdata('formato_foto'));
+                }
+
+                //Salvar Membro
+                $eclesiastes['pessoa_id'] = $pessoa_id;
+                if (!$this->db->insert('membro', $eclesiastes)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                }
                 $json['finish'] = true;
                 break;
 
@@ -184,7 +225,7 @@ class Membro extends CI_Controller
             'margin_left' => 10,
             'margin_right' => 11,
             'margin_top' => 15,
-            'margin_bottom' => 0
+            'margin_bottom' => 0,
         ]);
 
         $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
@@ -193,5 +234,33 @@ class Membro extends CI_Controller
         $mpdf->SetTitle('My Title');
         $mpdf->WriteHTML($html);
         $mpdf->Output('cartao_de_membro.pdf', 'I');
+    }
+
+    public function do_upload($nome_file)
+    {
+        if (!file_exists("./fotos/")) {
+            mkdir('./fotos/');
+        }
+        $config['upload_path'] = './fotos/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 2048;
+        $config['max_width'] = 1024;
+        $config['max_height'] = 768;
+        //$config['file_name'] = $nome_file . '.jpg';
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('foto')) {
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode($error);
+            return false;
+            //$this->load->view('upload_form', $error);
+        } else {
+            //$data = array('upload_data' => $this->upload->data());
+            $this->session->set_userdata('foto_atual', $this->upload->data('file_name'));
+            $this->session->set_userdata('formato_foto', $this->upload->data('file_ext'));
+            //echo json_encode($data);
+            return true;
+        }
     }
 }
