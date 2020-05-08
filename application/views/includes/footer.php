@@ -40,6 +40,7 @@
 <script src="<?= base_url() ?>libs/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="<?= base_url() ?>libs/plugins/datatables/jquery.dataTables.js"></script>
         <script src="<?= base_url() ?>libs/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+        <link href="<?= base_url() ?>libs/plugins/toastr/toastr.js" rel="stylesheet"/>
 <!-- overlayScrollbars -->
 <script src="<?= base_url() ?>libs/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
