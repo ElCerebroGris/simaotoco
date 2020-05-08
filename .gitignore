@@ -21,8 +21,9 @@ application/logs/*
 /vendor/
 
 #ITEL Devs
-application/config/config.php
-application/config/database.php
+/application/config/config.php
+/fotos/*
+/application/config/database.php
 
 ### CodeIgniter Patch ###
 

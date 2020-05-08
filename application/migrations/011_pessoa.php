@@ -23,7 +23,7 @@ class Migration_Pessoa extends CI_Migration
         $this->dbforge->add_field('foto varchar(30)');
         $this->dbforge->add_field('estado_pessoa int(11) NOT NULL DEFAULT 1');
         $this->dbforge->add_field('data_criacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP');
-        $this->dbforge->add_field('data_atualizacao timestamp ON UPDATE CURRENT_TIMESTAMP');
+        $this->dbforge->add_field('data_atualizacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
         $this->dbforge->create_table('pessoa');
     }
 

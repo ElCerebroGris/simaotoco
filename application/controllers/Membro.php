@@ -173,8 +173,11 @@ class Membro extends CI_Controller
         ]);
 
         
-
-        $html = $this->load->view('membro/cartao')->output->final_output;
+        $this->load->model('membro_model');
+        $data['membro'] = $this->membro_model->ver($member_id);
+        // var_dump($data);
+        // die();
+        $html = $this->load->view('membro/cartao', $data)->output->final_output;
 
         $mpdf->SetTitle('Cartão de Membro');
         $mpdf->WriteHTML($html);

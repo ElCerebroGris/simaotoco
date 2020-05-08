@@ -13,7 +13,7 @@ class Migration_Identificacao extends CI_Migration
         $this->dbforge->add_field('tipo_identificacao enum(\'BI\',\'PASSAPORTE\',\'CÉDULA\',\'OUTRO\')
          DEFAULT \'BI\'');
         $this->dbforge->add_field('data_criacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP');
-        $this->dbforge->add_field('data_atualizacao timestamp ON UPDATE CURRENT_TIMESTAMP');
+        $this->dbforge->add_field('data_atualizacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
         $this->dbforge->create_table('identificacao');
     }
 

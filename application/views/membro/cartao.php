@@ -34,9 +34,9 @@
     <br>
     <table width="100%" style="margin-top: 340px" cellpadding="10">
         <tr>
-            <td width="80%" style="font-size: 18pt; margin-top: -30px;">
-                <p><span class="title">Nome Completo:</span> <span class="propriety">Nome Completo</span></p>
-                <p><span class="title">Cartão de Membro Nº:</span> <span class="propriety">Nome Completo</span></p>
+            <td width="80%" style="font-size: 14pt; margin-top: -30px;">
+                <p><span class="title">Nome Completo:</span> <span class="propriety">Vanilson Ribeiro</span></p>
+                <p><span class="title">Cartão de Membro Nº:</span> <span class="propriety">00319390LA035 Completo</span></p>
                 <p><span class="title">Categoria:</span> <span class="propriety">Nome Completo</span></p>
                 <p><span class="title">Data de Admissão:</span> <span class="propriety">Nome Completo</span></p>
                 <p><span class="title">Paróquia:</span> <span class="propriety">Nome Completo</span></p>
@@ -44,7 +44,7 @@
             </td>
             <td width="10%">&nbsp;</td>
             <td width="10%">
-                <img class="photo" src="<?= base_url() . 'libs/dist/img/photo3.jpg' ?>" width="315px" height="390px" alt="Foto do Membro">
+                <img class="photo" src="<?= base_url() . 'libs/dist/img/photo3.jpg' ?>" width="315px" height="390px">
             </td>
         </tr>
     </table>

@@ -15,7 +15,7 @@ class Migration_Classe extends CI_Migration
         $this->dbforge->add_field('email varchar(100) DEFAULT NULL');
         $this->dbforge->add_field('estado_classe int(11) NOT NULL DEFAULT 1');
         $this->dbforge->add_field('data_criacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP');
-        $this->dbforge->add_field('data_atualizacao timestamp ON UPDATE CURRENT_TIMESTAMP');
+        $this->dbforge->add_field('data_atualizacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
         $this->dbforge->create_table('classe');
     }
 
