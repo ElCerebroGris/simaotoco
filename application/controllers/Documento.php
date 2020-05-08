@@ -1,54 +1,89 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Documento extends CI_Controller {
+class Documento extends CI_Controller
+{
 
-    public function verificar_acesso() {
+    public function verificar_acesso()
+    {
         if (!$this->session->userdata('logado')) {
             redirect('welcome/entrar');
         }
     }
 
-    public function index() {
+    public function index()
+    {
         redirect('documento/listar');
     }
 
-    public function listar() {
-        $this->db->join('membro', 'membro.id_membro=membro_documento.id_membro');
-        $dados['documentos'] = $this->db->get('membro_documento')->result();
+    public function listar()
+    {
+        $this->db->join('membro', 'membro.membro_id=documento.membro_id');
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $this->db->join('usuario', 'usuario.usuario_id=documento.usuario_id');
+        $dados['documentos'] = $this->db->get('documento')->result();
         $this->load->view('documento/listar', $dados);
     }
 
-    public function add() {
-        $dados['tipo_documento'] = $this->db->get('tipo_documento')->result();
+    public function mostrar($documento_id, $membro_id)
+    {
+        $this->db->where('documento_id', $documento_id);
+        $dados['documentos'] = $this->db->get('documento')->result();
+        switch ($dados['documentos'][0]->tipo_documento) {
+            case 'TESTIFICAÇÃO':
+                redirect('documento/testificacao/' . $membro_id);
+                break;
+            case 'CERTIDÃO DE CASAMENTO':
+                redirect('documento/cerdidaoCasamento/' . $membro_id);
+                break;
+            case 'CERTIDÃO DE BAPTISMO':
+                redirect('documento/cerdidaoBaptismo/' . $membro_id);
+                break;
+        }
+        $this->load->view('documento/listar', $dados);
+    }
+
+    public function add()
+    {
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('documento/add', $dados);
     }
 
-    public function addPost() {
-        $data['nome_membro'] = $this->input->post('nome_membro');
-        $data['nome_pai'] = $this->input->post('nome_pai');
-        $data['nome_mae'] = $this->input->post('nome_mae');
+    public function addPost()
+    {
+        $data['tipo_documento'] = $this->input->post('tipo_documento');
+        $data['membro_id'] = $this->input->post('membro');
+        $data['usuario_id'] = $this->session->userdata('id_usuario');
 
-        $data1['descricao_identificacao'] = $this->input->post('identificacao');
-        $data1['tipo_identificacao'] = $this->input->post('tipo');
+        //Verificar se o membro é casado
+        if($data['tipo_documento'] == 'CERTIDÃO DE CASAMENTO'){
+            $this->db->where('membro_homem_id', $$data['membro_id']);
+            $dados['casamento'] = $this->db->get('casamento')->result();
+            if(!$dados['casamento']){
+                $this->session->set_flashdata('sms', 'Membro não é casado!!!');
+                redirect('documento/add');
+            }
+        }
 
-        $data['id_nacionalidade'] = $this->input->post('nacionalidade');
-        $data['data_nascimento'] = $this->input->post('data_nascimento');
-        $data['estado_civil'] = $this->input->post('estado_civil');
-        $data['id_localidade'] = 1;
-        $data['telefone'] = $this->input->post('telefone');
-        $data['endereco'] = $this->input->post('endereco');
+        //Verificar se o membro é baptisado
+        if($data['tipo_documento'] == 'CERTIDÃO DE BAPTISMO'){
+            $this->db->where('membro_id', $data['membro_id']);
+            $dados['membro'] = $this->db->get('membro')->result();
+            if(!$dados['membro'][0]->data_baptismo){
+                $this->session->set_flashdata('sms', 'Membro não é baptisado!!!');
+                redirect('documento/add');
+            }
+        }
 
-        $data['id_identificacao'] = $data['identificacao'][0]->id_identificacao;
         if ($this->db->insert('documento', $data)) {
-            $this->session->set_flashdata('sms', 'Reserva adicionado com sucesso');
+            $this->session->set_flashdata('sms', 'documento adicionado com sucesso');
             redirect('documento/listar');
         }
     }
 
-    public function cerdidaoCasamento($user_id = NULL)
+    public function cerdidaoCasamento($membro_id)
     {
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
@@ -57,10 +92,17 @@ class Documento extends CI_Controller {
             'margin_top' => 5,
             'margin_bottom' => 5,
             'margin_header' => 10,
-            'margin_footer' => 10
+            'margin_footer' => 10,
         ]);
 
-        $html = $this->load->view('membro/docs/certidao_casamento')->output->final_output;
+        $this->db->where('membro_homem_id', $membro_id);
+        $dados['casamento'] = $this->db->get('casamento')->result();
+
+        $this->load->model('membro_model');
+        $dados['homem'] = $this->membro_model->ver($membro_id);
+        $dados['mulher'] = $this->membro_model->ver($dados['casamento'][0]->membro_mulher_id);
+
+        $html = $this->load->view('membro/docs/certidao_casamento', $dados)->output->final_output;
 
         $mpdf->SetProtection(array('print'));
         $mpdf->SetTitle("Certidão de Casamento");
@@ -70,7 +112,7 @@ class Documento extends CI_Controller {
         $mpdf->Output('cartao_de_membro.pdf', 'I');
     }
 
-    public function cerdidaoBaptismo($user_id = NULL)
+    public function cerdidaoBaptismo($membro_id)
     {
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
@@ -79,10 +121,13 @@ class Documento extends CI_Controller {
             'margin_top' => 5,
             'margin_bottom' => 5,
             'margin_header' => 10,
-            'margin_footer' => 10
+            'margin_footer' => 10,
         ]);
 
-        $html = $this->load->view('membro/docs/certidao_batismo')->output->final_output;
+        $this->load->model('membro_model');
+        $dados['membro'] = $this->membro_model->ver($membro_id);
+
+        $html = $this->load->view('membro/docs/certidao_batismo', $dados)->output->final_output;
 
         $mpdf->SetProtection(array('print'));
         $mpdf->SetTitle("Certidão de Baptismo");
@@ -92,7 +137,7 @@ class Documento extends CI_Controller {
         $mpdf->Output('cartao_de_membro.pdf', 'I');
     }
 
-    public function testificacao($user_id = NULL)
+    public function testificacao($membro_id = null)
     {
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
@@ -101,10 +146,13 @@ class Documento extends CI_Controller {
             'margin_top' => 5,
             'margin_bottom' => 5,
             'margin_header' => 10,
-            'margin_footer' => 10
+            'margin_footer' => 10,
         ]);
 
-        $html = $this->load->view('membro/docs/testificacao')->output->final_output;
+        $this->load->model('membro_model');
+        $dados['documentos'] = $this->membro_model->ver($membro_id);
+
+        $html = $this->load->view('membro/docs/testificacao', $dados)->output->final_output;
 
         $mpdf->SetProtection(array('print'));
         $mpdf->SetTitle("Testificação");

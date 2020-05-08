@@ -16,6 +16,12 @@
                                 </ol>
                             </div>
                         </div>
+                        <?php if ($this->session->flashdata('sms') != null) { ?>
+                            <div class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?= $this->session->flashdata('sms'); ?>
+                            </div>
+                        <?php } ?>
                     </div><!-- /.container-fluid -->
                 </section>
 
@@ -33,22 +39,23 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?= base_url() ?>usuario/addPost">
+                                    <form role="form" method="post" action="<?= base_url() ?>documento/addPost">
                                         <div class="card-body">
                                         <div class="row">
                                         <div class="form-group col-md-6">
                                                 <label>Tipo de Documento</label>
                                                 <select name="tipo_documento" class="form-control select2" style="width: 100%;">
-                                                    <?php foreach ($tipo_documento as $h) { ?>
-                                                        <option value="<?= $h->id_tipo_documento ?>"><?= $h->descricao_tipo_documento ?></option>
-                                                    <?php } ?>
+                                                        <option value="CARTÃO">CARTÃO</option>
+                                                        <option value="TESTIFICAÇÃO">TESTIFICAÇÃO</option>
+                                                        <option value="CERTIDÃO DE CASAMENTO">CERTIDÃO DE CASAMENTO</option>
+                                                        <option value="CERTIDÃO DE BAPTISMO">CERTIDÃO DE BAPTISMO</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Membro a receber</label>
                                                 <select name="membro" class="form-control select2" style="width: 100%;">
                                                     <?php foreach ($membros as $h) { ?>
-                                                        <option value="<?= $h->id_membro ?>"><?= $h->nome_membro ?></option>
+                                                        <option value="<?= $h->membro_id ?>"><?= $h->pessoa_nome ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>

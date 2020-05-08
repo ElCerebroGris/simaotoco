@@ -95,9 +95,12 @@
             <h2>TESTIFICAÇÃO Nº 036/EP/0020</h2>
 
             <p>Para conhecimento e devidos efeitos, de acordo com o seu pedido,
-                testifica-se que, segue a Província Eclesiastica de Cuanza Norte, em
-                missão particular e vista aos irmãos em Cristo, irmão Pastor <b>PRIMEIRO
-                    NOME ÚLTIMO NOME, Membro do Corpo dos 24 Anciãos.</b></p>
+                testifica-se que, segue a Província Eclesiastica de 
+                <?= $documentos->descricao_provincia_eclesiastica ?>, em
+                missão particular e vista aos irmãos em Cristo, 
+                <?= $documentos->sexo=='MASCULINO'? 'irmão':'irmã' ?>  
+                <?=$documentos->descricao_categoria ?> <b>, 
+                <?= $documentos->pessoa_nome.', '.$documentos->descricao_funcao ?>.</b></p>
             <p>Deve ser recebido em qualquer Congregação do Senhor, onde existe a
                 Igreja de Nosso Senhor Jesus Cristo no Mundo.
             </p>
@@ -108,7 +111,10 @@
             </p>
 
             <div class="main-footer">
-                <p class="p-footer">Luanda, ____ de __________________ de 00___ - “Ano do Fim dos Muros e de Inicio da Harmonia da Família Tocoísta” - Milénio de Cristo</p>
+            <?php $dado = explode(' ',$documentos->data_criacao)[0]; ?> 
+                <p class="p-footer">Luanda, <?= explode('-', $dado)[2] ?>
+                 de <?= explode('-', $dado)[1] ?> de <?= explode('-', $dado)[0] ?> 
+                - “Ano do Fim dos Muros e de Inicio da Harmonia da Família Tocoísta” - Milénio de Cristo</p>
 
 
 

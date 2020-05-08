@@ -58,32 +58,45 @@
         </div> -->
 
         <div class="main">
+        <?php $dado = explode(' ',$casamento[0]->data_casamento)[0];
+        $idade = date('y')-explode('-',$homem->data_nascimento)[0];
+        $idade_mulher = date('y')-explode('-',$mulher->data_nascimento)[0];
+        $data = explode(' ',$casamento[0]->data_criacao)[0];
+         ?> 
             <h1>CERTIDÃO DE CASAMENTO</h1>
 
             <p>=== Certifica-se que, com fundamento nas Sagradas Escrituras e sob
                 observância do respectivo Ritual em uso nesta Igreja, na presença das
-                testemunhas da terra e dos Céus, aos 19 de Outubro de 2010, com registo as
+                testemunhas da terra e dos Céus, aos <?= explode('-', $dado)[2] ?> 
+                de <?= explode('-', $dado)[1] ?> de <?= explode('-', $dado)[0] ?>, com registo as
                 folhas n.º 50, do Livro de Casamento n.º 02/INSJCM/0010, contraiu matrimónio, o
-                Irmão Quimbangala Raul Pedro, de 30 anos de idade, natural do
-                Município da Quibala, Província de Kwanza Sul, de Nacionalidade Angolana,
-                nascido aos 16 de Abril de 1989, filho de Raul Pedro e de Anita Filipe,
-                Baptizado na Igreja de Nosso Senhor Jesus Cristo no Mundo, em Luanda, aos 08
-                de Agosto de 2000, titular do Cartão de Membro n.º 012512LDA, emitido aos 07
-                de Dezembro de 2015; com a Irmã Esmeralda Luísa Félix
-                Armando, de 25 anos de idade, natural do Município do Bungo, Província do
-                Uíge, de Nacionalidade Angolana, nascida aos 01 de Janeiro de 1994, filha de
-                Eugénio de Jesus Miala Ramiro e de Josefina Félix Bambi,
-                Baptizada na Igreja de Nosso Senhor Jesus Cristo no Mundo, em Luanda, aos 02
-                de Julho de 2005, titular do Cartão de Membro n.º 0897LDA, emtido aos 15 de
-                Abril de 2009. ========================================.</p>
-            <p>Foram Padrinhos Francisco Aguiar e Filomena Vateta David,
-                ambos casados. ========.</p>
+                Irmão <b><?= $homem->pessoa_nome ?></b>, de <?= $idade ?> anos de idade, natural do
+                Município de <?= $homem->municipio_nascimento ?>, 
+                Província de <?= $homem->provincia_nascimento ?>, de 
+                Nacionalidade <?= $homem->descricao_nacionalidade ?>,
+                nascido aos <?= $homem->data_nascimento ?>, filho de <?= $homem->nome_pai ?> 
+                e de <?= $homem->nome_mae ?>,
+                Baptizado na Igreja de Nosso Senhor Jesus Cristo no Mundo, em Luanda, aos 
+                <?= $homem->data_baptismo ?>, 
+                titular do Cartão de Membro n.º <?= $homem->descricao_identificacao ?>; 
+                com a Irmã <b><?= $mulher->pessoa_nome ?></b>
+                , de <?= $idade_mulher ?> anos de idade, natural do 
+                Município do <?= $mulher->municipio_nascimento ?>, 
+                Província de <?= $mulher->provincia_nascimento ?>, de 
+                Nacionalidade <?= $mulher->descricao_nacionalidade ?>, 
+                nascida aos <?= $mulher->data_nascimento ?>, filha de <?= $mulher->nome_pai ?>
+                e de <?= $mulher->nome_mae ?>,
+                Baptizada na Igreja de Nosso Senhor Jesus Cristo no Mundo, em Luanda, 
+                aos <?= $mulher->data_baptismo ?>, 
+                titular do Cartão de Membro n.º <?= $mulher->descricao_identificacao ?>.</p>
+            <p>Foram Padrinhos <?= $casamento[0]->padrinho_nome ?> e <?= $casamento[0]->madrinha_nome ?>,
+                ambos casados.</p>
             <p>Para efeitos probatórios, dentro e fora de Angola, passou-se-lhes a presente
-                Certidão que vai devidamente autenticada com o selo branco em uso nesta Igreja.
-                ===================.</p>
+                Certidão que vai devidamente autenticada com o selo branco em uso nesta Igreja.</p>
 
             <div class="main-footer">
-                <p class="p-footer">Feito em, 25 de Março de 0020 - Milénio de Cristo</p>
+                <p class="p-footer">Feito em,  <?= explode('-', $data)[2] ?> 
+                de <?= explode('-', $data)[1] ?> de <?= explode('-', $data)[0] ?>- Milénio de Cristo</p>
 
                 <p>O LÍDER ESPIRITUAL</p>
                 <p>Santidade Bispo Dom AFONSO NUNES</p>

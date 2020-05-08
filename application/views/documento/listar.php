@@ -54,26 +54,31 @@
                                                     <th>Documento</th>
                                                     <th>Usuário</th>
                                                     <th>Data</th>
-                                                    <th>Estado</th>
+                                                    <th>Opções</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="color:black">
                                                 <?php foreach ($documentos as $u) { ?>
                                                     <tr>
-                                                        <td><?= $u->nome_membro ?></td>
-                                                        <td><?= $u->descricao_documento ?></td>
+                                                        <td><?= $u->pessoa_nome ?></td>
+                                                        <td><?= $u->tipo_documento ?></td>
                                                         <td><?= $u->nome_usuario ?></td>
-                                                        <td><?= $u->estado ?></td>
+                                                        <td><?= $u->data_criacao ?></td>
+                                                        <td>
+                                                        <a target="blank" 
+                                                        href="<?= base_url('documento/mostrar/'.$u->documento_id.'/'.$u->membro_id) ?>" 
+                                                        class="btn btn-outline-secondary btn-sm"><i class="fa fa-print"></i></a>
+                                                        </td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Membro</th>
+                                                <th>Membro</th>
                                                     <th>Documento</th>
                                                     <th>Usuário</th>
                                                     <th>Data</th>
-                                                    <th>Estado</th>
+                                                    <th>Opções</th>
                                                 </tr>
                                             </tfoot>
                                         </table>

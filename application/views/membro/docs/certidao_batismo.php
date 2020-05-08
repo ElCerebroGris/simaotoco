@@ -58,27 +58,31 @@
         </div> -->
 
         <div class="main">
+        <?php $dado = explode('-',$membro->data_nascimento);
+        $dado1 = explode('-',$membro->data_baptismo); 
+        $dado2 = explode('-',date('d-m').'-20'.date('y'));
+        ?>
             <h1>CERTIDÃO DE BAPTISMO</h1>
 
-            <p>Pelo presente, certifica-se que SILVIA MANUEL S. MARQUES LOPES,
-                Estado Civil Solteira, Natural de ____________________, filho de
-                ________________________ e de __________________________,
-                nascido aos ____ de ______________ de ____, foi baptizado, por
-                imersão, na Igreja de Nosso Senhor Jesus Cristo no Mundo, aos ____
-                de ________________ de _____, cumprindo o respectivo ritual vigente
+            <p>Pelo presente, certifica-se que <?= $membro->pessoa_nome ?>,
+                Estado Civil <?= $membro->estado_civil ?>, Natural de <?= $membro->provincia_nascimento ?>, 
+                filho de <?= $membro->nome_pai ?> e de  <?= $membro->nome_mae ?>,
+                nascido aos <?= $dado[2] .' de '. $dado[1] .' de '. $dado[0] ?>, foi baptizado, por
+                imersão, na Igreja de Nosso Senhor Jesus Cristo no Mundo, 
+                aos <?= $dado1[2] .' de '. $dado1[1] .' de '. $dado1[0] ?>, 
+                cumprindo o respectivo ritual vigente
                 nesta Igreja, passando a partir desta data a ostentar a categoria de
-                cristão.=====================
-                ==================================================
+                cristão. <br>
                 Para constar, passou-se-lhe o presente certificado que vai devidamente
-                assinado e carimbado. ======================</p>
+                assinado e carimbado.</p>
 
             <div class="main-footer">
-                <p class="p-footer">Luanda, ____ de __________________ de 00___ - “Ano da Solidariedade, da Leitura e Interpretação da Lei de Deus” - Milénio de Cristo</p>
+                <p class="p-footer">Luanda, <?= $dado2[0] .' de '. $dado2[1] .' de '. $dado2[2] ?> - 
+                “Ano da Solidariedade, da Leitura e Interpretação da Lei de Deus” - Milénio de Cristo</p>
 
 
 
                 <p>O PASTOR PROVINCIAL</p>
-                <p>Reverendo-Pastor TUASSOLO VICTOR</p>
 
             </div>
         </div>

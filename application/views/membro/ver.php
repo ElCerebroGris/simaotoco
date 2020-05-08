@@ -41,20 +41,20 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
                                             <img class="profile-user-img img-fluid img-circle"
-                                                 src="<?=base_url().'fotos/'.$membros[0]->foto ?>"
+                                                 src="<?=base_url().'fotos/'.$membros->foto ?>"
                                                  alt="User profile picture">
                                         </div>
 
-                                        <h3 class="profile-username text-center"><?=$membros[0]->pessoa_nome?></h3>
+                                        <h3 class="profile-username text-center"><?=$membros->pessoa_nome?></h3>
 
-                                        <p class="text-muted text-center"><?=$membros[0]->descricao_funcao?></p>
+                                        <p class="text-muted text-center"><?=$membros->descricao_funcao?></p>
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
-                                                <b>Identificação:</b> <a class="float-right"><?=$membros[0]->descricao_identificacao?></a>
+                                                <b>Identificação:</b> <a class="float-right"><?=$membros->descricao_identificacao?></a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Data de nascimento:</b> <a class="float-right"><?=$membros[0]->data_nascimento?></a>
+                                                <b>Data de nascimento:</b> <a class="float-right"><?=$membros->data_nascimento?></a>
                                             </li>
                                         </ul>
 
@@ -78,31 +78,31 @@
                                             <div class="active tab-pane" id="activity">
                                             <ul class="list-group list-group-unbordered mb-3">
                                                 <li class="list-group-item">
-                                                    <b>Nome completo:</b> <a class="float-right"><?=$membros[0]->pessoa_nome?></a>
+                                                    <b>Nome completo:</b> <a class="float-right"><?=$membros->pessoa_nome?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Nome do Pai:</b> <a class="float-right"><?=$membros[0]->nome_pai?></a>
+                                                    <b>Nome do Pai:</b> <a class="float-right"><?=$membros->nome_pai?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Nome da Mãe:</b> <a class="float-right"><?=$membros[0]->nome_mae?></a>
+                                                    <b>Nome da Mãe:</b> <a class="float-right"><?=$membros->nome_mae?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Identificação:</b> <a class="float-right"><?=$membros[0]->descricao_identificacao?></a>
+                                                    <b>Identificação:</b> <a class="float-right"><?=$membros->descricao_identificacao?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Nacionalidade:</b> <a class="float-right"><?=$membros[0]->descricao_nacionalidade?></a>
+                                                    <b>Nacionalidade:</b> <a class="float-right"><?=$membros->descricao_nacionalidade?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Data de nascimento:</b> <a class="float-right"><?=$membros[0]->data_nascimento?></a>
+                                                    <b>Data de nascimento:</b> <a class="float-right"><?=$membros->data_nascimento?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Estado civil:</b> <a class="float-right"><?=$membros[0]->estado_civil?></a>
+                                                    <b>Estado civil:</b> <a class="float-right"><?=$membros->estado_civil?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Telefone:</b> <a class="float-right"><?=$membros[0]->telefone?></a>
+                                                    <b>Telefone:</b> <a class="float-right"><?=$membros->telefone?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Endereço:</b> <a class="float-right"><?=$membros[0]->endereco?></a>
+                                                    <b>Endereço:</b> <a class="float-right"><?=$membros->endereco?></a>
                                                 </li>
                                             </ul>
 
@@ -111,31 +111,31 @@
                                             <div class="tab-pane" id="timeline">
                                             <ul class="list-group list-group-unbordered mb-3">
                                                 <li class="list-group-item">
-                                                    <b>Tribo:</b> <a class="float-right"><?=$membros[0]->descricao_tribo?></a>
+                                                    <b>Tribo:</b> <a class="float-right"><?=$membros->descricao_tribo?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Igreja Nacional:</b> <a class="float-right"><?=$membros[0]->descricao_igreja_nacional?></a>
+                                                    <b>Igreja Nacional:</b> <a class="float-right"><?=$membros->descricao_igreja_nacional?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Provincia Eclesiastica:</b> <a class="float-right"><?=$membros[0]->descricao_provincia_eclesiastica?></a>
+                                                    <b>Provincia Eclesiastica:</b> <a class="float-right"><?=$membros->descricao_provincia_eclesiastica?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Paroquia:</b> <a class="float-right"><?=$membros[0]->descricao_paroquia?></a>
+                                                    <b>Paroquia:</b> <a class="float-right"><?=$membros->descricao_paroquia?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Classe:</b> <a class="float-right"><?=$membros[0]->descricao_classe?></a>
+                                                    <b>Classe:</b> <a class="float-right"><?=$membros->descricao_classe?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Data de admissão:</b> <a class="float-right"><?=$membros[0]->data_admissao?></a>
+                                                    <b>Data de admissão:</b> <a class="float-right"><?=$membros->data_admissao?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Categoria:</b> <a class="float-right"><?=$membros[0]->descricao_categoria?></a>
+                                                    <b>Categoria:</b> <a class="float-right"><?=$membros->descricao_categoria?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Função:</b> <a class="float-right"><?=$membros[0]->descricao_funcao?></a>
+                                                    <b>Função:</b> <a class="float-right"><?=$membros->descricao_funcao?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Data de baptismo:</b> <a class="float-right"><?=$membros[0]->data_baptismo?></a>
+                                                    <b>Data de baptismo:</b> <a class="float-right"><?=$membros->data_baptismo?></a>
                                                 </li>
                                             </ul>
                                             </div>
