@@ -60,8 +60,7 @@ class Documento extends CI_Controller {
             'margin_footer' => 10
         ]);
 
-        $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
-        $html = $this->load->view('membro/docs/certidao_casamento', $data)->output->final_output;
+        $html = $this->load->view('membro/docs/certidao_casamento')->output->final_output;
 
         $mpdf->SetProtection(array('print'));
         $mpdf->SetTitle("Certidão de Casamento");
@@ -83,8 +82,7 @@ class Documento extends CI_Controller {
             'margin_footer' => 10
         ]);
 
-        $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
-        $html = $this->load->view('membro/docs/certidao_batismo', $data)->output->final_output;
+        $html = $this->load->view('membro/docs/certidao_batismo')->output->final_output;
 
         $mpdf->SetProtection(array('print'));
         $mpdf->SetTitle("Certidão de Baptismo");
@@ -106,8 +104,7 @@ class Documento extends CI_Controller {
             'margin_footer' => 10
         ]);
 
-        $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
-        $html = $this->load->view('membro/docs/testificacao', $data)->output->final_output;
+        $html = $this->load->view('membro/docs/testificacao')->output->final_output;
 
         $mpdf->SetProtection(array('print'));
         $mpdf->SetTitle("Testificação");

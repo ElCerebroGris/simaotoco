@@ -164,17 +164,19 @@ class Membro extends CI_Controller
     public function cartao($member_id)
     {
         $mpdf = new \Mpdf\Mpdf([
+            'default_font' => 'centurygothic',
             'mode' => 'utf-8',
             'format' => [153.1, 240.9],
             'orientation' => 'L',
             'margin_left' => 10,
             'margin_right' => 10,
             'margin_top' => 15,
-            'margin_bottom' => 0
+            'margin_bottom' => 0    
         ]);
 
-        $data['stylesheet'] = file_get_contents(base_url() . 'libs/dist/css/card.css');
-        $html = $this->load->view('membro/cartao', $data)->output->final_output;
+        
+
+        $html = $this->load->view('membro/cartao')->output->final_output;
 
         $mpdf->SetTitle('Cartão de Membro');
         $mpdf->WriteHTML($html);

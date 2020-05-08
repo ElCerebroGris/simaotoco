@@ -6,18 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        <?= $stylesheet; ?>
-        .title{
+        body {
+            background-image: url('http://localhost/code-behind/tocoista/libs/dist/img/card.jpg');
+            background-position: top left;
+            background-repeat: no-repeat;
+            background-image-resize: 2;
+        }
+
+        .title {
             font-size: 1.3em;
             font-weight: bold;
         }
-        .propriety{
+
+        .propriety {
             font-size: 1.1em;
             text-transform: uppercase;
         }
 
-        .photo{
-            margin-left: 210px; 
+        .photo {
+            margin-left: 210px;
             margin-top: -60px;
         }
     </style>
