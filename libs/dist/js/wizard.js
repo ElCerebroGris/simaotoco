@@ -1,12 +1,12 @@
-$(function () {
+$(function() {
 
     function step(button) {
-        $('.form-step:visible').fadeOut(200, function () {
+        $('.form-step:visible').fadeOut(200, function() {
             $('.' + button.data('step')).fadeIn(200);
         });
     }
 
-    $('html').on('submit', 'form.form-wizard', function (e) {
+    $('html').on('submit', 'form.form-wizard', function(e) {
         e.preventDefault();
 
         var form = $(this);
@@ -14,16 +14,16 @@ $(function () {
         var formButton = form.find('button');
 
         $.ajax({
-            url: 'http://localhost/code-behind/tocoista/membro/request',
+            url: 'http://localhost/gestoasimaotoco/membro/request',
             type: 'POST',
             data: formData,
             cache: false,
             processData: false,
             contentType: false,
             dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                
+            success: function(data) {
+                //console.log(data);
+
                 if (data.error) {
                     $('.error').html('<p class="alert alert-danger">' + data.errMessage + '</p>').fadeIn(200);
                 } else {
@@ -35,16 +35,17 @@ $(function () {
                 }
 
                 if (data.finish) {
-                    console.log();
+                    //console.log();
+                    location.replace('http://localhost/gestoasimaotoco/membro/listar')
                 }
             },
-            error: function(data){
+            error: function(data) {
                 console.log(data);
             }
         });
     });
 
-    $('html').on('click', 'a[data-step]', function (e) {
+    $('html').on('click', 'a[data-step]', function(e) {
         e.preventDefault();
         step($(this));
     });

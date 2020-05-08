@@ -8,7 +8,6 @@ class Migration_Membro extends CI_Migration
     public function up()
     {
         $this->dbforge->add_field('membro_id int(11) NOT NULL PRIMARY KEY auto_increment');
-        $this->dbforge->add_field('nacionalidade_id int(11) NOT NULL');
         $this->dbforge->add_field('pessoa_id int(11) NOT NULL');
         $this->dbforge->add_field('area_id int(11) NOT NULL');
         $this->dbforge->add_field('classe_id int(11) NOT NULL');

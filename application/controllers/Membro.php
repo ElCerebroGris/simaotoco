@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../vendor/autoload.php';
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Membro extends CI_Controller
@@ -31,24 +31,26 @@ class Membro extends CI_Controller
     public function ver($id = null)
     {
         $this->verificar_acesso();
-        $this->db->where('id_membro', $id);
-        $this->db->join('igreja_nacional', 'igreja_nacional.id_igreja_nacional=membro.id_igreja_nacional');
+        $this->db->where('membro_id', $id);
+        $this->db->join('classe', 'classe.classe_id=membro.classe_id');
+        $this->db->join('paroquia', 'paroquia.paroquia_id=classe.paroquia_id');
         $this->db->join(
             'provincia_eclesiastica',
-            'provincia_eclesiastica.id_provincia_eclesiastica=membro.id_provincia_eclesiastica'
+            'provincia_eclesiastica.provincia_eclesiastica_id=paroquia.provincia_eclesiastica_id'
         );
-        $this->db->join('paroquia', 'paroquia.id_paroquia=membro.id_paroquia');
-        $this->db->join('classe', 'classe.id_classe=membro.id_classe');
-        $this->db->join('categoria', 'categoria.id_categoria=membro.id_categoria');
-        $this->db->join('funcao', 'funcao.id_funcao=membro.id_funcao');
-        $this->db->join('tribo', 'tribo.id_tribo=membro.id_tribo');
-        $this->db->join('estado_civil', 'estado_civil.id_estado_civil=membro.id_estado_civil');
-        $this->db->join('nacionalidade', 'nacionalidade.id_nacionalidade=membro.id_nacionalidade');
-        $this->db->join('identificacao', 'identificacao.id_identificacao=membro.id_identificacao');
+        $this->db->join('igreja_nacional',
+            'igreja_nacional.igreja_nacional_id=provincia_eclesiastica.igreja_nacional_id');
+        $this->db->join('categoria', 'categoria.categoria_id=membro.categoria_id');
+        $this->db->join('funcao', 'funcao.funcao_id=membro.funcao_id');
+        $this->db->join('area', 'area.area_id=membro.area_id');
+        $this->db->join('tribo', 'tribo.tribo_id=area.tribo_id');
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $this->db->join('identificacao', 'identificacao.pessoa_id=pessoa.pessoa_id');
+        $this->db->join('nacionalidade', 'nacionalidade.nacionalidade_id=pessoa.nacionalidade_id');
         $dados['membros'] = $this->db->get('membro')->result();
 
-        $this->db->where('id_membro', $id);
-        $dados['documentos'] = $this->db->get('membro_documento')->result();
+        //$this->db->where('id_membro', $id);
+        //$dados['documentos'] = $this->db->get('documento')->result();
         $this->load->view('membro/ver', $dados);
     }
 
@@ -57,6 +59,7 @@ class Membro extends CI_Controller
         $this->verificar_acesso();
         $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
         $dados['tribos'] = $this->db->get('tribo')->result();
+        $dados['areas'] = $this->db->get('area')->result();
         $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
         $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
         $dados['paroquias'] = $this->db->get('paroquia')->result();
@@ -64,44 +67,6 @@ class Membro extends CI_Controller
         $dados['categorias'] = $this->db->get('categoria')->result();
         $dados['funcoes'] = $this->db->get('funcao')->result();
         $this->load->view('membro/add', $dados);
-    }
-
-    public function addPost()
-    {
-        $this->verificar_acesso();
-        $data['nome_membro'] = $this->input->post('nome_membro');
-        $data['nome_pai'] = $this->input->post('nome_pai');
-        $data['nome_mae'] = $this->input->post('nome_mae');
-
-        $data1['descricao_identificacao'] = $this->input->post('identificacao');
-        $data1['tipo_identificacao'] = $this->input->post('tipo');
-
-        $data['nacionalidade_id'] = $this->input->post('nacionalidade');
-        $data['tribo_id'] = $this->input->post('tribo');
-        $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
-        $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
-        $data['paroquia_id'] = $this->input->post('paroquia');
-        $data['classeid_'] = $this->input->post('classe');
-        $data['data_admissao'] = $this->input->post('data_admissao');
-        $data['data_baptismo'] = $this->input->post('data_baptismo');
-        $data['categoriaid_id'] = $this->input->post('categoria');
-        $data['funcao_id'] = $this->input->post('funcao');
-        $data['data_nascimento'] = $this->input->post('data_nascimento');
-        $data['estado_civil_id'] = $this->input->post('estado_civil');
-        $data['telefone'] = $this->input->post('telefone');
-        $data['endereco'] = $this->input->post('endereco');
-
-        if ($this->db->insert('identificacao', $data1)) {
-
-            $this->db->where('descricao_identificacao', $data1['descricao_identificacao']);
-            $dados1['identificacao'] = $this->db->get('identificacao')->result();
-
-            $data['identificacao_id'] = $dados1['identificacao'][0]->id_identificacao;
-            if ($this->db->insert('membro', $data)) {
-                $this->session->set_flashdata('sms', 'Reserva adicionado com sucesso');
-                redirect('membro/listar');
-            }
-        }
     }
 
     public function request()
@@ -113,43 +78,94 @@ class Membro extends CI_Controller
         $action = $postData['action'];
         unset($postData['action']);
 
+        $pessoa = array();
+        $identificacao = array();
+        $eclesiastes = array();
+
         switch ($action) {
             case 'foto':
-                $this->session->set_userdata('files', $_FILES);
-                $json['success'] = true;
-                // $json['error'] = true;
-                // $json['errMessage'] = 'Formato Inválido!';
+                //$json['error'] = true;
+                //$json['errMessage'] = 'Formato Inválido!';
+                //var_dump($this->session->userdata('foto_atual'));
+                //die();
+                if($this->session->userdata('foto_atual')){
+                    unlink('./fotos/'.$this->session->userdata('foto_atual'));
+                }
+                if ($this->do_upload()) {
+                    $json['success'] = true;
+                } else {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro ao carregar a foto, verifique o tamanho!';
+                }
                 break;
             case 'eclesis':
 
-                $dados['eclesiastes'] = [
-                    'tribo' => $postData['tribo'],
-                    'classe' => $postData['classe'],
+                $eclesiastes = [
+                    'area_id' => $postData['area'],
+                    'classe_id' => $postData['classe'],
                     'data_admissao' => $postData['data_admissao'],
-                    'categoria' => $postData['categoria'],
+                    'categoria_id' => $postData['categoria'],
                     'data_baptismo' => $postData['data_baptismo'],
-                    'funcao' => $postData['funcao']
+                    'funcao_id' => $postData['funcao'],
                 ];
-
-                $this->session->set_userdata('eclesiastes', $dados['eclesiastes']);
+                $this->session->set_userdata('eclesiastes', $eclesiastes);
                 $json['success'] = true;
                 break;
             case 'personal':
-                $dados['personal'] = [
-                    'nome_membro' => $postData['nome_membro'],
+                $pessoa = [
+                    'pessoa_nome' => $postData['nome_membro'],
                     'nome_pai' => $postData['nome_pai'],
                     'nome_mae' => $postData['nome_mae'],
-                    'identificacao' => $postData['identificacao'],
+                    'nacionalidade_id' => $postData['nacionalidade'],
                     'data_nascimento' => $postData['data_nascimento'],
+                    'provincia_nascimento' => $postData['provincia_nascimento'],
+                    'municipio_nascimento' => $postData['data_nascimento'],
                     'sexo' => $postData['sexo'],
                     'estado_civil' => $postData['estado_civil'],
                     'telefone' => $postData['telefone'],
-                    'endereco' => $postData['endereco']
+                    'foto' => $this->session->userdata('foto_atual'),
+                    'endereco' => $postData['endereco'],
                 ];
-                $this->session->set_userdata('personal', $dados['personal']);
+
+                //$this->session->set_userdata('personal', $dados['personal']);
+
+                //Salvar Pessoa
+                $pessoa_id = null;
+                if ($this->db->insert('pessoa', $pessoa)) {
+                    $this->db->where('pessoa_nome', $pessoa['pessoa_nome']);
+                    $dados1['pessoa'] = $this->db->get('pessoa')->result();
+                    $pessoa_id = $dados1['pessoa'][0]->pessoa_id;
+                } else {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                }
+
+                //Salvar Identificacao
+                $identificacao = [
+                    'pessoa_id' => $pessoa_id,
+                    'descricao_identificacao' => $postData['identificacao'],
+                    'tipo_identificacao' => $postData['tipo'],
+                ];
+                if (!$this->db->insert('identificacao', $identificacao)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                } else {
+                    /*Atualizar Foto
+                    rename("./fotos/" . $this->session->userdata('foto_atual'),
+                        "./fotos/" . $identificacao['descricao_identificacao']
+                        . $this->session->userdata('formato_foto'));
+                    */
+                }
+
+                //Salvar Membro
+                $eclesiastes = $this->session->userdata('eclesiastes');
+                $eclesiastes['pessoa_id'] = $pessoa_id;
+                if (!$this->db->insert('membro', $eclesiastes)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                }
+                $this->session->unset_userdata('foto_atual');
                 $json['finish'] = true;
-                echo json_encode($this->session->userdata());
-                return;
                 break;
 
             default:
@@ -181,5 +197,32 @@ class Membro extends CI_Controller
         $mpdf->SetTitle('Cartão de Membro');
         $mpdf->WriteHTML($html);
         $mpdf->Output('cartao_de_membro.pdf', 'I');
+    }
+
+    public function do_upload()
+    {
+        if (!file_exists("./fotos/")) {
+            mkdir('./fotos/');
+        }
+        $config['upload_path'] = './fotos/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 2048;
+        $config['max_width'] = 1024;
+        $config['max_height'] = 768;
+        $config['file_name'] = time();
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('foto')) {
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode($error);
+            return false;
+        } else {
+            //$data = array('upload_data' => $this->upload->data());
+            $this->session->set_userdata('foto_atual', $this->upload->data('file_name'));
+            //$this->session->set_userdata('formato_foto', $this->upload->data('file_ext'));
+            //echo json_encode($data);
+            return true;
+        }
     }
 }

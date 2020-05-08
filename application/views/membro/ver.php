@@ -41,11 +41,11 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
                                             <img class="profile-user-img img-fluid img-circle"
-                                                 src="<?=base_url()?>libs/dist/img/user4-128x128.jpg"
+                                                 src="<?=base_url().'fotos/'.$membros[0]->foto ?>"
                                                  alt="User profile picture">
                                         </div>
 
-                                        <h3 class="profile-username text-center"><?=$membros[0]->nome_membro?></h3>
+                                        <h3 class="profile-username text-center"><?=$membros[0]->pessoa_nome?></h3>
 
                                         <p class="text-muted text-center"><?=$membros[0]->descricao_funcao?></p>
 
@@ -71,7 +71,6 @@
                                         <ul class="nav nav-pills">
                                             <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Dados Pessoais</a></li>
                                             <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Dados Eclesiasticos</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Documentos</a></li>
                                         </ul>
                                     </div><!-- /.card-header -->
                                     <div class="card-body">
@@ -79,7 +78,7 @@
                                             <div class="active tab-pane" id="activity">
                                             <ul class="list-group list-group-unbordered mb-3">
                                                 <li class="list-group-item">
-                                                    <b>Nome completo:</b> <a class="float-right"><?=$membros[0]->nome_membro?></a>
+                                                    <b>Nome completo:</b> <a class="float-right"><?=$membros[0]->pessoa_nome?></a>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <b>Nome do Pai:</b> <a class="float-right"><?=$membros[0]->nome_pai?></a>
@@ -97,7 +96,7 @@
                                                     <b>Data de nascimento:</b> <a class="float-right"><?=$membros[0]->data_nascimento?></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <b>Estado civil:</b> <a class="float-right"><?=$membros[0]->descricao_estado_civil?></a>
+                                                    <b>Estado civil:</b> <a class="float-right"><?=$membros[0]->estado_civil?></a>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <b>Telefone:</b> <a class="float-right"><?=$membros[0]->telefone?></a>
@@ -139,37 +138,6 @@
                                                     <b>Data de baptismo:</b> <a class="float-right"><?=$membros[0]->data_baptismo?></a>
                                                 </li>
                                             </ul>
-                                            </div>
-                                            <!-- /.tab-pane -->
-
-                                            <div class="tab-pane" id="settings">
-                                                <table id="example" class="table table-bordered table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Documento</th>
-                                                            <th>Usuário</th>
-                                                            <th>Data</th>
-                                                            <th>Estado</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($documentos as $u) {?>
-                                                            <tr>
-                                                                <td><?=$u->descricao_documento?></td>
-                                                                <td><?=$u->nome_usuario?></td>
-                                                                <td><?=$u->estado?></td>
-                                                            </tr>
-                                                        <?php }?>
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>Documento</th>
-                                                            <th>Usuário</th>
-                                                            <th>Data</th>
-                                                            <th>Estado</th>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
                                             </div>
                                             <!-- /.tab-pane -->
                                         </div>
