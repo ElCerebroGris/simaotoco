@@ -15,7 +15,11 @@ class Casamento extends CI_Controller {
     }
 
     public function listar() {
+        $this->db->join('membro','membro.membro_id=casamento.membro_mulher_id');
+        $this->db->join('membro','membro.membro_id=casamento.membro_homem_id');
+        $this->db->join('pessoa','pessoa.pessoa_id=membro.pessoa_id');
         $dados['casamentos'] = $this->db->get('casamento')->result();
+        //$dados['casamentos2'] = $this->db->get('casamento')->result();
         $this->load->view('casamento/listar', $dados);
     }
 

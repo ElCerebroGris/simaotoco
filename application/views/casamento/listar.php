@@ -61,11 +61,11 @@
                                             <tbody style="color:black">
                                                 <?php foreach ($casamentos as $q) {?>
                                                     <tr>
-                                                    <td><?=$q->membro_homem_id?></td>
+                                                    <td>
+                                                        <?=$q->pessoa_nome?></td>
                                                         <td><?=$q->membro_mulher_id?></td>
                                                         <td><?=$q->padrinho_nome?></td>
                                                         <td><?=$q->madrinha_nome?></td>
-                                                        <td><?=$q->padrinhos_casados?></td>
                                                         <td><?=$q->data_casamento?></td>
 
                                                         <td class="text-center" width="20%">
