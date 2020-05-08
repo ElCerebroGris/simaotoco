@@ -20,6 +20,7 @@ class Migration_Pessoa extends CI_Migration
         $this->dbforge->add_field('estado_civil enum(\'SOLTEIRO\',\'CASADO\',\'DIVORCIADO\',\'VIUVIO\') 
         DEFAULT \'SOLTEIRO\'');
         $this->dbforge->add_field('sexo enum(\'MASCULINO\',\'FEMENINO\') DEFAULT \'MASCULINO\'');
+        $this->dbforge->add_field('foto varchar(30)');
         $this->dbforge->add_field('estado_pessoa int(11) NOT NULL DEFAULT 1');
         $this->dbforge->add_field('data_criacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP');
         $this->dbforge->add_field('data_atualizacao timestamp ON UPDATE CURRENT_TIMESTAMP');

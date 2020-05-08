@@ -168,7 +168,7 @@
                                             <input name="nome_pai" type="text" class="form-control" required="">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="nome">Nome da nãe</label>
+                                            <label for="nome">Nome da Mãe</label>
                                             <input name="nome_mae" type="text" class="form-control" required="">
                                         </div>
                                     </div>
