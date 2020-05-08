@@ -52,6 +52,7 @@
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Paroquia</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
@@ -60,11 +61,23 @@
                                                     <tr>
                                                     <td><?= $q->descricao_classe ?></td>
                                                         <td><?= $q->descricao_paroquia ?></td>
-                                                        
+                                                        <?php if ($q->estado_classe == 0) {?>
+                                                            <td>Desativado</td>
+                                                        <?php } else {?>
+                                                            <td>Ativado</td>
+                                                        <?php }?>
+
                                                         <td class="text-center" width="20%">
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php if ($q->estado_classe == 0) {?>
+                                                                <a href="<?= base_url('classe/ativar/'.$q->classe_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?= base_url('classe/desativar/'.$q->classe_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
+
+                                                                <a href="#" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php }?>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -73,6 +86,7 @@
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Paroquias</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </tfoot>

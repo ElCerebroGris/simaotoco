@@ -37,4 +37,22 @@ class Nacionalidade extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_nacionalidade'] = 1;
+        $this->db->where('nacionalidade_id', $id);
+        if ($this->db->update('nacionalidade', $data)) {
+            $this->session->set_flashdata('sms', 'nacionalidade atualizado com sucesso');
+            redirect('nacionalidade/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_nacionalidade'] = 0;
+        $this->db->where('nacionalidade_id', $id);
+        if ($this->db->update('nacionalidade', $data)) {
+            $this->session->set_flashdata('sms', 'nacionalidade atualizado com sucesso');
+            redirect('nacionalidade/listar');
+        }
+    }
+
 }

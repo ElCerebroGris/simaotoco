@@ -51,6 +51,24 @@ class Membro extends CI_Controller
         $this->load->view('membro/add', $dados);
     }
 
+    public function ativar($id) {
+        $data['estado_membro'] = 1;
+        $this->db->where('membro_id', $id);
+        if ($this->db->update('membro', $data)) {
+            $this->session->set_flashdata('sms', 'membro atualizado com sucesso');
+            redirect('membro/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_membro'] = 0;
+        $this->db->where('membro_id', $id);
+        if ($this->db->update('membro', $data)) {
+            $this->session->set_flashdata('sms', 'membro atualizado com sucesso');
+            redirect('membro/listar');
+        }
+    }
+
     public function request()
     {
         $postData = $_REQUEST;

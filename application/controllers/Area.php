@@ -40,4 +40,22 @@ class Area extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_area'] = 1;
+        $this->db->where('area_id', $id);
+        if ($this->db->update('area', $data)) {
+            $this->session->set_flashdata('sms', 'area atualizado com sucesso');
+            redirect('area/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_area'] = 0;
+        $this->db->where('area_id', $id);
+        if ($this->db->update('area', $data)) {
+            $this->session->set_flashdata('sms', 'area atualizado com sucesso');
+            redirect('area/listar');
+        }
+    }
+
 }

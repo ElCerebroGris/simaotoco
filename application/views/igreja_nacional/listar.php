@@ -52,6 +52,7 @@
                                                     <th>Nome</th>
                                                     <th>Sigla</th>
                                                     <th>Indicador telefonico</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
@@ -61,10 +62,22 @@
                                                         <td><?= $q->descricao_igreja_nacional ?></td>
                                                         <td><?= $q->sigla ?></td>
                                                         <td><?= $q->indicador_telefonico ?></td>
+                                                        <?php if ($q->estado_igreja_nacional == 0) {?>
+                                                            <td>Desativado</td>
+                                                        <?php } else {?>
+                                                            <td>Ativado</td>
+                                                        <?php }?>
                                                         <td class="text-center" width="20%">
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php if ($q->estado_igreja_nacional == 0) {?>
+                                                                <a href="<?= base_url('igreja_nacional/ativar/'.$q->igreja_nacional_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?= base_url('igreja_nacional/desativar/'.$q->igreja_nacional_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
+
+                                                                <a href="#" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php }?>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -74,6 +87,7 @@
                                                     <th>Nome</th>
                                                     <th>Sigla</th>
                                                     <th>Indicador telefonico</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </tfoot>

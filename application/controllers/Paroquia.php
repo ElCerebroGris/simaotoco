@@ -40,4 +40,22 @@ class Paroquia extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_paroquia'] = 1;
+        $this->db->where('paroquia_id', $id);
+        if ($this->db->update('paroquia', $data)) {
+            $this->session->set_flashdata('sms', 'paroquia atualizado com sucesso');
+            redirect('paroquia/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_paroquia'] = 0;
+        $this->db->where('paroquia_id', $id);
+        if ($this->db->update('paroquia', $data)) {
+            $this->session->set_flashdata('sms', 'paroquia atualizado com sucesso');
+            redirect('paroquia/listar');
+        }
+    }
+
 }

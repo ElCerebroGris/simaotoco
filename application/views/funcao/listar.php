@@ -50,6 +50,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nome</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
@@ -57,10 +58,22 @@
                                                 <?php foreach ($funcoes as $q) { ?>
                                                     <tr>
                                                         <td><?= $q->descricao_funcao ?></td>
+                                                        <?php if ($q->estado_funcao == 0) {?>
+                                                            <td>Desativado</td>
+                                                        <?php } else {?>
+                                                            <td>Ativado</td>
+                                                        <?php }?>
                                                         <td class="text-center" width="20%">
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php if ($q->estado_funcao == 0) {?>
+                                                                <a href="<?= base_url('tribo/ativar/'.$q->funcao_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?= base_url('tribo/desativar/'.$q->funcao_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
+
+                                                                <a href="#" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php }?>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -68,6 +81,7 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>Nome</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </tfoot>

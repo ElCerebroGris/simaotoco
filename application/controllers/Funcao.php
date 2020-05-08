@@ -32,4 +32,22 @@ class Funcao extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_funcao'] = 1;
+        $this->db->where('funcao_id', $id);
+        if ($this->db->update('funcao', $data)) {
+            $this->session->set_flashdata('sms', 'funcao atualizado com sucesso');
+            redirect('funcao/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_funcao'] = 0;
+        $this->db->where('funcao_id', $id);
+        if ($this->db->update('funcao', $data)) {
+            $this->session->set_flashdata('sms', 'funcao atualizado com sucesso');
+            redirect('funcao/listar');
+        }
+    }
+
 }

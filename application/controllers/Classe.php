@@ -35,4 +35,22 @@ class Classe extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_classe'] = 1;
+        $this->db->where('classe_id', $id);
+        if ($this->db->update('classe', $data)) {
+            $this->session->set_flashdata('sms', 'classe atualizado com sucesso');
+            redirect('classe/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_classe'] = 0;
+        $this->db->where('classe_id', $id);
+        if ($this->db->update('classe', $data)) {
+            $this->session->set_flashdata('sms', 'classe atualizado com sucesso');
+            redirect('classe/listar');
+        }
+    }
+
 }

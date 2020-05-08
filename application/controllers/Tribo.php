@@ -36,4 +36,22 @@ class Tribo extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_tribo'] = 1;
+        $this->db->where('tribo_id', $id);
+        if ($this->db->update('tribo', $data)) {
+            $this->session->set_flashdata('sms', 'tribo atualizado com sucesso');
+            redirect('tribo/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_tribo'] = 0;
+        $this->db->where('tribo_id', $id);
+        if ($this->db->update('tribo', $data)) {
+            $this->session->set_flashdata('sms', 'tribo atualizado com sucesso');
+            redirect('tribo/listar');
+        }
+    }
+
 }

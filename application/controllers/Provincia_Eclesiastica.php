@@ -40,4 +40,22 @@ class Provincia_Eclesiastica extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_provincia_eclesiastica'] = 1;
+        $this->db->where('provincia_eclesiastica_id', $id);
+        if ($this->db->update('provincia_eclesiastica', $data)) {
+            $this->session->set_flashdata('sms', 'provincia eclesiastica atualizado com sucesso');
+            redirect('provincia_eclesiastica/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_provincia_eclesiastica'] = 0;
+        $this->db->where('provincia_eclesiastica_id', $id);
+        if ($this->db->update('provincia_eclesiastica', $data)) {
+            $this->session->set_flashdata('sms', 'provincia eclesiastica atualizado com sucesso');
+            redirect('provincia_eclesiastica/listar');
+        }
+    }
+
 }

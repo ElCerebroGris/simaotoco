@@ -32,4 +32,22 @@ class Categoria extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_categoria'] = 1;
+        $this->db->where('categoria_id', $id);
+        if ($this->db->update('categoria', $data)) {
+            $this->session->set_flashdata('sms', 'categoria atualizado com sucesso');
+            redirect('categoria/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_categoria'] = 0;
+        $this->db->where('categoria_id', $id);
+        if ($this->db->update('categoria', $data)) {
+            $this->session->set_flashdata('sms', 'categoria atualizado com sucesso');
+            redirect('categoria/listar');
+        }
+    }
+
 }

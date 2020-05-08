@@ -54,6 +54,7 @@
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Identificação</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
@@ -62,10 +63,26 @@
                                                     <tr>
                                                         <td><a style="color:black !important" href="<?=base_url('membro/ver/' . $q->membro_id)?>"><?=$q->pessoa_nome?></a></td>
                                                         <td><?=$q->descricao_identificacao?></td>
+                                                        <?php if ($q->estado_membro == 0) {?>
+                                                            <td>Desativado</td>
+                                                        <?php } else {?>
+                                                            <td>Ativado</td>
+                                                        <?php }?>
                                                         <td class="text-center" width="20%">
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php if ($q->estado_membro == 0) {?>
+                                                                <a href="<?= base_url('membro/ativar/'.$q->membro_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?=base_url('membro/ver/' . $q->membro_id)?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-info"></i></a>
+
+                                                                <a href="<?= base_url('membro/desativar/'.$q->membro_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
+
+                                                                <a href="#" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php }?>
+                                                            
                                                         </td>
                                                     </tr>
                                                 <?php }?>

@@ -34,4 +34,22 @@ class Igreja_Nacional extends CI_Controller {
         }
     }
 
+    public function ativar($id) {
+        $data['estado_igreja_nacional'] = 1;
+        $this->db->where('igreja_nacional_id', $id);
+        if ($this->db->update('igreja_nacional', $data)) {
+            $this->session->set_flashdata('sms', 'igreja_nacional atualizado com sucesso');
+            redirect('igreja_nacional/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_igreja_nacional'] = 0;
+        $this->db->where('igreja_nacional_id', $id);
+        if ($this->db->update('igreja_nacional', $data)) {
+            $this->session->set_flashdata('sms', 'igreja_nacional atualizado com sucesso');
+            redirect('igreja_nacional/listar');
+        }
+    }
+
 }
