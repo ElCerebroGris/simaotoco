@@ -11669,6 +11669,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .nav-sidebar .nav-header {
   font-size: .9rem;
+ 
   padding: 0.5rem;
 }
 
@@ -11826,7 +11827,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*='sidebar-dark-'] .nav-header {
-  background: inherit;
+  background: #1a2226;
   color: #d0d4db;
 }
 

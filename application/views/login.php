@@ -1,75 +1,77 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Simão Toco | Entrar</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="<?= base_url() ?>libs/plugins/fontawesome-free/css/all.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!-- icheck bootstrap -->
-        <link rel="stylesheet" href="<?= base_url() ?>libs/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="<?= base_url() ?>libs/dist/css/adminlte.min.css">
-        <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    </head>
-    <body class="hold-transition login-page">
-        <div class="login-box">
-            <div class="login-logo">
-                <a href="../../index2.html"><b>Igreja</b> Simão Toco</a>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="<?= base_url() ?>libs/dist/img/logo.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>libs/plugins/login/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>libs/plugins/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>libs/plugins/login/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>libs/plugins/login/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>libs/plugins/login/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>libs/plugins/login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>libs/plugins/login/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+<main>
+        <div class="main-content">
+            <div class="icon">
+                <img src="<?= base_url() ?>libs/dist/img/logo.png" alt="">
             </div>
-            <!-- /.login-logo -->
-            <div class="card">
-                <div class="card-body login-card-body">
-                    <p class="login-box-msg">Sistema de Gestão Administrativa</p>
-
-                    <form action="<?= base_url() ?>usuario/entrarPost" method="post">
-                        <div class="input-group mb-3">
-                            <input name="usuario" type="text" class="form-control" placeholder="Usuário">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input name="senha" type="password" class="form-control" placeholder="Senha">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- /.col -->
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </form>
-                    <!-- /.social-auth-links -->
-
-                    <p class="mb-1">
-                        <a href="<?= base_url() ?>usuario/recuperar_senha">Esqueceu a senha?</a>
-                    </p>
-                </div>
-                <!-- /.login-card-body -->
+            <div class="form-login">
+                <form class="validate-form" action="<?= base_url() ?>usuario/entrarPost" method="post">
+					
+					<p >
+					<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+						<input class="input100" type="text" placeholder="User" name="usuario" required data-validate = "Password is required">
+					</p>
+                    <p>
+					<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+						<input class="input100" type="password" placeholder="Password" name="senha" required data-validate = "Password is required">
+					</p>
+					
+                    <button type="submit">Entrar</button>
+                </form>
+                <p> <a class="txt2 p-t-12" href="<?= base_url() ?>usuario/recuperar_senha"> Esqueceu a senha?</a></p>
             </div>
         </div>
-        <!-- /.login-box -->
+    </main>
+	
+	
 
-        <!-- jQuery -->
-        <script src="<?= base_url() ?>libs/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="<?= base_url() ?>libs/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="<?= base_url() ?>libs/dist/js/adminlte.min.js"></script>
+	
+<!--===============================================================================================-->	
+	<script src="<?= base_url() ?>libs/plugins/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="<?= base_url() ?>libs/plugins/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="<?= base_url() ?>libs/plugins/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="<?= base_url() ?>libs/plugins/login/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="<?= base_url() ?>libs/plugins/login/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 10
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="<?= base_url() ?>libs/plugins/login/js/main.js"></script>
 
-    </body>
+</body>
 </html>
