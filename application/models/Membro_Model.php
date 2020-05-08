@@ -96,8 +96,8 @@ class Membro_Model extends CI_Model {
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $this->db->join('identificacao', 'identificacao.pessoa_id=pessoa.pessoa_id');
         $this->db->join('nacionalidade', 'nacionalidade.nacionalidade_id=pessoa.nacionalidade_id');
-        $dados['membros'] = $this->db->get('membro')->result();
-        return $dados['membros'];
+        return ($this->db->get('membro')->result()) ? $this->db->get('membro')->result()[0] : 0;
+
     }
 
 }

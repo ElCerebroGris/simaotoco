@@ -18,7 +18,7 @@ class Migration_Membro extends CI_Migration
         $this->dbforge->add_field('funcao_id int(11) NOT NULL');
         $this->dbforge->add_field('estado_membro int(11) NOT NULL DEFAULT 1');
         $this->dbforge->add_field('data_criacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP');
-        $this->dbforge->add_field('data_atualizacao timestamp ON UPDATE CURRENT_TIMESTAMP');
+        $this->dbforge->add_field('data_atualizacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
         $this->dbforge->create_table('membro');
     }
 
