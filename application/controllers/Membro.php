@@ -166,16 +166,25 @@ class Membro extends CI_Controller
             'mode' => 'utf-8',
             'format' => [153.1, 240.9],
             'orientation' => 'L',
-            'margin_left' => 10,
-            'margin_right' => 10,
+            'margin_left' => 12,
+            'margin_right' => 12,
             'margin_top' => 15,
-            'margin_bottom' => 0    
+            'margin_bottom' => 0 
         ]);
 
         
         $this->load->model('membro_model');
-        $data['membro'] = $this->membro_model->ver($member_id);
-        // var_dump($data);
+        $this->db->where('membro_id', $member_id);
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $this->db->join('identificacao', 'identificacao.pessoa_id=pessoa.pessoa_id');
+        $this->db->join('nacionalidade', 'nacionalidade.nacionalidade_id=pessoa.nacionalidade_id');
+        $data= $this->db->get('membro')->result();
+        if(!$data){
+            $this->session->set_flashdata('sms', 'Não é possível imprimir o cartão!');
+            redirect('membro/listar');
+        }
+        $data['membro'] = $data[0];
+        // var_dump((object)$data);
         // die();
         $html = $this->load->view('membro/cartao', $data)->output->final_output;
 
