@@ -44,6 +44,7 @@ class Provincia_Eclesiastica extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_provincia_eclesiastica'] = 1;
         $this->db->where('provincia_eclesiastica_id', $id);
         if ($this->db->update('provincia_eclesiastica', $data)) {
@@ -53,6 +54,7 @@ class Provincia_Eclesiastica extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_provincia_eclesiastica'] = 0;
         $this->db->where('provincia_eclesiastica_id', $id);
         if ($this->db->update('provincia_eclesiastica', $data)) {

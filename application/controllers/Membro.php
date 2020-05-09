@@ -52,6 +52,7 @@ class Membro extends CI_Controller
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_membro'] = 1;
         $this->db->where('membro_id', $id);
         if ($this->db->update('membro', $data)) {
@@ -61,6 +62,7 @@ class Membro extends CI_Controller
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_membro'] = 0;
         $this->db->where('membro_id', $id);
         if ($this->db->update('membro', $data)) {
@@ -181,6 +183,7 @@ class Membro extends CI_Controller
 
     public function cartao($member_id)
     {
+        $this->verificar_acesso();
         $mpdf = new \Mpdf\Mpdf([
             'default_font' => 'centurygothic',
             'mode' => 'utf-8',
@@ -220,7 +223,7 @@ class Membro extends CI_Controller
 
         if (!$this->upload->do_upload('foto')) {
             $error = array('error' => $this->upload->display_errors());
-            echo json_encode($error);
+            //echo json_encode($error);
             return false;
         } else {
             //$data = array('upload_data' => $this->upload->data());

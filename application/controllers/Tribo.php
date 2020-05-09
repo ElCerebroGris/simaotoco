@@ -40,6 +40,7 @@ class Tribo extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_tribo'] = 1;
         $this->db->where('tribo_id', $id);
         if ($this->db->update('tribo', $data)) {
@@ -49,6 +50,7 @@ class Tribo extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_tribo'] = 0;
         $this->db->where('tribo_id', $id);
         if ($this->db->update('tribo', $data)) {

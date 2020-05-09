@@ -45,6 +45,7 @@ class Paroquia extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_paroquia'] = 1;
         $this->db->where('paroquia_id', $id);
         if ($this->db->update('paroquia', $data)) {
@@ -54,6 +55,7 @@ class Paroquia extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_paroquia'] = 0;
         $this->db->where('paroquia_id', $id);
         if ($this->db->update('paroquia', $data)) {

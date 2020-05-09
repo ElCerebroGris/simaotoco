@@ -82,6 +82,7 @@ class Usuario extends CI_Controller
 
     public function ativar($id)
     {
+        $this->verificar_acesso();
         $data['estado_usuario'] = 1;
         $this->db->where('usuario_id', $id);
         if ($this->db->update('usuario', $data)) {
@@ -92,6 +93,7 @@ class Usuario extends CI_Controller
 
     public function desativar($id)
     {
+        $this->verificar_acesso();
         $data['estado_usuario'] = 0;
         $this->db->where('usuario_id', $id);
         if ($this->db->update('usuario', $data)) {

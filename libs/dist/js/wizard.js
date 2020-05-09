@@ -14,7 +14,7 @@ $(function() {
         var formButton = form.find('button');
 
         $.ajax({
-            url: 'http://localhost/code-behind/tocoista/membro/request',
+            url: 'http://localhost/gestoasimaotoco/membro/request',
             type: 'POST',
             data: formData,
             cache: false,

@@ -46,7 +46,7 @@
 
                                     <div class="info-box-content">
                                         <span class="info-box-text">Total de Tribo</span>
-                                        <span class="info-box-number"></span>
+                                        <span class="info-box-number">12</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>

@@ -15,15 +15,18 @@ class Igreja_Nacional extends CI_Controller {
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
         $this->load->view('igreja_nacional/listar', $dados);
     }
 
     public function add() {
+        $this->verificar_acesso();
         $this->load->view('igreja_nacional/add');
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['descricao_igreja_nacional'] = $this->input->post('descricao_igreja_nacional');
         $data['sigla'] = $this->input->post('sigla');
         $data['indicador_telefonico'] = $this->input->post('indicador_telefonico');
@@ -38,6 +41,7 @@ class Igreja_Nacional extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_igreja_nacional'] = 1;
         $this->db->where('igreja_nacional_id', $id);
         if ($this->db->update('igreja_nacional', $data)) {
@@ -47,6 +51,7 @@ class Igreja_Nacional extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_igreja_nacional'] = 0;
         $this->db->where('igreja_nacional_id', $id);
         if ($this->db->update('igreja_nacional', $data)) {

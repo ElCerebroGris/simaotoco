@@ -41,6 +41,7 @@ class Nacionalidade extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_nacionalidade'] = 1;
         $this->db->where('nacionalidade_id', $id);
         if ($this->db->update('nacionalidade', $data)) {
@@ -50,6 +51,7 @@ class Nacionalidade extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_nacionalidade'] = 0;
         $this->db->where('nacionalidade_id', $id);
         if ($this->db->update('nacionalidade', $data)) {

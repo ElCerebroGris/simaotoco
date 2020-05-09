@@ -25,6 +25,7 @@ class Area extends CI_Controller {
 
     public function add() {
         $this->verificar_acesso();
+        $this->verificar_acesso();
         $dados['tribos'] = $this->db->get('tribo')->result();
         $this->load->view('area/add', $dados);
     }
@@ -44,6 +45,7 @@ class Area extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_area'] = 1;
         $this->db->where('area_id', $id);
         if ($this->db->update('area', $data)) {
@@ -53,6 +55,7 @@ class Area extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_area'] = 0;
         $this->db->where('area_id', $id);
         if ($this->db->update('area', $data)) {

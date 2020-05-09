@@ -19,6 +19,7 @@ class Documento extends CI_Controller
 
     public function listar()
     {
+        $this->verificar_acesso();
         $this->db->join('membro', 'membro.membro_id=documento.membro_id');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $this->db->join('usuario', 'usuario.usuario_id=documento.usuario_id');
@@ -28,6 +29,7 @@ class Documento extends CI_Controller
 
     public function mostrar($documento_id, $membro_id)
     {
+        $this->verificar_acesso();
         $this->db->where('documento_id', $documento_id);
         $dados['documentos'] = $this->db->get('documento')->result();
         switch ($dados['documentos'][0]->tipo_documento) {
@@ -46,6 +48,7 @@ class Documento extends CI_Controller
 
     public function add()
     {
+        $this->verificar_acesso();
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('documento/add', $dados);
@@ -53,6 +56,7 @@ class Documento extends CI_Controller
 
     public function addPost()
     {
+        $this->verificar_acesso();
         $data['tipo_documento'] = $this->input->post('tipo_documento');
         $data['membro_id'] = $this->input->post('membro');
         $data['usuario_id'] = $this->session->userdata('id_usuario');
@@ -88,6 +92,7 @@ class Documento extends CI_Controller
 
     public function cerdidaoCasamento($membro_id)
     {
+        $this->verificar_acesso();
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
             'margin_left' => 5,
@@ -117,6 +122,7 @@ class Documento extends CI_Controller
 
     public function cerdidaoBaptismo($membro_id)
     {
+        $this->verificar_acesso();
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
             'margin_left' => 5,
@@ -142,6 +148,7 @@ class Documento extends CI_Controller
 
     public function testificacao($membro_id = null)
     {
+        $this->verificar_acesso();
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
             'margin_left' => 5,

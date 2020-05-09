@@ -11,19 +11,23 @@ class Categoria extends CI_Controller {
     }
 
     public function index() {
+        $this->verificar_acesso();
         redirect('categoria/listar');
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $dados['categorias'] = $this->db->get('categoria')->result();
         $this->load->view('categoria/listar', $dados);
     }
 
     public function add() {
+        $this->verificar_acesso();
         $this->load->view('categoria/add');
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['descricao_categoria'] = $this->input->post('descricao_categoria');
 
         if ($this->db->insert('categoria', $data)) {
@@ -36,6 +40,7 @@ class Categoria extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_categoria'] = 1;
         $this->db->where('categoria_id', $id);
         if ($this->db->update('categoria', $data)) {
@@ -45,6 +50,7 @@ class Categoria extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_categoria'] = 0;
         $this->db->where('categoria_id', $id);
         if ($this->db->update('categoria', $data)) {

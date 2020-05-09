@@ -15,6 +15,7 @@ class Casamento extends CI_Controller {
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $this->db->join('membro','membro.membro_id=casamento.membro_homem_id');
         $this->db->join('pessoa','pessoa.pessoa_id=membro.pessoa_id');
         $dados['casamentos'] = $this->db->get('casamento')->result();
@@ -23,6 +24,7 @@ class Casamento extends CI_Controller {
     }
 
     public function add() {
+        $this->verificar_acesso();
         $this->db->where('sexo', 'MASCULINO');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros_h'] = $this->db->get('membro')->result();
@@ -35,6 +37,7 @@ class Casamento extends CI_Controller {
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['membro_homem_id'] = $this->input->post('membro_homem_id');
         $data['membro_mulher_id'] = $this->input->post('membro_mulher_id');
         $data['padrinho_nome'] = $this->input->post('padrinho_nome');

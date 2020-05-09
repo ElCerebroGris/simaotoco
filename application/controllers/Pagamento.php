@@ -15,7 +15,7 @@ class Pagamento extends CI_Controller {
     }
 
     public function listar() {
-        
+        $this->verificar_acesso();
         $this->db->join('membro', 'membro.membro_id=pagamento.membro_id');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $this->db->join('usuario', 'usuario.usuario_id=pagamento.usuario_id');
@@ -24,12 +24,14 @@ class Pagamento extends CI_Controller {
     }
 
     public function add() {
+        $this->verificar_acesso();
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('pagamento/add', $dados);
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['membro_id'] = $this->input->post('membro');
         $data['usuario_id'] = $this->session->userdata('id_usuario');
         $data['tipo_pagamento'] = $this->input->post('tipo_pagamento');

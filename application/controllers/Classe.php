@@ -15,17 +15,20 @@ class Classe extends CI_Controller {
     }
 
     public function listar() {
+        $this->verificar_acesso();
         $this->db->join('paroquia', 'paroquia.paroquia_id=classe.paroquia_id');
         $dados['classes'] = $this->db->get('classe')->result();
         $this->load->view('classe/listar', $dados);
     }
 
     public function add() {
+        $this->verificar_acesso();
         $dados['paroquias'] = $this->db->get('paroquia')->result();
         $this->load->view('classe/add', $dados);
     }
 
     public function addPost() {
+        $this->verificar_acesso();
         $data['paroquia_id'] = $this->input->post('paroquia');
         $data['descricao_classe'] = $this->input->post('descricao_classe');
 
@@ -39,6 +42,7 @@ class Classe extends CI_Controller {
     }
 
     public function ativar($id) {
+        $this->verificar_acesso();
         $data['estado_classe'] = 1;
         $this->db->where('classe_id', $id);
         if ($this->db->update('classe', $data)) {
@@ -48,6 +52,7 @@ class Classe extends CI_Controller {
     }
 
     public function desativar($id) {
+        $this->verificar_acesso();
         $data['estado_classe'] = 0;
         $this->db->where('classe_id', $id);
         if ($this->db->update('classe', $data)) {
