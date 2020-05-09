@@ -36,7 +36,7 @@ $(function() {
 
                 if (data.finish) {
                     //console.log();
-                    location.replace('http://localhost/gestoasimaotoco/membro/listar')
+                    location.replace('http://localhost/code-behind/tocoista/membro/listar')
                 }
             },
             error: function(data) {

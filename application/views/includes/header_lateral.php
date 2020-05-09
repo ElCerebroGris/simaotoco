@@ -2,14 +2,16 @@
 	<!-- Brand Logo -->
 	<div class="">
 
-		<a href="<?= base_url() ?>" class="brand-link navbar-success">
+		<a href="<?= base_url() ?>" class="brand-link navbar-success logo">
 			<img src="<?= base_url() ?>libs/dist/img/logo.png"
 			alt="Igreja Tocoista"
-			class="brand-image img-circle elevation-4"
+			class="brand-image img-circle elevation-3"
     >   
-    <span class="brand-text font-weight-dark ">SGMIST</span>
+                 <span class=" font-weight-dark logo-lg">SGMIST</span>
  
-		</a>
+        </a>
+        
+        
 	</div>
 		
     <!-- Sidebar -->
@@ -26,7 +28,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column  " data-widget="tree" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="<?= base_url() ?>welcome/dashboard" class="nav-link ">
                         <i class="nav-icon fas fa-church "></i>

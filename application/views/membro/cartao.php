@@ -13,42 +13,68 @@
             background-image-resize: 2;
         }
 
-        .title {
-            font-size: 1.3em;
+        p {
+            margin: 0pt;
+        }
+
+        .main {
+            width: 100%;
+        }
+
+        .details {
+            width: 500px;
+            float: left;
+            margin-top: 270px;
+        }
+
+        .details .sub {
+            margin-top: 40px;
+        }
+
+        .details .sub .title {
+            font-size: 1em;
+        }
+
+        .details .sub .propriety {
             font-weight: bold;
         }
 
-        .propriety {
-            font-size: 1.1em;
-            text-transform: uppercase;
+        .photo {
+            width: 220px;
+            float: right;
+            margin-top: -55.5px;
         }
 
-        .photo {
-            margin-left: 210px;
-            margin-top: -60px;
+        .title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #38760f;
+        }
+
+        .propriety {
+            font-size: 1.4em;
         }
     </style>
 </head>
 
 <body>
+    <?php
+    $membro = (object) $membro;
+    //var_dump($membro);
+    ?>
     <br>
-    <table width="100%" style="margin-top: 340px" cellpadding="10">
-        <tr>
-            <td width="80%" style="font-size: 14pt; margin-top: -30px;">
-                <p><span class="title">Nome Completo:</span> <span class="propriety">Vanilson Ribeiro</span></p>
-                <p><span class="title">Cartão de Membro Nº:</span> <span class="propriety">00319390LA035 Completo</span></p>
-                <p><span class="title">Categoria:</span> <span class="propriety">Nome Completo</span></p>
-                <p><span class="title">Data de Admissão:</span> <span class="propriety">Nome Completo</span></p>
-                <p><span class="title">Paróquia:</span> <span class="propriety">Nome Completo</span></p>
-                <p><span class="title">Tribo:</span> <span class="propriety">Nome Completo</span></p>
-            </td>
-            <td width="10%">&nbsp;</td>
-            <td width="10%">
-                <img class="photo" src="<?= base_url() . 'libs/dist/img/photo3.jpg' ?>" width="315px" height="390px">
-            </td>
-        </tr>
-    </table>
-
+    <div class="main">
+        <div class="details">
+            <p><span class="title">Nome: </span> <span class="propriety"><?= $membro->pessoa_nome ?></span></p>
+            <p><span class="title">Filiação: </span> <span class="propriety"><?= $membro->nome_pai ?> e <?= $membro->nome_mae ?></span></p>
+            <div class="sub">
+                <p><span class="title">Cartão de Membro Nº: </span></p>
+                <p><span class="propriety"><?= $membro->descricao_identificacao ?></span></p>
+            </div>
+        </div>
+        <div class="photo">
+            <img style="margin-left: 30px;" src="<?= base_url() . 'fotos/' . $membro->foto ?>" width="190px" height="228px">
+        </div>
     </div>
 
 </body>

@@ -167,5 +167,4 @@ class Usuario extends CI_Controller
     {
         $this->load->view('usuario/nova_senha');
     }
-
 }

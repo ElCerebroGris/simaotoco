@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="<?= base_url() ?>libs/plugins/select2/css/select2.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>libs/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
         <link rel="stylesheet" href="<?= base_url() ?>libs/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>libs/dist/css/skins/_all-skins.min.css">
+        <link href="<?= base_url() ?>libs/plugins/toastr/toastr.css" rel="stylesheet"/>
         <!-- Theme style -->
         <link rel="stylesheet" href="<?= base_url() ?>libs/dist/css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
@@ -26,6 +28,7 @@
         <!-- Site wrapper -->
 <nav class="main-header navbar navbar-expand navbar-light bg-success">
     <!-- Left navbar links -->
+    
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link text-white" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
