@@ -66,7 +66,8 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Tribo</label>
                                             <input type="hidden" name="action" value="eclesis">
-                                            <select name="tribo" class="form-control select2" style="width: 100%;">
+                                            <select name="tribo" class="form-control select2 filter" data-get="area" style="width: 100%;">
+                                                <option value="">Selecione uma opção</option>
                                                 <?php foreach ($tribos as $n) { ?>
                                                     <option value="<?= $n->tribo_id ?>"><?= $n->descricao_tribo ?></option>
                                                 <?php } ?>
@@ -75,14 +76,13 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Area</label>
                                             <select name="area" class="form-control select2" style="width: 100%;">
-                                                <?php foreach ($areas as $n) { ?>
-                                                    <option value="<?= $n->area_id ?>"><?= $n->descricao_area ?></option>
-                                                <?php } ?>
+                                                <option value="">Selecione antes uma tribo</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Igreja Nacional</label>
-                                            <select name="igreja_nacional" class="form-control select2" style="width: 100%;">
+                                            <select name="igreja_nacional" class="form-control select2 filter" data-get="provincia_eclesiastica" style="width: 100%;">
+                                                <option value="">Selecione uma opção</option>
                                                 <?php foreach ($igreja_nacionais as $n) { ?>
                                                     <option value="<?= $n->igreja_nacional_id ?>"><?= $n->descricao_igreja_nacional ?></option>
                                                 <?php } ?>
@@ -90,26 +90,20 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Provincia Eclesiastica</label>
-                                            <select name="provincia_eclesiastica" class="form-control select2" style="width: 100%;">
-                                                <?php foreach ($provincia_eclesiasticas as $n) { ?>
-                                                    <option value="<?= $n->provincia_eclesiastica_id ?>"><?= $n->descricao_provincia_eclesiastica ?></option>
-                                                <?php } ?>
+                                            <select name="provincia_eclesiastica" class="form-control select2 filter" data-get="paroquia" style="width: 100%;">
+                                                <option value="">Selecione antes uma igreja nacional</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Paroquia</label>
-                                            <select name="paroquia" class="form-control select2" style="width: 100%;">
-                                                <?php foreach ($paroquias as $n) { ?>
-                                                    <option value="<?= $n->paroquia_id ?>"><?= $n->descricao_paroquia ?></option>
-                                                <?php } ?>
+                                            <select name="paroquia" class="form-control select2 filter" data-get="classe" style="width: 100%;">
+                                                <option value="">Selecione antes uma província eclesiastica</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Classe</label>
                                             <select name="classe" class="form-control select2" style="width: 100%;">
-                                                <?php foreach ($classes as $n) { ?>
-                                                    <option value="<?= $n->classe_id ?>"><?= $n->descricao_classe ?></option>
-                                                <?php } ?>
+                                                <option value="">Selecione antes uma paroquia</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">

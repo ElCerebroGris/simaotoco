@@ -36,14 +36,14 @@
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
-						<input class="input100" type="text" placeholder="User" name="usuario" required data-validate = "Password is required">
+						<input class="input100" type="text" placeholder="Usuário" name="usuario" autocomplete="off" required>
 					</p>
                     <p>
 					<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
-						<input class="input100" type="password" placeholder="Password" name="senha" required data-validate = "Password is required">
+						<input class="input100" type="password" placeholder="Senha" name="senha" autocomplete="off" required>
 					</p>
 					
                     <button type="submit">Entrar</button>

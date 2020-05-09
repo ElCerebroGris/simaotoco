@@ -66,18 +66,14 @@ class Membro extends CI_Controller
 
         switch ($action) {
             case 'foto':
-                //$json['error'] = true;
-                //$json['errMessage'] = 'Formato Inválido!';
-                //var_dump($this->session->userdata('foto_atual'));
-                //die();
-                if($this->session->userdata('foto_atual')){
-                    unlink('./fotos/'.$this->session->userdata('foto_atual'));
+                if ($this->session->userdata('foto_atual')) {
+                    unlink('./fotos/' . $this->session->userdata('foto_atual'));
                 }
                 if ($this->do_upload()) {
                     $json['success'] = true;
                 } else {
                     $json['error'] = true;
-                    $json['errMessage'] = 'Erro ao carregar a foto, verifique o tamanho!';
+                    $json['errMessage'] = 'Erro ao carregar a foto! Selecione uma imagem com um formato é válido!';
                 }
                 break;
             case 'eclesis':
@@ -108,8 +104,6 @@ class Membro extends CI_Controller
                     'foto' => $this->session->userdata('foto_atual'),
                     'endereco' => $postData['endereco'],
                 ];
-
-                //$this->session->set_userdata('personal', $dados['personal']);
 
                 //Salvar Pessoa
                 $pessoa_id = null;
@@ -169,23 +163,22 @@ class Membro extends CI_Controller
             'margin_left' => 12,
             'margin_right' => 12,
             'margin_top' => 15,
-            'margin_bottom' => 0 
+            'margin_bottom' => 0
         ]);
 
-        
+
         $this->load->model('membro_model');
         $this->db->where('membro_id', $member_id);
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $this->db->join('identificacao', 'identificacao.pessoa_id=pessoa.pessoa_id');
         $this->db->join('nacionalidade', 'nacionalidade.nacionalidade_id=pessoa.nacionalidade_id');
-        $data= $this->db->get('membro')->result();
-        if(!$data){
+        $data = $this->db->get('membro')->result();
+        if (!$data) {
             $this->session->set_flashdata('sms', 'Não é possível imprimir o cartão!');
             redirect('membro/listar');
         }
         $data['membro'] = $data[0];
-        // var_dump((object)$data);
-        // die();
+
         $html = $this->load->view('membro/cartao', $data)->output->final_output;
 
         $mpdf->SetTitle('Cartão de Membro');
@@ -208,8 +201,6 @@ class Membro extends CI_Controller
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('foto')) {
-            $error = array('error' => $this->upload->display_errors());
-            echo json_encode($error);
             return false;
         } else {
             //$data = array('upload_data' => $this->upload->data());
@@ -218,5 +209,71 @@ class Membro extends CI_Controller
             //echo json_encode($data);
             return true;
         }
+    }
+
+    //AJAX REQUESTS
+
+    public function areasByTribo($data_id)
+    {
+        $this->db->where('tribo_id', $data_id);
+        $data = $this->db->get('area')->result();
+
+        if(!$data){
+            $json['error'] = true;
+            echo json_encode($json);
+            return;
+        }
+
+        $json['success'] = true;
+        $json['content'] = $data;
+        echo json_encode($json);
+    }
+
+    public function pEclesiasticasByIgreja($data_id)
+    {
+        $this->db->where('igreja_nacional_id', $data_id);
+        $data = $this->db->get('provincia_eclesiastica')->result();
+
+        if(!$data){
+            $json['error'] = true;
+            echo json_encode($json);
+            return;
+        }
+
+        $json['success'] = true;
+        $json['content'] = $data;
+        echo json_encode($json);
+    }
+
+    public function paroquiasBypEclesiastica($data_id)
+    {
+        $this->db->where('provincia_eclesiastica_id', $data_id);
+        $data = $this->db->get('paroquia')->result();
+
+        if(!$data){
+            $json['error'] = true;
+            echo json_encode($json);
+            return;
+        }
+
+        $json['success'] = true;
+        $json['content'] = $data;
+        echo json_encode($json);
+    }
+
+    public function classesByParoquia($data_id)
+    {
+        $this->db->where('paroquia_id', $data_id);
+        $data = $this->db->get('classe')->result();
+
+        if(!$data){
+            $json['error'] = true;
+            echo json_encode($json);
+            return;
+        }
+
+        $json['success'] = true;
+        $json['content'] = $data;
+        echo json_encode($json);
     }
 }

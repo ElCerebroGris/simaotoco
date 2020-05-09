@@ -1,21 +1,24 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+class Usuario extends CI_Controller
+{
 
-class Usuario extends CI_Controller {
-
-    public function verificar_acesso() {
+    public function verificar_acesso()
+    {
         if (!$this->session->userdata('logado')) {
             redirect('welcome/entrar');
         }
     }
 
-    public function index() {
+    public function index()
+    {
         $this->verificar_acesso();
         redirect('usuario/listar');
     }
 
-    public function listar() {
+    public function listar()
+    {
         $this->verificar_acesso();
         $this->db->where('usuario_id !=', $this->session->userdata('id_usuario'));
         $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
@@ -23,65 +26,69 @@ class Usuario extends CI_Controller {
 
         $this->load->view('usuario/listar', $dados);
     }
-    
-    public function perfil() {
+
+    public function perfil()
+    {
         $this->verificar_acesso();
         $this->db->where('id_usuario', $this->session->userdata('id_usuario'));
         $this->db->join('funcionario', 'funcionario.id_funcionario=usuario.id_funcionario');
         $this->db->join('cargo', 'cargo.codigo_cargo=funcionario.codigo_cargo');
         $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
         $dados['usuarios'] = $this->db->get('usuario')->result();
-        
+
         $dados['niveis'] = $this->db->get('nivel_usuario')->result();
 
         $this->load->view('usuario/perfil', $dados);
     }
 
-    public function add() {
+    public function add()
+    {
         $this->verificar_acesso();
         $dados['niveis'] = $this->db->get('nivel_usuario')->result();
         $this->load->view('usuario/add', $dados);
     }
 
-    public function addPost() {
+    public function addPost()
+    {
         $this->verificar_acesso();
         $data['nome_usuario'] = $this->input->post('nome_usuario');
         $data['senha'] = $this->input->post('senha');
         $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
         $data['email'] = $this->input->post('email');
-        
-        if($this->db->insert('usuario', $data)){
+
+        if ($this->db->insert('usuario', $data)) {
             $this->session->set_flashdata('sms', 'Usuário adicionado com sucesso');
             redirect('usuario/listar');
         }
-        
     }
-    
-    public function perfilPost() {
+
+    public function perfilPost()
+    {
         $this->verificar_acesso();
         $data['nome_usuario'] = $this->input->post('nome_usuario');
         $data['senha'] = $this->input->post('senha');
-        
+
         $this->db->where('id_usuario', $this->session->userdata('id_usuario'));
-        if($this->db->update('usuario', $data)){
+        if ($this->db->update('usuario', $data)) {
             redirect('usuario/perfil');
         }
-        
     }
 
-    public function sair() {
+    public function sair()
+    {
         $this->verificar_acesso();
 
         $this->session->sess_destroy();
         redirect('welcome');
     }
 
-    public function entrarPost() {
+    public function entrarPost()
+    {
         $nome_usuario = $this->input->post('usuario');
         $senha = $this->input->post('senha');
 
         //Fase de desenvolvimento
-        if($nome_usuario=='admin' && $senha=='admin'){
+        if ($nome_usuario == 'admin' && $senha == 'admin') {
             $dados['id_usuario'] = 1;
             $dados['nome_completo'] = 'ADMIN';
             $dados['nome_usuario'] = $nome_usuario;
@@ -112,17 +119,19 @@ class Usuario extends CI_Controller {
         redirect('welcome/entrar');
         //redirect('welcome');
     }
-    
-    public function recuperar_senha() {
+
+    public function recuperar_senha()
+    {
         $this->load->view('usuario/recuperar_senha');
     }
-    
-    public function recuperar_senhaPost() {
+
+    public function recuperar_senhaPost()
+    {
         redirect('usuario/nova_senha');
     }
-    
-    public function nova_senha() {
+
+    public function nova_senha()
+    {
         $this->load->view('usuario/nova_senha');
     }
-
 }
