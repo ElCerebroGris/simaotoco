@@ -35,6 +35,9 @@ class Provincia_Eclesiastica extends CI_Controller {
         $data['descricao_provincia_eclesiastica'] = $this->input->post('descricao_provincia_eclesiastica');
 
         if ($this->db->insert('provincia_eclesiastica', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('provincia eclesiastica '.$data['descricao_provincia_eclesiastica'].' adicionado');
+
             $this->session->set_flashdata('sms', 'provincia_eclesiastica adicionado com sucesso');
             redirect('provincia_eclesiastica/listar');
         }

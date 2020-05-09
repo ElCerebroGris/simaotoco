@@ -27,6 +27,8 @@ class Funcao extends CI_Controller {
         $data['descricao_funcao'] = $this->input->post('descricao_funcao');
 
         if ($this->db->insert('funcao', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('função '.$data['descricao_funcao'].' adicionado');
             $this->session->set_flashdata('sms', 'funcao adicionado com sucesso');
             redirect('funcao/listar');
         }

@@ -32,6 +32,9 @@ class Nacionalidade extends CI_Controller {
         $data['descricao_nacionalidade'] = $this->input->post('descricao_nacionalidade');
 
         if ($this->db->insert('nacionalidade', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('nacionalidade '.$data['descricao_nacionalidade'].' adicionado');
+
             $this->session->set_flashdata('sms', 'nacionalidade adicionado com sucesso');
             redirect('nacionalidade/listar');
         }

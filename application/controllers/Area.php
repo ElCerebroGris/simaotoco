@@ -35,6 +35,9 @@ class Area extends CI_Controller {
         $data['descricao_area'] = $this->input->post('descricao_area');
 
         if ($this->db->insert('area', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('area '.$data['descricao_area'].' adicionado');
+
             $this->session->set_flashdata('sms', 'area adicionado com sucesso');
             redirect('area/listar');
         }

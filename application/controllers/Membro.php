@@ -164,6 +164,8 @@ class Membro extends CI_Controller
                     $json['error'] = true;
                     $json['errMessage'] = 'Erro! Impossível avançar.';
                 }
+                $this->load->model('log_model');
+                $this->log_model->adicionar('membro '.$pessoa['pessoa_nome'].' adicionado');
                 $this->session->unset_userdata('foto_atual');
                 $json['finish'] = true;
                 break;

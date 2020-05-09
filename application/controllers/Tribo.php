@@ -31,6 +31,9 @@ class Tribo extends CI_Controller {
         $data['descricao_tribo'] = $this->input->post('descricao_tribo');
 
         if ($this->db->insert('tribo', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('tribo '.$data['descricao_tribo'].' adicionado');
+
             $this->session->set_flashdata('sms', 'tribo adicionado com sucesso');
             redirect('tribo/listar');
         }

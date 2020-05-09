@@ -29,6 +29,9 @@ class Igreja_Nacional extends CI_Controller {
         $data['indicador_telefonico'] = $this->input->post('indicador_telefonico');
 
         if ($this->db->insert('igreja_nacional', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('igreja nacional '.$data['descricao_igreja_nacional'].' adicionado');
+
             $this->session->set_flashdata('sms', 'igreja nacional adicionado com sucesso');
             redirect('igreja_nacional/listar');
         }

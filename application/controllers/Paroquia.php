@@ -35,6 +35,10 @@ class Paroquia extends CI_Controller {
         $data['descricao_paroquia'] = $this->input->post('descricao_paroquia');
 
         if ($this->db->insert('paroquia', $data)) {
+            
+            $this->load->model('log_model');
+            $this->log_model->adicionar('paroquia '.$data['descricao_paroquia'].' adicionado');
+
             $this->session->set_flashdata('sms', 'paroquia adicionado com sucesso');
             redirect('paroquia/listar');
         }

@@ -30,6 +30,9 @@ class Classe extends CI_Controller {
         $data['descricao_classe'] = $this->input->post('descricao_classe');
 
         if ($this->db->insert('classe', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('classe '.$data['descricao_classe'].' adicionado');
+
             $this->session->set_flashdata('sms', 'classe adicionado com sucesso');
             redirect('classe/listar');
         }

@@ -78,6 +78,9 @@ class Documento extends CI_Controller
         }
 
         if ($this->db->insert('documento', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('documento '.$data['tipo_documento'].' criado');
+
             $this->session->set_flashdata('sms', 'documento adicionado com sucesso');
             redirect('documento/listar');
         }

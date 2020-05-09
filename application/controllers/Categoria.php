@@ -27,6 +27,9 @@ class Categoria extends CI_Controller {
         $data['descricao_categoria'] = $this->input->post('descricao_categoria');
 
         if ($this->db->insert('categoria', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('categoria '.$data['descricao_categoria'].' adicionado');
+
             $this->session->set_flashdata('sms', 'categoria adicionado com sucesso');
             redirect('categoria/listar');
         }

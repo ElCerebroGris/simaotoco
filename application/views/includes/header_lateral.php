@@ -64,6 +64,14 @@
                 </li>
                 <li class="nav-header">Administração</li>
                 <li class="nav-item">
+                    <a href="<?= base_url() ?>log" class="nav-link">
+                        <i class="nav-icon fas fa-history"></i>
+                        <p>
+                            Logs
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url() ?>usuario" class="nav-link">
                         <i class="nav-icon fas fa-user-alt"></i>
                         <p>

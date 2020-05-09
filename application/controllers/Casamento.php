@@ -43,6 +43,9 @@ class Casamento extends CI_Controller {
         $data['data_casamento'] = $this->input->post('data_casamento');
 
         if ($this->db->insert('casamento', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('casamento de '.$data['membro_homem_id'].' adicionado');
+
             $this->session->set_flashdata('sms', 'casamento adicionado com sucesso');
             redirect('casamento/listar');
         }

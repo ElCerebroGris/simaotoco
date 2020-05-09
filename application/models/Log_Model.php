@@ -13,12 +13,9 @@ class Log_Model extends CI_Model {
         parent::__construct();
     }
 
-    function adicionar($accao, $sms) {
-        $data['id_usuario'] = $this->session->userdata('id_usuario');
-        $data['data'] = date('d/m') . '/20' . date('y');
-        $data['hora'] = date("h:i:sa");
-        $data['acao'] = $accao;
-        $data['mensagem'] = $sms;
+    function adicionar($descricao) {
+        $data['usuario_id'] = $this->session->userdata('id_usuario');
+        $data['descricao_log'] = $descricao;
 
         return $this->db->insert('log', $data);
     }

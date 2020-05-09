@@ -37,6 +37,10 @@ class Pagamento extends CI_Controller {
         $data['mes_referencia'] = $this->input->post('mes_referencia');
 
         if ($this->db->insert('pagamento', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('pagamento de '.$data['membro_id']
+            .' registrado no valor de '.$data['valor']);
+
             $this->session->set_flashdata('sms', 'Pagamento registrado com sucesso');
             redirect('pagamento/listar');
         }
