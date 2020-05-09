@@ -11,6 +11,7 @@ class Migration_Usuario extends CI_Migration
         $this->dbforge->add_field('membro_id int(11) NOT NULL');
         $this->dbforge->add_field('nome_usuario varchar(100) NOT NULL UNIQUE');
         $this->dbforge->add_field('senha varchar(100) NOT NULL');
+        $this->dbforge->add_field('email varchar(100) NOT NULL');
         $this->dbforge->add_field('codigo_nivel_usuario int(11) NOT NULL');
         $this->dbforge->add_field('estado_usuario int(11) NOT NULL DEFAULT 1');
         $this->dbforge->add_field('data_criacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP');

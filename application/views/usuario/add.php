@@ -43,11 +43,11 @@
                                          
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputEmail1">Nome de Usuário</label>
-                                                <input name="nome_usuario" type="text" class="form-control" id="exampleInputEmail1">
+                                                <input name="nome_usuario" type="text" class="form-control" id="" required>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputPassword1">Senha</label>
-                                                <input name="senha" type="password" class="form-control" id="exampleInputPassword1">
+                                                <input name="senha" type="password" class="form-control" id="" required>
                                             </div>
                                             </div>
                                             <div class="row">
@@ -63,7 +63,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputEmail1">Email</label>
-                                                <input name="email" type="email" class="form-control" id="exampleInputEmail1">
+                                                <input name="email" type="email" class="form-control" id="exampleInputEmail1" required="">
                                             </div>
                                             </div>
                                             <div class="card">

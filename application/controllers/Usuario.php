@@ -69,6 +69,24 @@ class Usuario extends CI_Controller {
         
     }
 
+    public function ativar($id) {
+        $data['estado_usuario'] = 1;
+        $this->db->where('usuario_id', $id);
+        if ($this->db->update('usuario', $data)) {
+            $this->session->set_flashdata('sms', 'usuario atualizado com sucesso');
+            redirect('usuario/listar');
+        }
+    }
+
+    public function desativar($id) {
+        $data['estado_usuario'] = 0;
+        $this->db->where('usuario_id', $id);
+        if ($this->db->update('usuario', $data)) {
+            $this->session->set_flashdata('sms', 'usuario atualizado com sucesso');
+            redirect('usuario/listar');
+        }
+    }
+
     public function sair() {
         $this->verificar_acesso();
 

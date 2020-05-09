@@ -51,6 +51,7 @@
                                                 <tr>
                                                     <th>Nome de Usuário</th>
                                                     <th>Nível</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
@@ -59,11 +60,22 @@
                                                     <tr>
                                                         <td><?= $u->nome_usuario ?></td>
                                                         <td><?= $u->descricao_nivel_usuario ?></td>
+                                                        <?php if ($u->estado_usuario == 0) {?>
+                                                            <td>Desativado</td>
+                                                        <?php } else {?>
+                                                            <td>Ativado</td>
+                                                        <?php }?>
                                                         <td class="text-center" width="20%">
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
-                                                        </td>
+                                                            <?php if ($u->estado_usuario == 0) {?>
+                                                                <a href="<?= base_url('usuario/ativar/'.$u->usuario_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?= base_url('usuario/desativar/'.$u->usuario_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
+
+                                                                <a href="#" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php }?>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -71,6 +83,7 @@
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Nivel</th>
+                                                    <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </tfoot>
