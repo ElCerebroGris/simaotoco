@@ -65,7 +65,7 @@
                                                         <td class="text-center" width="20%">
                                                             <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
                                                             <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <a href="<?=base_url('membro/editar/' . $q->membro_id)?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
                                                         </td>
                                                     </tr>
                                                 <?php }?>

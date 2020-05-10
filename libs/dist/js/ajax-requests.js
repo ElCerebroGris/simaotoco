@@ -75,4 +75,24 @@ $(function () {
         });
     });
 
+    function readURL(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function(e){
+                if($('#imgActual').length){
+                    $('#imgActual').fadeOut(100);
+                }
+                $('#imgPrev').fadeIn(2000);
+                $('#imgPrev').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('[name=foto]').on('change', function(e){
+        readURL(this);
+    });
+
 });

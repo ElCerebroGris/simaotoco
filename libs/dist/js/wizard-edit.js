@@ -7,7 +7,7 @@ $(function() {
         });
     }
 
-    $('html').on('submit', 'form.form-wizard', function(e) {
+    $('html').on('submit', 'form.form-wizard-edit', function(e) {
         e.preventDefault();
 
         var form = $(this);
@@ -15,7 +15,7 @@ $(function() {
         var formButton = form.find('button');
 
         $.ajax({
-            url: 'http://localhost/code-behind/tocoista/membro/request',
+            url: 'http://localhost/code-behind/tocoista/membro/requestedit',
             type: 'POST',
             data: formData,
             cache: false,
