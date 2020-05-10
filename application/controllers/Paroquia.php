@@ -44,6 +44,34 @@ class Paroquia extends CI_Controller {
         }
     }
 
+    public function editar($id) {
+        $this->verificar_acesso();
+        $this->db->where('paroquia_id', $id);
+        $this->db->join('provincia_eclesiastica',
+         'provincia_eclesiastica.provincia_eclesiastica_id=paroquia.provincia_eclesiastica_id');
+        $dados['paroquias'] = $this->db->get('paroquia')->result();
+
+        $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
+        $this->load->view('paroquia/editar', $dados);
+    }
+
+    public function editarPost() {
+        $this->verificar_acesso();
+        $id = $this->input->post('paroquia_id');
+        $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
+        $data['descricao_paroquia'] = $this->input->post('descricao_paroquia');
+
+        $this->db->where('paroquia_id', $id);
+        if ($this->db->update('paroquia', $data)) {
+            
+            $this->load->model('log_model');
+            $this->log_model->adicionar('paroquia '.$data['descricao_paroquia'].' atualizada');
+
+            $this->session->set_flashdata('sms', 'paroquia atualizada com sucesso');
+            redirect('paroquia/listar');
+        }
+    }
+
     public function ativar($id) {
         $this->verificar_acesso();
         $data['estado_paroquia'] = 1;

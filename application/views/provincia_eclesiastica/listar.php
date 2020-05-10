@@ -73,7 +73,7 @@
                                                                 <a href="<?= base_url('provincia_eclesiastica/desativar/'.$q->provincia_eclesiastica_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
 
-                                                                <a href="#" 
+                                                                <a href="<?= base_url('provincia_eclesiastica/editar/'.$q->provincia_eclesiastica_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
                                                             <?php }?>
                                                         </td>

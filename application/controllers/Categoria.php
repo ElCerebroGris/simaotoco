@@ -39,6 +39,28 @@ class Categoria extends CI_Controller {
         }
     }
 
+    public function editar($id) {
+        $this->verificar_acesso();
+        $this->db->where('categoria_id', $id);
+        $dados['categorias'] = $this->db->get('categoria')->result();
+        $this->load->view('categoria/editar', $dados);
+    }
+
+    public function editarPost() {
+        $this->verificar_acesso();
+        $id = $this->input->post('categoria_id');
+        $data['descricao_categoria'] = $this->input->post('descricao_categoria');
+
+        $this->db->where('categoria_id', $id);
+        if ($this->db->update('categoria', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('categoria '.$data['descricao_categoria'].' atualizada');
+
+            $this->session->set_flashdata('sms', 'categoria atualizada com sucesso');
+            redirect('categoria/listar');
+        }
+    }
+
     public function ativar($id) {
         $this->verificar_acesso();
         $data['estado_categoria'] = 1;

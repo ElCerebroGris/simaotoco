@@ -75,7 +75,7 @@
                                                                 <a href="<?= base_url('classe/desativar/'.$q->classe_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
 
-                                                                <a href="#" 
+                                                                <a href="<?= base_url('classe/editar/'.$q->classe_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
                                                             <?php }?>
                                                         </td>

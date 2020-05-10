@@ -65,13 +65,13 @@
                                                         <?php }?>
                                                         <td class="text-center" width="20%">
                                                             <?php if ($q->estado_funcao == 0) {?>
-                                                                <a href="<?= base_url('tribo/ativar/'.$q->funcao_id) ?>" 
+                                                                <a href="<?= base_url('funcao/ativar/'.$q->funcao_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
                                                             <?php } else {?>
-                                                                <a href="<?= base_url('tribo/desativar/'.$q->funcao_id) ?>" 
+                                                                <a href="<?= base_url('funcao/desativar/'.$q->funcao_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
 
-                                                                <a href="#" 
+                                                                <a href="<?= base_url('funcao/editar/'.$q->funcao_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
                                                             <?php }?>
                                                         </td>

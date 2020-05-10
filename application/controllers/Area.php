@@ -44,6 +44,33 @@ class Area extends CI_Controller {
         }
     }
 
+    public function editar($id) {
+        $this->verificar_acesso();
+        $this->db->where('area_id', $id);
+        $this->db->join('tribo',
+         'tribo.tribo_id=area.tribo_id');
+        $dados['areas'] = $this->db->get('area')->result();
+        $dados['tribos'] = $this->db->get('tribo')->result();
+
+        $this->load->view('area/editar', $dados);
+    }
+
+    public function editarPost() {
+        $this->verificar_acesso();
+        $id = $this->input->post('area_id');
+        $data['tribo_id'] = $this->input->post('tribo');
+        $data['descricao_area'] = $this->input->post('descricao_area');
+
+        $this->db->where('area_id', $id);
+        if ($this->db->update('area', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('area '.$data['descricao_area'].' atualizada');
+
+            $this->session->set_flashdata('sms', 'area atualizada com sucesso');
+            redirect('area/listar');
+        }
+    }
+
     public function ativar($id) {
         $this->verificar_acesso();
         $data['estado_area'] = 1;

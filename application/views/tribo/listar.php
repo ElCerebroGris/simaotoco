@@ -71,7 +71,7 @@
                                                                 <a href="<?= base_url('tribo/desativar/'.$q->tribo_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
 
-                                                                <a href="#" 
+                                                                <a href="<?= base_url('tribo/editar/'.$q->tribo_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
                                                             <?php }?>
                                                         </td>

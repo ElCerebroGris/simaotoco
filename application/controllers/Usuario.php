@@ -28,20 +28,6 @@ class Usuario extends CI_Controller
         $this->load->view('usuario/listar', $dados);
     }
 
-    public function perfil()
-    {
-        $this->verificar_acesso();
-        $this->db->where('id_usuario', $this->session->userdata('id_usuario'));
-        $this->db->join('funcionario', 'funcionario.id_funcionario=usuario.id_funcionario');
-        $this->db->join('cargo', 'cargo.codigo_cargo=funcionario.codigo_cargo');
-        $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
-        $dados['usuarios'] = $this->db->get('usuario')->result();
-
-        $dados['niveis'] = $this->db->get('nivel_usuario')->result();
-
-        $this->load->view('usuario/perfil', $dados);
-    }
-
     public function add()
     {
         $this->verificar_acesso();
@@ -67,15 +53,62 @@ class Usuario extends CI_Controller
 
     }
 
-    public function perfilPost()
+    public function editar($id)
     {
         $this->verificar_acesso();
+        $this->db->where('usuario_id', $id);
+        $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
+        $dados['usuarios'] = $this->db->get('usuario')->result();
+
+        $dados['niveis'] = $this->db->get('nivel_usuario')->result();
+        $this->load->view('usuario/editar', $dados);
+    }
+
+    public function editarPost()
+    {
+        $this->verificar_acesso();
+        $id = $this->input->post('usuario_id');
+        $data['nome_usuario'] = $this->input->post('nome_usuario');
+        $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
+        $data['email'] = $this->input->post('email');
+
+        $this->db->where('usuario_id', $id);
+        if ($this->db->update('usuario', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('usuário '.$data['nome_usuario'].' atualizado');
+
+            $this->session->set_flashdata('sms', 'Usuário atualizaddo com sucesso');
+            redirect('usuario/listar');
+        }
+
+    }
+
+    public function perfil()
+    {
+        $this->verificar_acesso();
+        $this->db->where('usuario_id', $this->session->userdata('id_usuario'));
+        $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
+        $dados['usuarios'] = $this->db->get('usuario')->result();
+
+        $dados['niveis'] = $this->db->get('nivel_usuario')->result();
+        $this->load->view('usuario/perfil', $dados);
+    }
+
+    public function perfilPost()
+    {
+        $id = $this->input->post('usuario_id');
         $data['nome_usuario'] = $this->input->post('nome_usuario');
         $data['senha'] = $this->input->post('senha');
+        $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
+        $data['email'] = $this->input->post('email');
 
-        $this->db->where('id_usuario', $this->session->userdata('id_usuario'));
+        $this->db->where('usuario_id', $id);
         if ($this->db->update('usuario', $data)) {
-            redirect('usuario/perfil');
+            $this->load->model('log_model');
+            $this->log_model->adicionar('usuário '.$data['nome_usuario'].' atualizado');
+
+            $this->session->set_flashdata('sms', 'Usuário atualizaddo com sucesso');
+            redirect('usuario/perfil/'.$id);
         }
 
     }
