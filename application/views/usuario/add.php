@@ -71,6 +71,15 @@
                                                 <label for="exampleInputEmail1">Email</label>
                                                 <input name="email" type="email" class="form-control" id="exampleInputEmail1" required="">
                                             </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label>Membro</label>
+                                                <select name="membro_id" class="form-control select2" style="width: 100%;">
+                                                    <?php foreach ($membros as $m) {?>
+                                                        <option value="<?=$m->membro_id?>"><?=$m->pessoa_nome?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
                                             </div>
                                             <div class="card">
                                             <button type="submit" class="btn btn-success">Salvar</button>

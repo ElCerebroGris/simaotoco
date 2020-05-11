@@ -32,12 +32,16 @@ class Usuario extends CI_Controller
     {
         $this->verificar_acesso();
         $dados['niveis'] = $this->db->get('nivel_usuario')->result();
+
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('usuario/add', $dados);
     }
 
     public function addPost()
     {
         $this->verificar_acesso();
+        $data['membro_id'] = $this->input->post('membro_id');
         $data['nome_usuario'] = $this->input->post('nome_usuario');
         $data['senha'] = $this->input->post('senha');
         $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
