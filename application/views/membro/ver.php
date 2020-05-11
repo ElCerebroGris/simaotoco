@@ -58,7 +58,7 @@
                                             </li>
                                         </ul>
 
-                                        <a href="<?= base_url('membro/cartao/'.$membros->membro_id) ?>" class="btn btn-primary btn-block"><b>Imprimir cartão</b></a>
+                                        <a target="blank" href="<?= base_url('membro/cartao/'.$membros->membro_id) ?>" class="btn btn-primary btn-block"><b>Imprimir cartão</b></a>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>

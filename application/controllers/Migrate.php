@@ -28,14 +28,17 @@ class Migrate extends CI_Controller
 
     public function all()
     {
-        for ($version = 1; $version <= 17; ++$version) {
+        $this->load->model('record_model');
+        //$this->record_model->eliminarTabelas();
+
+        for ($version = 1; $version <= 18; ++$version) {
             if (!$this->migration->version($version)) {
                 echo 'Error' . $this->migration->error_string();
-            } else {
-                //echo 'Migrations '.$version.' ran successfully!\n';
             }
         }
-        echo 'Migrations ran successfully!';
+
+        $this->record_model->adicionarDados();
+        echo 'Migrations run successfully!';
     }
 
 }

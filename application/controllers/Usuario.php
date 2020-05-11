@@ -151,16 +151,6 @@ class Usuario extends CI_Controller
         $senha = $this->input->post('senha');
 
         //Fase de desenvolvimento
-        if ($nome_usuario == 'admin' && $senha == 'admin') {
-            $dados['id_usuario'] = 1;
-            $dados['nome_completo'] = 'ADMIN';
-            $dados['nome_usuario'] = $nome_usuario;
-            $dados['logado'] = true;
-            $dados['nivel'] = 1;
-            $dados['descricao'] = 'Administrador';
-            $this->session->set_userdata($dados);
-            redirect('welcome');
-        }
 
         $this->db->where('nome_usuario', $nome_usuario);
         $this->db->where('senha', $senha);
