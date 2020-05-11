@@ -19,6 +19,9 @@
                             <?php if ($this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
                                 <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Adicionar</a>
+                                <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Testificação</a>
+                                <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Casamento</a>
+                                <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Baptismo</a>
                             </h5>
                         <?php } ?>
                             </div>

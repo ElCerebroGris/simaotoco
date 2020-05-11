@@ -31,12 +31,28 @@ class Igreja_Nacional extends CI_Controller {
         $data['sigla'] = $this->input->post('sigla');
         $data['indicador_telefonico'] = $this->input->post('indicador_telefonico');
 
+        if(!$this->validar($data['descricao_igreja_nacional'])){
+            $this->session->set_flashdata('sms', 'igreja nacional já existente');
+            redirect('igreja_nacional/add');
+        }
+
         if ($this->db->insert('igreja_nacional', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('igreja nacional '.$data['descricao_igreja_nacional'].' adicionado');
 
             $this->session->set_flashdata('sms', 'igreja nacional adicionado com sucesso');
             redirect('igreja_nacional/listar');
+        }
+    }
+
+    public function validar($descricao){
+        $this->db->where('descricao_igreja_nacional', $descricao);
+        $dados['igreja_nacional'] = $this->db->get('igreja_nacional')->result();
+
+        if(count($dados['igreja_nacional']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -53,6 +69,11 @@ class Igreja_Nacional extends CI_Controller {
         $data['descricao_igreja_nacional'] = $this->input->post('descricao_igreja_nacional');
         $data['sigla'] = $this->input->post('sigla');
         $data['indicador_telefonico'] = $this->input->post('indicador_telefonico');
+
+        if(!$this->validar($data['descricao_igreja_nacional'])){
+            $this->session->set_flashdata('sms', 'igreja nacional já existente');
+            redirect('igreja_nacional/editar');
+        }
 
         $this->db->where('igreja_nacional_id', $id);
         if ($this->db->update('igreja_nacional', $data)) {

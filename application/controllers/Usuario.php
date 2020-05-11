@@ -43,6 +43,11 @@ class Usuario extends CI_Controller
         $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
         $data['email'] = $this->input->post('email');
 
+        if(!$this->validar($data['nome_usuario'], $data['email'])){
+            $this->session->set_flashdata('sms', 'Usuário já existente');
+            redirect('usuario/add');
+        }
+
         if ($this->db->insert('usuario', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('usuário '.$data['nome_usuario'].' adicionado');
@@ -51,6 +56,18 @@ class Usuario extends CI_Controller
             redirect('usuario/listar');
         }
 
+    }
+
+    public function validar($username, $email){
+        $this->db->where('nome_usuario', $username);
+        $this->db->or_where('email', $email);
+        $dados['usuarios'] = $this->db->get('usuario')->result();
+
+        if(count($dados['usuarios']) == 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function editar($id)
@@ -71,6 +88,11 @@ class Usuario extends CI_Controller
         $data['nome_usuario'] = $this->input->post('nome_usuario');
         $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
         $data['email'] = $this->input->post('email');
+
+        if(!$this->validar($data['nome_usuario'], $data['email'])){
+            $this->session->set_flashdata('sms', 'Usuário já existente');
+            redirect('usuario/editar');
+        }
 
         $this->db->where('usuario_id', $id);
         if ($this->db->update('usuario', $data)) {

@@ -30,12 +30,28 @@ class Tribo extends CI_Controller {
         $this->verificar_acesso();
         $data['descricao_tribo'] = $this->input->post('descricao_tribo');
 
+        if(!$this->validar($data['descricao_tribo'])){
+            $this->session->set_flashdata('sms', 'Tribo já existente');
+            redirect('tribo/add');
+        }
+
         if ($this->db->insert('tribo', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('tribo '.$data['descricao_tribo'].' adicionado');
 
             $this->session->set_flashdata('sms', 'tribo adicionado com sucesso');
             redirect('tribo/listar');
+        }
+    }
+
+    public function validar($descricao){
+        $this->db->where('descricao_tribo', $descricao);
+        $dados['tribos'] = $this->db->get('tribo')->result();
+
+        if(count($dados['tribos']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -50,6 +66,11 @@ class Tribo extends CI_Controller {
         $this->verificar_acesso();
         $id = $this->input->post('tribo_id');
         $data['descricao_tribo'] = $this->input->post('descricao_tribo');
+
+        if(!$this->validar($data['descricao_tribo'])){
+            $this->session->set_flashdata('sms', 'Tribo já existente');
+            redirect('tribo/editar');
+        }
 
         $this->db->where('tribo_id', $id);
         if ($this->db->update('tribo', $data)) {

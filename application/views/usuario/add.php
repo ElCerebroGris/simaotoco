@@ -1,6 +1,6 @@
 
             <!-- Navbar -->
-            <?php include APPPATH . 'views/includes/header.php'; ?>
+            <?php include APPPATH . 'views/includes/header.php';?>
             <!-- /.navbar -->
 
             <!-- Content Wrapper. Contains page content -->
@@ -8,6 +8,12 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="container-fluid">
+                    <?php if ($this->session->flashdata('sms') != null) {?>
+                            <div class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?=$this->session->flashdata('sms');?>
+                            </div>
+                        <?php }?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h1>Adicionar Usuário</h1>
@@ -35,12 +41,12 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?= base_url() ?>usuario/addPost">
+                                    <form role="form" method="post" action="<?=base_url()?>usuario/addPost">
                                         <div class="card-body">
                                             <div class="row">
 
 
-                                         
+
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputEmail1">Nome de Usuário</label>
                                                 <input name="nome_usuario" type="text" class="form-control" id="" required>
@@ -52,13 +58,13 @@
                                             </div>
                                             <div class="row">
 
-                                           
+
                                             <div class="form-group col-md-6">
                                                 <label>Nivel de Usuário</label>
                                                 <select name="codigo_nivel_usuario" class="form-control select2" style="width: 100%;">
-                                                    <?php foreach ($niveis as $h) { ?>
-                                                        <option value="<?= $h->codigo_nivel_usuario ?>"><?= $h->descricao_nivel_usuario ?></option>
-                                                    <?php } ?>
+                                                    <?php foreach ($niveis as $h) {?>
+                                                        <option value="<?=$h->codigo_nivel_usuario?>"><?=$h->descricao_nivel_usuario?></option>
+                                                    <?php }?>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -72,7 +78,7 @@
                                         </div>
                                         <!-- /.card-body -->
                                                     </div>
-                                     
+
                                     </form>
                                 </div>
                                 <!-- /.card -->
@@ -85,6 +91,5 @@
             </div>
             <!-- /.content-wrapper -->
 
-            <?php include APPPATH . 'views/includes/footer.php'; ?>
+            <?php include APPPATH . 'views/includes/footer.php';?>
 
-            

@@ -30,12 +30,28 @@ class Categoria extends CI_Controller {
         $this->verificar_acesso();
         $data['descricao_categoria'] = $this->input->post('descricao_categoria');
 
+        if(!$this->validar($data['descricao_categoria'])){
+            $this->session->set_flashdata('sms', 'categoria já existente');
+            redirect('categoria/add');
+        }
+
         if ($this->db->insert('categoria', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('categoria '.$data['descricao_categoria'].' adicionado');
 
             $this->session->set_flashdata('sms', 'categoria adicionado com sucesso');
             redirect('categoria/listar');
+        }
+    }
+
+    public function validar($descricao){
+        $this->db->where('descricao_categoria', $descricao);
+        $dados['categoria'] = $this->db->get('categoria')->result();
+
+        if(count($dados['categoria']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -50,6 +66,11 @@ class Categoria extends CI_Controller {
         $this->verificar_acesso();
         $id = $this->input->post('categoria_id');
         $data['descricao_categoria'] = $this->input->post('descricao_categoria');
+
+        if(!$this->validar($data['descricao_categoria'])){
+            $this->session->set_flashdata('sms', 'categoria já existente');
+            redirect('categoria/editar');
+        }
 
         $this->db->where('categoria_id', $id);
         if ($this->db->update('categoria', $data)) {

@@ -32,12 +32,30 @@ class Classe extends CI_Controller {
         $data['paroquia_id'] = $this->input->post('paroquia');
         $data['descricao_classe'] = $this->input->post('descricao_classe');
 
+        if(!$this->validar($data['descricao_classe'], 
+        $data['paroquia_id'])){
+            $this->session->set_flashdata('sms', 'classe já existente');
+            redirect('classe/add');
+        }
+
         if ($this->db->insert('classe', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('classe '.$data['descricao_classe'].' adicionado');
 
             $this->session->set_flashdata('sms', 'classe adicionado com sucesso');
             redirect('classe/listar');
+        }
+    }
+
+    public function validar($descricao, $paroquia_id){
+        $this->db->where('descricao_classe', $descricao);
+        $this->db->where('paroquia_id', $paroquia_id);
+        $dados['classe'] = $this->db->get('classe')->result();
+
+        if(count($dados['classe']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -56,6 +74,12 @@ class Classe extends CI_Controller {
         $id = $this->input->post('classe_id');
         $data['paroquia_id'] = $this->input->post('paroquia');
         $data['descricao_classe'] = $this->input->post('descricao_classe');
+
+        if(!$this->validar($data['descricao_classe'], 
+        $data['paroquia_id'])){
+            $this->session->set_flashdata('sms', 'classe já existente');
+            redirect('classe/editar');
+        }
 
         $this->db->where('classe_id', $id);
         if ($this->db->update()('classe', $data)) {

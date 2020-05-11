@@ -34,12 +34,30 @@ class Provincia_Eclesiastica extends CI_Controller {
         $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
         $data['descricao_provincia_eclesiastica'] = $this->input->post('descricao_provincia_eclesiastica');
 
+        if(!$this->validar($data['descricao_provincia_eclesiastica'], 
+        $data['igreja_nacional_id'])){
+            $this->session->set_flashdata('sms', 'provincia eclesiastica já existente');
+            redirect('provincia_eclesiastica/add');
+        }
+
         if ($this->db->insert('provincia_eclesiastica', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('provincia eclesiastica '.$data['descricao_provincia_eclesiastica'].' adicionado');
 
             $this->session->set_flashdata('sms', 'provincia_eclesiastica adicionado com sucesso');
             redirect('provincia_eclesiastica/listar');
+        }
+    }
+
+    public function validar($descricao, $igreja_id){
+        $this->db->where('descricao_provincia_eclesiastica', $descricao);
+        $this->db->where('igreja_nacional_id', $igreja_id);
+        $dados['provincia_eclesiastica'] = $this->db->get('provincia_eclesiastica')->result();
+
+        if(count($dados['provincia_eclesiastica']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -59,6 +77,12 @@ class Provincia_Eclesiastica extends CI_Controller {
         $id = $this->input->post('provincia_eclesiastica_id');
         $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
         $data['descricao_provincia_eclesiastica'] = $this->input->post('descricao_provincia_eclesiastica');
+
+        if(!$this->validar($data['descricao_provincia_eclesiastica'], 
+        $data['igreja_nacional_id'])){
+            $this->session->set_flashdata('sms', 'provincia eclesiastica já existente');
+            redirect('provincia_eclesiastica/editar');
+        }
 
         $this->db->where('provincia_eclesiastica_id', $id);
         if ($this->db->update('provincia_eclesiastica', $data)) {

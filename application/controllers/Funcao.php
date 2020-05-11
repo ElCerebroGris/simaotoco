@@ -29,11 +29,27 @@ class Funcao extends CI_Controller {
         $this->verificar_acesso();
         $data['descricao_funcao'] = $this->input->post('descricao_funcao');
 
+        if(!$this->validar($data['descricao_funcao'])){
+            $this->session->set_flashdata('sms', 'função já existente');
+            redirect('funcao/add');
+        }
+
         if ($this->db->insert('funcao', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('função '.$data['descricao_funcao'].' adicionado');
             $this->session->set_flashdata('sms', 'funcao adicionado com sucesso');
             redirect('funcao/listar');
+        }
+    }
+
+    public function validar($descricao){
+        $this->db->where('descricao_funcao', $descricao);
+        $dados['funcao'] = $this->db->get('funcao')->result();
+
+        if(count($dados['funcao']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -48,6 +64,11 @@ class Funcao extends CI_Controller {
         $this->verificar_acesso();
         $id = $this->input->post('funcao_id');
         $data['descricao_funcao'] = $this->input->post('descricao_funcao');
+
+        if(!$this->validar($data['descricao_funcao'])){
+            $this->session->set_flashdata('sms', 'função já existente');
+            redirect('funcao/editar');
+        }
 
         $this->db->where('funcao_id', $id);
         if ($this->db->update('funcao', $data)) {
