@@ -15,7 +15,7 @@
                         <?php } ?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                            <?php if ($this->session->userdata('nivel') == 1) { ?>
+                            <?php if ($this->session->userdata('nivel') == 7 || $this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
                                 <a href="<?= base_url() ?>pagamento/add" class="btn btn-outline-primary btn-sm	">Novo</a>
                             </h5>

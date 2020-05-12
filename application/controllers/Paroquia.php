@@ -34,6 +34,12 @@ class Paroquia extends CI_Controller {
         $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
         $data['descricao_paroquia'] = $this->input->post('descricao_paroquia');
 
+        if(!$this->validar($data['descricao_paroquia'], 
+        $data['provincia_eclesiastica_id'])){
+            $this->session->set_flashdata('sms', 'paroquia já existente');
+            redirect('paroquia/add');
+        }
+
         if ($this->db->insert('paroquia', $data)) {
             
             $this->load->model('log_model');
@@ -41,6 +47,18 @@ class Paroquia extends CI_Controller {
 
             $this->session->set_flashdata('sms', 'paroquia adicionado com sucesso');
             redirect('paroquia/listar');
+        }
+    }
+
+    public function validar($descricao, $provincia_id){
+        $this->db->where('descricao_paroquia', $descricao);
+        $this->db->where('provincia_eclesiastica_id', $provincia_id);
+        $dados['paroquia'] = $this->db->get('paroquia')->result();
+
+        if(count($dados['paroquia']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -60,6 +78,12 @@ class Paroquia extends CI_Controller {
         $id = $this->input->post('paroquia_id');
         $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
         $data['descricao_paroquia'] = $this->input->post('descricao_paroquia');
+
+        if(!$this->validar($data['descricao_paroquia'], 
+        $data['provincia_eclesiastica_id'])){
+            $this->session->set_flashdata('sms', 'paroquia já existente');
+            redirect('paroquia/editar');
+        }
 
         $this->db->where('paroquia_id', $id);
         if ($this->db->update('paroquia', $data)) {

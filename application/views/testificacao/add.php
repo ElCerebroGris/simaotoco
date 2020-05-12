@@ -8,11 +8,11 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Adicionar Documento</h1>
+                                <h1>Adicionar Testificação</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Documento</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Testificação</a></li>
                                 </ol>
                             </div>
                         </div>
@@ -39,18 +39,10 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?= base_url() ?>documento/addPost">
+                                    <form role="form" method="post" action="<?= base_url() ?>testificacao/addPost">
                                         <div class="card-body">
                                         <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label>Tipo de Documento</label>
-                                                <select name="tipo_documento" class="form-control select2" style="width: 100%;">
-                                                        <option value="0">Selecione um tipo</option>
-                                                        <option value="CERTIDÃO DE CASAMENTO">CERTIDÃO DE CASAMENTO</option>
-                                                        <option value="CERTIDÃO DE BAPTISMO">CERTIDÃO DE BAPTISMO</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-12">
                                                 <label>Membro a receber</label>
                                                 <select name="membro" class="form-control select2" style="width: 100%;">
                                                     <?php foreach ($membros as $h) { ?>
@@ -58,7 +50,44 @@
                                                     <?php } ?>
                                                 </select>
                                             </div>
-                                        </div>                                            
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label>DE:</label>
+                                                <select id="filter2" name="origem_tipo" class="form-control select2" style="width: 100%;">
+                                                        <option value="0">Selecione a Origem</option>        
+                                                        <option value="1">PAROQUIA</option>
+                                                        <option value="2">PROVINCIA ECLESIASTICA</option>
+                                                        <option value="3">IGREJA NACIONAL</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>PARA:</label>
+                                                <select id="filter3" name="destino_tipo" class="form-control select2" style="width: 100%;">
+                                                        <option value="0">Selecione a Destino</option>         
+                                                        <option value="1">PAROQUIA</option>
+                                                        <option value="2">PROVINCIA ECLESIASTICA</option>
+                                                        <option value="3">IGREJA NACIONAL</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label>Referencia:</label>
+                                                <select id="listData2" name="origem_referencia" class="form-control select2" style="width: 100%;">
+                                                        <option value="CARTÃO">...</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Referencia:</label>
+                                                <select id="listData3" name="destino_referencia" class="form-control select2" style="width: 100%;">
+                                                        <option value="CARTÃO">...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            
                                             <div class="card">
                                             <button type="submit" class="btn btn-success">Salvar</button>
                                         </div>

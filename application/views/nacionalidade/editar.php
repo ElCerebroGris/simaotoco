@@ -9,6 +9,12 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="container-fluid">
+                    <?php if ($this->session->flashdata('sms') != null) {?>
+                            <div class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?=$this->session->flashdata('sms');?>
+                            </div>
+                        <?php }?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h1>Editar Nacionalidade</h1>

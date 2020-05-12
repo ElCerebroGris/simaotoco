@@ -35,12 +35,30 @@ class Area extends CI_Controller {
         $data['tribo_id'] = $this->input->post('tribo');
         $data['descricao_area'] = $this->input->post('descricao_area');
 
+        if(!$this->validar($data['descricao_area'], 
+        $data['tribo_id'])){
+            $this->session->set_flashdata('sms', 'area já existente');
+            redirect('area/add');
+        }
+
         if ($this->db->insert('area', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('area '.$data['descricao_area'].' adicionado');
 
             $this->session->set_flashdata('sms', 'area adicionado com sucesso');
             redirect('area/listar');
+        }
+    }
+
+    public function validar($descricao, $tribo_id){
+        $this->db->where('descricao_area', $descricao);
+        $this->db->where('tribo_id', $tribo_id);
+        $dados['area'] = $this->db->get('area')->result();
+
+        if(count($dados['area']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -60,6 +78,12 @@ class Area extends CI_Controller {
         $id = $this->input->post('area_id');
         $data['tribo_id'] = $this->input->post('tribo');
         $data['descricao_area'] = $this->input->post('descricao_area');
+
+        if(!$this->validar($data['descricao_area'], 
+        $data['tribo_id'])){
+            $this->session->set_flashdata('sms', 'area já existente');
+            redirect('area/editar');
+        }
 
         $this->db->where('area_id', $id);
         if ($this->db->update('area', $data)) {

@@ -17,11 +17,11 @@ class Record_Model extends CI_Model {
         $sql = "INSERT INTO nivel_usuario (codigo_nivel_usuario, descricao_nivel_usuario) VALUES 
         (1, 'Administrador'),
         (2, 'Secretario Executivo'),
-        (3, 'Gestor Financeiro'),
-        (4, 'Gestor de Membros'),
-        (5, 'Gestor de Igreja Nacional'),
-        (6, 'Gestor de Provincia Eclesiastica'),
-        (7, 'Gestor de de Paroquia');";
+        (3, 'Gestor de Membros'),
+        (4, 'Gestor de Igreja Nacional'),
+        (5, 'Gestor de Provincia Eclesiastica'),
+        (6, 'Gestor de de Paroquia'),
+        (7, 'Gestor Financeiro');";
         $this->db->query($sql);
 
         $sql = "INSERT INTO `tribo` (`descricao_tribo`, `endereco`, `telefone`, `email`) VALUES

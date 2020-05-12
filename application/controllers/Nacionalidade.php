@@ -31,12 +31,28 @@ class Nacionalidade extends CI_Controller {
         $data['pais'] = $this->input->post('pais');
         $data['descricao_nacionalidade'] = $this->input->post('descricao_nacionalidade');
 
+        if(!$this->validar($data['descricao_nacionalidade'])){
+            $this->session->set_flashdata('sms', 'nacionalidade já existente');
+            redirect('nacionalidade/add');
+        }
+
         if ($this->db->insert('nacionalidade', $data)) {
             $this->load->model('log_model');
             $this->log_model->adicionar('nacionalidade '.$data['descricao_nacionalidade'].' adicionado');
 
             $this->session->set_flashdata('sms', 'nacionalidade adicionado com sucesso');
             redirect('nacionalidade/listar');
+        }
+    }
+
+    public function validar($descricao){
+        $this->db->where('descricao_nacionalidade', $descricao);
+        $dados['nacionalidade'] = $this->db->get('nacionalidade')->result();
+
+        if(count($dados['nacionalidade']) == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -52,6 +68,11 @@ class Nacionalidade extends CI_Controller {
         $id = $this->input->post('nacionalidade_id');
         $data['pais'] = $this->input->post('pais');
         $data['descricao_nacionalidade'] = $this->input->post('descricao_nacionalidade');
+
+        if(!$this->validar($data['descricao_nacionalidade'])){
+            $this->session->set_flashdata('sms', 'nacionalidade já existente');
+            redirect('nacionalidade/editar');
+        }
 
         $this->db->where('nacionalidade_id', $id);
         if ($this->db->update('nacionalidade', $data)) {

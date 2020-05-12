@@ -18,16 +18,14 @@
                             <div class="col-sm-6">
                             <?php if ($this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
-                                <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Novo Geral</a>
-                                <a href="<?= base_url() ?>testificacao/listar" class="btn btn-outline-primary btn-sm  ">Testificação</a>
-                                <a href="<?= base_url() ?>pedido/listar" class="btn btn-outline-primary btn-sm  ">Pedidos de Impressão</a>
+                                <a href="<?= base_url() ?>testificacao/add" class="btn btn-outline-primary btn-sm  ">Nova Testificação</a>
                             </h5>
                         <?php } ?>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Documentos</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Testificação</a></li>
                                     <li class="breadcrumb-item active">Listar</li>
                                 </ol>
                             </div>
@@ -45,7 +43,7 @@
                                 <!-- Default box -->
                                 <div class="card card-success">
                                     <div class="card-header">
-                                        <h3 class="card-title">Lista de Documentos</h3>
+                                        <h3 class="card-title">Lista de Testificação</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -53,8 +51,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Membro</th>
-                                                    <th>Documento</th>
                                                     <th>Usuário</th>
+                                                    <th>Origem</th>
+                                                    <th>Destino</th>
                                                     <th>Data</th>
                                                     <th>Opções</th>
                                                 </tr>
@@ -63,12 +62,13 @@
                                                 <?php foreach ($documentos as $u) { ?>
                                                     <tr>
                                                         <td><?= $u->pessoa_nome ?></td>
-                                                        <td><?= $u->tipo_documento ?></td>
                                                         <td><?= $u->nome_usuario ?></td>
+                                                        <td><?= $u->origem_descricao ?></td>
+                                                        <td><?= $u->destino_descricao ?></td>
                                                         <td><?= $u->data_criacao ?></td>
                                                         <td>
                                                         <a target="blank" 
-                                                        href="<?= base_url('documento/mostrar/'.$u->documento_id.'/'.$u->membro_id) ?>" 
+                                                        href="<?= base_url('testificacao/mostrar_pdf/'.$u->testificacao_id) ?>" 
                                                         class="btn btn-outline-secondary btn-sm"><i class="fa fa-print"></i></a>
                                                         </td>
                                                     </tr>
@@ -76,9 +76,10 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                <th>Membro</th>
-                                                    <th>Documento</th>
+                                                    <th>Membro</th>
                                                     <th>Usuário</th>
+                                                    <th>Origem</th>
+                                                    <th>Destino</th>
                                                     <th>Data</th>
                                                     <th>Opções</th>
                                                 </tr>
