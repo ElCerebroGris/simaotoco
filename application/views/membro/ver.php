@@ -41,7 +41,7 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
                                             <img class="profile-user-img img-fluid img-circle"
-                                                 src="<?=base_url().'fotos/'.$membros->foto ?>"
+                                                 src="<?=base_url() . 'fotos/' . $membros->foto?>"
                                                  alt="User profile picture">
                                         </div>
 
@@ -57,8 +57,9 @@
                                                 <b>Data de nascimento:</b> <a class="float-right"><?=$membros->data_nascimento?></a>
                                             </li>
                                         </ul>
-
-                                        <a target="blank" href="<?= base_url('membro/cartao/'.$membros->membro_id) ?>" class="btn btn-primary btn-block"><b>Imprimir cartão</b></a>
+                                        <?php if ($this->session->userdata('nivel') <= 2) {?>
+                                        <a target="blank" href="<?=base_url('membro/cartao/' . $membros->membro_id)?>" class="btn btn-primary btn-block"><b>Imprimir cartão</b></a>
+                                        <?php }?>
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -156,4 +157,4 @@
             </div>
             <!-- /.content-wrapper -->
 
-            <?php include APPPATH . 'views/includes/footer.php'; ?>
+            <?php include APPPATH . 'views/includes/footer.php';?>

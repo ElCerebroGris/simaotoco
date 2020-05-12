@@ -8,11 +8,11 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Adicionar Documento</h1>
+                                <h1>Adicionar Pedido de Impressão</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Documento</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Pedido</a></li>
                                 </ol>
                             </div>
                         </div>
@@ -39,26 +39,19 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?= base_url() ?>documento/addPost">
+                                    <form role="form" method="post" action="<?= base_url() ?>pedido/addPost">
                                         <div class="card-body">
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label>Tipo de Documento</label>
-                                                <select name="tipo_documento" class="form-control select2" style="width: 100%;">
-                                                        <option value="0">Selecione um tipo</option>
-                                                        <option value="CERTIDÃO DE CASAMENTO">CERTIDÃO DE CASAMENTO</option>
-                                                        <option value="CERTIDÃO DE BAPTISMO">CERTIDÃO DE BAPTISMO</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Membro a receber</label>
+                                                <label>Membro</label>
                                                 <select name="membro" class="form-control select2" style="width: 100%;">
                                                     <?php foreach ($membros as $h) { ?>
                                                         <option value="<?= $h->membro_id ?>"><?= $h->pessoa_nome ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
-                                        </div>                                            
+                                        </div>
+                                        </div>
                                             <div class="card">
                                             <button type="submit" class="btn btn-success">Salvar</button>
                                         </div>

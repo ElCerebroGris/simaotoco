@@ -95,8 +95,8 @@
             <h2>TESTIFICAÇÃO Nº 036/EP/0020</h2>
 
             <p>Para conhecimento e devidos efeitos, de acordo com o seu pedido,
-                testifica-se que, segue a Província Eclesiastica de 
-                <?= $documentos->descricao_provincia_eclesiastica ?>, em
+                testifica-se que, segue a <?= $documentos->destino_tipo ?> de 
+                <?= $documentos->destino_descricao ?>, em
                 missão particular e vista aos irmãos em Cristo, 
                 <?= $documentos->sexo=='MASCULINO'? 'irmão':'irmã' ?>  
                 <?=$documentos->descricao_categoria ?> <b>, 

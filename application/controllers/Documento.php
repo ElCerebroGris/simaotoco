@@ -27,6 +27,33 @@ class Documento extends CI_Controller
         $this->load->view('documento/listar', $dados);
     }
 
+    public function igrejas()
+    {
+        $this->verificar_acesso();
+        $data = $this->db->get('igreja_nacional')->result();
+        $json['success'] = true;
+        $json['content'] = $data;
+        echo json_encode($json);
+    }
+
+    public function provincias()
+    {
+        $this->verificar_acesso();
+        $data = $this->db->get('provincia_eclesiastica')->result();
+        $json['success'] = true;
+        $json['content'] = $data;
+        echo json_encode($json);
+    }
+
+    public function paroquias()
+    {
+        $this->verificar_acesso();
+        $data = $this->db->get('paroquia')->result();
+        $json['success'] = true;
+        $json['content'] = $data;
+        echo json_encode($json);
+    }
+
     public function mostrar($documento_id, $membro_id)
     {
         $this->verificar_acesso();

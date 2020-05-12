@@ -48,6 +48,8 @@
 <script src="<?= base_url() ?>libs/dist/js/wizard.js"></script>
 <script src="<?= base_url() ?>libs/dist/js/ajax-requests.js"></script>
 
+<script src="<?= base_url() ?>libs/dist/js/ajax-requests-doc.js"></script>
+
 <script>
     $(function () {
     
