@@ -70,6 +70,84 @@ class Membro extends CI_Controller
             redirect('membro/listar');
         }
     }
+    public function editar($id)
+    {
+        $this->verificar_acesso();
+        $this->load->model('membro_model');
+        $dados['nacionalidades'] = $this->db->get('nacionalidade')->result();
+        $dados['tribos'] = $this->db->get('tribo')->result();
+        $dados['areas'] = $this->db->get('area')->result();
+        $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
+        $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
+        $dados['paroquias'] = $this->db->get('paroquia')->result();
+        $dados['classes'] = $this->db->get('classe')->result();
+        $dados['categorias'] = $this->db->get('categoria')->result();
+        $dados['funcoes'] = $this->db->get('funcao')->result();
+        $dados['membro'] = $this->membro_model->ver($id);
+
+        if (!$dados['membro']) {
+            $this->session->set_flashdata('sms', 'Aviso! O <b>Membro</b> solicitado não existe');
+            redirect('membro/listar');
+        }
+
+        // var_dump($dados['membro']);
+        // die();
+        $this->load->view('membro/edit', $dados);
+    }
+
+    public function is_empty(array $data, array $not_required)
+    {
+        foreach (array_keys($data) as $field) {
+
+            if (in_array($field, $not_required)) {
+                continue;
+            }
+
+            if (!$data[$field]) {
+                //Removel Underscore
+                $field = str_replace('_', ' ', $field);
+                return "<b>" . ucwords($field) . "</b> é um campo obrigatório!";
+            }
+        }
+
+        return false;
+    }
+
+    public function check_ID($tipo, $descricao, $pessoa_id = NULL)
+    {
+
+        if($pessoa_id){
+            $this->db->where('pessoa_id !=', $pessoa_id);
+        }
+
+        $this->db->where('tipo_identificacao', $tipo);
+        $this->db->where('descricao_identificacao', $descricao);
+
+        $member_id = $this->db->get('identificacao')->result();
+
+        if (!$member_id) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function teste()
+    {
+
+        $membro = (object) [
+            "pessoa_id" => "23",
+            "tipo_id" => "BI",
+            "ID" => "33333"
+        ];
+
+        // $this->db->where('pessoa_id', $membro->pessoa_id);
+        $this->db->where('tipo_identificacao', $membro->tipo_id);
+        $this->db->where('descricao_identificacao', $membro->ID);
+
+        $membro_id = $this->db->get('identificacao')->result();;
+        var_dump($membro_id);
+    }
 
     public function request()
     {
@@ -98,6 +176,15 @@ class Membro extends CI_Controller
                 break;
             case 'eclesis':
 
+                $not_required = ["data_baptismo"];
+                $__empty_fields = $this->is_empty($postData, $not_required);
+                if ($__empty_fields) {
+                    $json['error'] = true;
+                    $json['errMessage'] = $__empty_fields;
+                    echo json_encode($json);
+                    return;
+                }
+
                 $eclesiastes = [
                     'area_id' => $postData['area'],
                     'classe_id' => $postData['classe'],
@@ -110,6 +197,23 @@ class Membro extends CI_Controller
                 $json['success'] = true;
                 break;
             case 'personal':
+
+                $not_required = ["telefone", "endereco"];
+                $__empty_fields = $this->is_empty($postData, $not_required);
+                if ($__empty_fields) {
+                    $json['error'] = true;
+                    $json['errMessage'] = $__empty_fields;
+                    echo json_encode($json);
+                    return;
+                }
+
+                if ($this->check_ID($postData['tipo'], $postData['identificacao'])) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Ooops! Este número de identificação já está em uso!';
+                    echo json_encode($json);
+                    return;
+                }
+
                 $pessoa = [
                     'pessoa_nome' => $postData['nome_membro'],
                     'nome_pai' => $postData['nome_pai'],
@@ -117,7 +221,7 @@ class Membro extends CI_Controller
                     'nacionalidade_id' => $postData['nacionalidade'],
                     'data_nascimento' => $postData['data_nascimento'],
                     'provincia_nascimento' => $postData['provincia_nascimento'],
-                    'municipio_nascimento' => $postData['data_nascimento'],
+                    'municipio_nascimento' => $postData['municipio_nascimento'],
                     'sexo' => $postData['sexo'],
                     'estado_civil' => $postData['estado_civil'],
                     'telefone' => $postData['telefone'],
@@ -128,12 +232,12 @@ class Membro extends CI_Controller
                 //Salvar Pessoa
                 $pessoa_id = null;
                 if ($this->db->insert('pessoa', $pessoa)) {
-                    $this->db->where('pessoa_nome', $pessoa['pessoa_nome']);
-                    $dados1['pessoa'] = $this->db->get('pessoa')->result();
-                    $pessoa_id = $dados1['pessoa'][0]->pessoa_id;
+                    $pessoa_id = $this->db->insert_id();
                 } else {
                     $json['error'] = true;
-                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                    $json['errMessage'] = 'Desculpe! Não foi possível cadastrar.';
+                    echo json_encode($json);
+                    return;
                 }
 
                 //Salvar Identificacao
@@ -142,15 +246,12 @@ class Membro extends CI_Controller
                     'descricao_identificacao' => $postData['identificacao'],
                     'tipo_identificacao' => $postData['tipo'],
                 ];
+
                 if (!$this->db->insert('identificacao', $identificacao)) {
                     $json['error'] = true;
-                    $json['errMessage'] = 'Erro! Impossível avançar.';
-                } else {
-                    /*Atualizar Foto
-                    rename("./fotos/" . $this->session->userdata('foto_atual'),
-                        "./fotos/" . $identificacao['descricao_identificacao']
-                        . $this->session->userdata('formato_foto'));
-                    */
+                    $json['errMessage'] = 'Desculpe! Não foi possível cadastrar.';
+                    echo json_encode($json);
+                    return;
                 }
 
                 //Salvar Membro
@@ -160,8 +261,146 @@ class Membro extends CI_Controller
                     $json['error'] = true;
                     $json['errMessage'] = 'Erro! Impossível avançar.';
                 }
-                $this->load->model('log_model');
-                $this->log_model->adicionar('membro '.$pessoa['pessoa_nome'].' adicionado');
+
+                $this->session->set_flashdata('sms', 'Cadastro feito com sucesso!');
+                $this->session->unset_userdata('foto_atual');
+                $json['finish'] = true;
+                break;
+
+            default:
+                $json['error'] = true;
+                $json['errMessage'] = 'Erro! Impossível avançar.';
+                break;
+        }
+
+        echo json_encode($json);
+    }
+
+    public function requestedit()
+    {
+        $postData = $_REQUEST;
+        $postData = array_map('strip_tags', $postData);
+        $postData = array_map('trim', $postData);
+
+        $action = $postData['action'];
+        unset($postData['action']);
+
+        $pessoa = array();
+        $identificacao = array();
+        $eclesiastes = array();
+
+        switch ($action) {
+            case 'foto':
+
+                $this->session->set_userdata('foto_atual', $postData['foto_atual']);
+
+                if ($_FILES['foto']['name']) {
+
+                    if ($this->session->userdata('foto_atual')) {
+                        unlink('./fotos/' . $this->session->userdata('foto_atual'));
+                    }
+
+                    if (!$this->do_upload()) {
+                        $json['error'] = true;
+                        $json['errMessage'] = 'Erro ao carregar a foto! Selecione uma imagem com um formato é válido!';
+                    }
+
+                    $json['success'] = true;
+                }
+
+                $json['success'] = true;
+
+                break;
+            case 'eclesis':
+
+                $not_required = ["data_baptismo"];
+                $__empty_fields = $this->is_empty($postData, $not_required);
+                if ($__empty_fields) {
+                    $json['error'] = true;
+                    $json['errMessage'] = $__empty_fields;
+                    echo json_encode($json);
+                    return;
+                }
+
+                $eclesiastes = [
+                    'area_id' => $postData['area'],
+                    'classe_id' => $postData['classe'],
+                    'data_admissao' => $postData['data_admissao'],
+                    'categoria_id' => $postData['categoria'],
+                    'data_baptismo' => $postData['data_baptismo'],
+                    'funcao_id' => $postData['funcao'],
+                ];
+                $this->session->set_userdata('eclesiastes', $eclesiastes);
+                $json['success'] = true;
+                break;
+            case 'personal':
+                $pessoa_id = $postData['pessoa_id'];
+
+                $not_required = ["telefone", "endereco"];
+                $__empty_fields = $this->is_empty($postData, $not_required);
+                if ($__empty_fields) {
+                    $json['error'] = true;
+                    $json['errMessage'] = $__empty_fields;
+                    echo json_encode($json);
+                    return;
+                }
+
+                if ($this->check_ID($postData['tipo'], $postData['identificacao'], $pessoa_id)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Ooops! Este número de identificação já está em uso!';
+                    echo json_encode($json);
+                    return;
+                }
+
+                $pessoa = [
+                    'pessoa_nome' => $postData['nome_membro'],
+                    'nome_pai' => $postData['nome_pai'],
+                    'nome_mae' => $postData['nome_mae'],
+                    'nacionalidade_id' => $postData['nacionalidade'],
+                    'data_nascimento' => $postData['data_nascimento'],
+                    'provincia_nascimento' => $postData['provincia_nascimento'],
+                    'municipio_nascimento' => $postData['municipio_nascimento'],
+                    'sexo' => $postData['sexo'],
+                    'estado_civil' => $postData['estado_civil'],
+                    'telefone' => $postData['telefone'],
+                    'foto' => $this->session->userdata('foto_atual'),
+                    'endereco' => $postData['endereco'],
+                ];
+
+                //Salvar Pessoa
+                $this->db->where('pessoa_id', $pessoa_id);
+                if (!$this->db->update('pessoa', $pessoa)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Desculpe! Não foi possível cadastrar.';
+                    echo json_encode($json);
+                    return;
+                }
+
+                //Salvar Identificacao
+                $identificacao = [
+                    'pessoa_id' => $pessoa_id,
+                    'descricao_identificacao' => $postData['identificacao'],
+                    'tipo_identificacao' => $postData['tipo'],
+                ];
+
+                $this->db->where('pessoa_id', $pessoa_id);
+                if (!$this->db->update('identificacao', $identificacao)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Desculpe! Não foi possível cadastrar.';
+                    echo json_encode($json);
+                    return;
+                }
+
+                //Salvar Membro
+                $eclesiastes = $this->session->userdata('eclesiastes');
+                $eclesiastes['pessoa_id'] = $pessoa_id;
+                $this->db->where('pessoa_id', $pessoa_id);
+                if (!$this->db->update('membro', $eclesiastes)) {
+                    $json['error'] = true;
+                    $json['errMessage'] = 'Erro! Impossível avançar.';
+                }
+
+                $this->session->set_flashdata('sms', 'Dados Atualizados com sucesso!');
                 $this->session->unset_userdata('foto_atual');
                 $json['finish'] = true;
                 break;
@@ -241,7 +480,7 @@ class Membro extends CI_Controller
         $this->db->where('tribo_id', $data_id);
         $data = $this->db->get('area')->result();
 
-        if(!$data){
+        if (!$data) {
             $json['error'] = true;
             echo json_encode($json);
             return;
@@ -257,7 +496,7 @@ class Membro extends CI_Controller
         $this->db->where('igreja_nacional_id', $data_id);
         $data = $this->db->get('provincia_eclesiastica')->result();
 
-        if(!$data){
+        if (!$data) {
             $json['error'] = true;
             echo json_encode($json);
             return;
@@ -273,7 +512,7 @@ class Membro extends CI_Controller
         $this->db->where('provincia_eclesiastica_id', $data_id);
         $data = $this->db->get('paroquia')->result();
 
-        if(!$data){
+        if (!$data) {
             $json['error'] = true;
             echo json_encode($json);
             return;
@@ -289,7 +528,7 @@ class Membro extends CI_Controller
         $this->db->where('paroquia_id', $data_id);
         $data = $this->db->get('classe')->result();
 
-        if(!$data){
+        if (!$data) {
             $json['error'] = true;
             echo json_encode($json);
             return;
