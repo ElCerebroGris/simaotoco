@@ -26,10 +26,12 @@ class Casamento extends CI_Controller {
     public function add() {
         $this->verificar_acesso();
         $this->db->where('sexo', 'MASCULINO');
+        $this->db->where('estado_membro', 1);
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros_h'] = $this->db->get('membro')->result();
 
         $this->db->where('sexo', 'FEMENINO');
+        $this->db->where('estado_membro', 1);
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros_m'] = $this->db->get('membro')->result();
 

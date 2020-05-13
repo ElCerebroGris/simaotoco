@@ -33,6 +33,7 @@ class Usuario extends CI_Controller
         $this->verificar_acesso();
         $dados['niveis'] = $this->db->get('nivel_usuario')->result();
 
+        $this->db->where('estado_membro', 1);
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('usuario/add', $dados);
@@ -47,14 +48,14 @@ class Usuario extends CI_Controller
         $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
         $data['email'] = $this->input->post('email');
 
-        if(!$this->validar($data['nome_usuario'], $data['email'])){
+        if (!$this->validar($data['nome_usuario'], $data['email'], 0)) {
             $this->session->set_flashdata('sms', 'Usuário já existente');
             redirect('usuario/add');
         }
 
         if ($this->db->insert('usuario', $data)) {
             $this->load->model('log_model');
-            $this->log_model->adicionar('usuário '.$data['nome_usuario'].' adicionado');
+            $this->log_model->adicionar('usuário ' . $data['nome_usuario'] . ' adicionado');
 
             $this->session->set_flashdata('sms', 'Usuário adicionado com sucesso');
             redirect('usuario/listar');
@@ -62,14 +63,15 @@ class Usuario extends CI_Controller
 
     }
 
-    public function validar($username, $email){
+    public function validar($username, $email, $id)
+    {
         $this->db->where('nome_usuario', $username);
         $this->db->or_where('email', $email);
         $dados['usuarios'] = $this->db->get('usuario')->result();
 
-        if(count($dados['usuarios']) == 0){
+        if (count($dados['usuarios']) == 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -93,15 +95,15 @@ class Usuario extends CI_Controller
         $data['codigo_nivel_usuario'] = $this->input->post('codigo_nivel_usuario');
         $data['email'] = $this->input->post('email');
 
-        if(!$this->validar($data['nome_usuario'], $data['email'])){
+        /*if (!$this->validar($data['nome_usuario'], $data['email'], $id)) {
             $this->session->set_flashdata('sms', 'Usuário já existente');
-            redirect('usuario/editar');
-        }
+            redirect('usuario/editar/' . $id);
+        }*/
 
         $this->db->where('usuario_id', $id);
         if ($this->db->update('usuario', $data)) {
             $this->load->model('log_model');
-            $this->log_model->adicionar('usuário '.$data['nome_usuario'].' atualizado');
+            $this->log_model->adicionar('usuário ' . $data['nome_usuario'] . ' atualizado');
 
             $this->session->set_flashdata('sms', 'Usuário atualizaddo com sucesso');
             redirect('usuario/listar');
@@ -131,10 +133,10 @@ class Usuario extends CI_Controller
         $this->db->where('usuario_id', $id);
         if ($this->db->update('usuario', $data)) {
             $this->load->model('log_model');
-            $this->log_model->adicionar('usuário '.$data['nome_usuario'].' atualizado');
+            $this->log_model->adicionar('usuário ' . $data['nome_usuario'] . ' atualizado');
 
             $this->session->set_flashdata('sms', 'Usuário atualizaddo com sucesso');
-            redirect('usuario/perfil/'.$id);
+            redirect('usuario/perfil/' . $id);
         }
 
     }
@@ -166,7 +168,7 @@ class Usuario extends CI_Controller
         $this->verificar_acesso();
         $this->load->model('log_model');
         $this->log_model->adicionar('usuário terminou sessão');
-            
+
         $this->session->sess_destroy();
         redirect('welcome');
     }
@@ -180,7 +182,8 @@ class Usuario extends CI_Controller
 
         $this->db->where('nome_usuario', $nome_usuario);
         $this->db->where('senha', $senha);
-        //$this->db->join('membro', 'membro.membro_id=usuario.membro_id');
+        $this->db->where('estado_membro', 1);
+        $this->db->join('membro', 'membro.membro_id=usuario.membro_id');
         $this->db->join('nivel_usuario', 'nivel_usuario.codigo_nivel_usuario=usuario.codigo_nivel_usuario');
         $data['usuarios'] = $this->db->get('usuario')->result();
 

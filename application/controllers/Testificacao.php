@@ -56,6 +56,8 @@ class Testificacao extends CI_Controller
     public function add()
     {
         $this->verificar_acesso();
+        
+        $this->db->where('estado_membro', 1);
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('testificacao/add', $dados);
