@@ -1,4 +1,5 @@
 <?php include APPPATH . 'views/includes/header.php'; ?>
+
 <div class="wrapper">
 
     <div class="content-wrapper">
@@ -45,6 +46,7 @@
                                         </div>
                                         <div class="col-md-6 text-right">
                                             <img id="imgPrev" src="#" width="150px" style="display: none;">
+                                            <img id="imgActual" src="<?=base_url()."fotos/".$membro->foto?>" width="150px" >
                                         </div>
                                     </div>
 
@@ -67,24 +69,6 @@
                             <div class="card-body">
                                 <form role="form" method="post" class="form-wizard-edit">
                                     <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for="nome">Tribo</label>
-                                            <input type="hidden" name="action" value="eclesis">
-                                            <select name="tribo" class="form-control select2 filter" data-get="area" style="width: 100%;">
-                                                <option value="">Selecione uma opção</option>
-                                                <?php foreach ($tribos as $n) { ?>
-                                                    <option value="<?= $n->tribo_id ?>" <?php if($n->tribo_id == $membro->tribo_id){ echo 'selected';}?>><?= $n->descricao_tribo ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="nome">Area</label>
-                                            <select name="area" class="form-control select2" style="width: 100%;">
-                                                <?php foreach ($areas as $n) { ?>
-                                                    <option value="<?= $n->area_id ?>" <?php if($n->area_id == $membro->area_id){ echo 'selected';}?>><?= $n->descricao_area ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Igreja Nacional</label>
                                             <select name="igreja_nacional" class="form-control select2 filter" data-get="provincia_eclesiastica" style="width: 100%;">
@@ -119,6 +103,24 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
+                                            <label for="nome">Tribo</label>
+                                            <input type="hidden" name="action" value="eclesis">
+                                            <select name="tribo" class="form-control select2 filter" data-get="area" style="width: 100%;">
+                                                <option value="">Selecione uma opção</option>
+                                                <?php foreach ($tribos as $n) { ?>
+                                                    <option value="<?= $n->tribo_id ?>" <?php if($n->tribo_id == $membro->tribo_id){ echo 'selected';}?>><?= $n->descricao_tribo ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="nome">Area</label>
+                                            <select name="area" class="form-control select2" style="width: 100%;">
+                                                <?php foreach ($areas as $n) { ?>
+                                                    <option value="<?= $n->area_id ?>" <?php if($n->area_id == $membro->area_id){ echo 'selected';}?>><?= $n->descricao_area ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label for="nome">Categoria</label>
                                             <select name="categoria" class="form-control select2" style="width: 100%;">
                                                 <?php foreach ($categorias as $n) { ?>
@@ -134,13 +136,17 @@
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="nome">Data de admissão</label>
                                             <input name="data_admissao" type="date" class="form-control" value="<?=$membro->data_admissao?>">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="nome">Data de baptismo <sup>(opcional)</sup></label>
                                             <input name="data_baptismo" type="date" class="form-control" value="<?=($membro->data_baptismo ?? '')?>">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="nome">Local do Baptismo</label>
+                                            <input name="local_baptismo" type="text" class="form-control" value="<?=($membro->local_baptismo ?? '')?>">
                                         </div>
                                     </div>
                                     <div class="row">

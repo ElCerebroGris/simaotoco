@@ -97,7 +97,7 @@ class Membro extends CI_Controller
     public function check_ID($tipo, $descricao, $pessoa_id = NULL)
     {
 
-        if($pessoa_id){
+        if ($pessoa_id) {
             $this->db->where('pessoa_id !=', $pessoa_id);
         }
 
@@ -157,7 +157,12 @@ class Membro extends CI_Controller
                 break;
             case 'eclesis':
 
-                $not_required = ["data_baptismo"];
+                $not_required = ["data_baptismo", "local_baptismo"];
+
+                if ($postData['data_baptismo']) {
+                    $not_required = [];
+                }
+
                 $__empty_fields = $this->is_empty($postData, $not_required);
                 if ($__empty_fields) {
                     $json['error'] = true;
@@ -294,7 +299,12 @@ class Membro extends CI_Controller
                 break;
             case 'eclesis':
 
-                $not_required = ["data_baptismo"];
+                $not_required = ["data_baptismo", "local_baptismo"];
+
+                if ($postData['data_baptismo']) {
+                    $not_required = [];
+                }
+
                 $__empty_fields = $this->is_empty($postData, $not_required);
                 if ($__empty_fields) {
                     $json['error'] = true;
@@ -309,6 +319,7 @@ class Membro extends CI_Controller
                     'data_admissao' => $postData['data_admissao'],
                     'categoria_id' => $postData['categoria'],
                     'data_baptismo' => $postData['data_baptismo'],
+                    'local_baptismo' => $postData['local_baptismo'],
                     'funcao_id' => $postData['funcao'],
                 ];
                 $this->session->set_userdata('eclesiastes', $eclesiastes);
@@ -397,29 +408,40 @@ class Membro extends CI_Controller
 
     public function cartao($member_id)
     {
+        $QRCodeDir = __DIR__ . '/../../libs/phpqrcode';
+
+        require_once $QRCodeDir . '/qrlib.php';
+
         $mpdf = new \Mpdf\Mpdf([
             'default_font' => 'centurygothic',
             'mode' => 'utf-8',
             'format' => [153.1, 240.9],
             'orientation' => 'L',
-            'margin_left' => 12,
-            'margin_right' => 12,
-            'margin_top' => 15,
+            'margin_left' => 8,
+            'margin_right' => 3,
+            'margin_top' => 6,
             'margin_bottom' => 0
         ]);
 
 
         $this->load->model('membro_model');
-        $this->db->where('membro_id', $member_id);
-        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
-        $this->db->join('identificacao', 'identificacao.pessoa_id=pessoa.pessoa_id');
-        $this->db->join('nacionalidade', 'nacionalidade.nacionalidade_id=pessoa.nacionalidade_id');
-        $data = $this->db->get('membro')->result();
-        if (!$data) {
+        $data['membro'] = $this->membro_model->ver($member_id);
+
+        if (!$data['membro']) {
             $this->session->set_flashdata('sms', 'Não é possível imprimir o cartão!');
             redirect('membro/listar');
         }
-        $data['membro'] = $data[0];
+
+        // var_dump($data['membro']);
+        // die();
+
+        $qr_data = $data['membro']->pessoa_nome . "\n";
+        $qr_data .= $data['membro']->data_nascimento . "\n";
+        $qr_data .= $data['membro']->descricao_identificacao . "\n";
+
+        QRcode::png($qr_data, $QRCodeDir . '/generated/'.$data['membro']->descricao_identificacao.'.png');
+
+        $data['qr_data'] = "<img width='90px' src='" . base_url() . "libs/phpqrcode/generated/".$data['membro']->descricao_identificacao.".png'>";
 
         $html = $this->load->view('membro/cartao', $data)->output->final_output;
 

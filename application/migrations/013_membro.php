@@ -13,6 +13,7 @@ class Migration_Membro extends CI_Migration
         $this->dbforge->add_field('classe_id int(11) NOT NULL');
         $this->dbforge->add_field('data_admissao varchar(30) NOT NULL');
         $this->dbforge->add_field('data_baptismo varchar(30)');
+        $this->dbforge->add_field('local_baptismo varchar(100)');
         $this->dbforge->add_field('casado enum(\'SIM\',\'NÃO\') DEFAULT \'NÃO\'');
         $this->dbforge->add_field('categoria_id int(11) NOT NULL');
         $this->dbforge->add_field('funcao_id int(11) NOT NULL');
