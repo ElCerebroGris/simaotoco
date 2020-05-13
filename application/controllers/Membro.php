@@ -83,6 +83,7 @@ class Membro extends CI_Controller
         $dados['classes'] = $this->db->get('classe')->result();
         $dados['categorias'] = $this->db->get('categoria')->result();
         $dados['funcoes'] = $this->db->get('funcao')->result();
+        
         $dados['membro'] = $this->membro_model->ver($id);
 
         if (!$dados['membro']) {

@@ -7,7 +7,7 @@
 
     <style>
         body {
-            background-image: url('http://localhost/code-behind/tocoista/libs/dist/img/card.jpg');
+            background-image: url('http://localhost/gestoasimaotoco/libs/dist/img/card.jpg');
             background-position: top left;
             background-repeat: no-repeat;
             background-image-resize: 2;

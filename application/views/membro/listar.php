@@ -79,7 +79,7 @@
                                                                 <a href="<?= base_url('membro/desativar/'.$q->membro_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
 
-                                                                <a href="#" 
+                                                                <a href="<?= base_url('membro/editar/'.$q->membro_id) ?>" 
                                                                 class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
                                                             <?php }?>
                                                             

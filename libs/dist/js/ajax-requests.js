@@ -31,16 +31,16 @@ $(function() {
     function renderUrl(filtered, id) {
         switch (filtered) {
             case 'area':
-                return 'http://localhost/code-behind/tocoista/membro/areasbytribo/' + id;
+                return 'http://localhost/gestoasimaotoco/membro/areasbytribo/' + id;
                 break;
             case 'provincia_eclesiastica':
-                return 'http://localhost/code-behind/tocoista/membro/peclesiasticasbyigreja/' + id;
+                return 'http://localhost/gestoasimaotoco/membro/peclesiasticasbyigreja/' + id;
                 break;
             case 'paroquia':
-                return 'http://localhost/code-behind/tocoista/membro/paroquiasbypeclesiastica/' + id;
+                return 'http://localhost/gestoasimaotoco/membro/paroquiasbypeclesiastica/' + id;
                 break;
             case 'classe':
-                return 'http://localhost/code-behind/tocoista/membro/classesbyparoquia/' + id;
+                return 'http://localhost/gestoasimaotoco/membro/classesbyparoquia/' + id;
                 break;
             default:
                 break;
@@ -75,12 +75,12 @@ $(function() {
         });
     });
 
-    function readURL(input){
-        if(input.files && input.files[0]){
+    function readURL(input) {
+        if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function(e){
-                if($('#imgActual').length){
+            reader.onload = function(e) {
+                if ($('#imgActual').length) {
                     $('#imgActual').fadeOut(100);
                 }
                 $('#imgPrev').fadeIn(2000);
@@ -91,7 +91,7 @@ $(function() {
         }
     }
 
-    $('[name=foto]').on('change', function(e){
+    $('[name=foto]').on('change', function(e) {
         readURL(this);
     });
 

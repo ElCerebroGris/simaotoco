@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="col-md-6 text-right">
                                             <img id="imgPrev" src="#" width="150px" style="display: none;">
-                                            <img id="imgActual" src="<?=base_url()."fotos/".$membro->foto?>" width="150px" >
+                                            <img id="imgActual" alt="Foto" src="<?=base_url()."fotos/".$membro->foto?>" width="150px" >
                                         </div>
                                     </div>
 

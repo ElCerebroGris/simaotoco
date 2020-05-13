@@ -29,7 +29,7 @@
                         <div class="error" style="display: none;">
 
                         </div>
-                        <div class="card card-success data-foto form-step" style="display: none;">
+                        <div class="card card-success data-foto form-step">
                             <div class="card-header">
                                 <h3 class="card-title">Fotografia</h3>
                             </div>
@@ -58,7 +58,7 @@
                         </div>
                         <!-- /.card -->
 
-                        <div class="card card-success data-eclesis form-step">
+                        <div class="card card-success data-eclesis form-step" style="display: none;">
                             <div class="card-header">
                                 <h3 class="card-title">Dados Eclasisaticos</h3>
                             </div>
