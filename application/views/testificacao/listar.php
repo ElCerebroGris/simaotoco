@@ -63,8 +63,8 @@
                                                     <tr>
                                                         <td><?= $u->pessoa_nome ?></td>
                                                         <td><?= $u->nome_usuario ?></td>
-                                                        <td><?= $u->origem_descricao ?></td>
-                                                        <td><?= $u->destino_descricao ?></td>
+                                                        <td><?= $u->origem_tipo.' - '.$u->origem_descricao ?></td>
+                                                        <td><?= $u->destino_tipo.' - '.$u->destino_descricao ?></td>
                                                         <td><?= $u->data_criacao ?></td>
                                                         <td>
                                                         <a target="blank" 
