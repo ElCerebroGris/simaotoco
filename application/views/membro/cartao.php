@@ -27,22 +27,35 @@
             margin-top: 270px;
         }
 
+        .details .propriety{
+            font-size: 1.5em;
+        }
+
         .details .sub {
-            margin-top: 40px;
+            margin-top: 16px;
         }
 
-        .details .sub .title {
-            font-size: 1em;
+        .details .sub .qr-code {
+            /* margin-top: -20px; */
+            /* background-color: #38760f; */
+            width: 24%;
+            float: left;
         }
 
-        .details .sub .propriety {
+        .details .sub p{
+            /* font-weight: bold; */
+            margin-top: 25px;
+            font-size: 2em;
+        }
+        .details .sub .sub-propriety {
+            color: #38760f;
             font-weight: bold;
         }
 
         .photo {
             width: 220px;
             float: right;
-            margin-top: -55.5px;
+            margin-top: -38px;
         }
 
         .title {
@@ -50,30 +63,27 @@
             font-weight: bold;
             color: #38760f;
         }
-
-        .propriety {
-            font-size: 1.4em;
-        }
     </style>
 </head>
 
 <body>
-    <?php
-    $membro = (object) $membro;
-    //var_dump($membro);
-    ?>
     <br>
     <div class="main">
         <div class="details">
             <p><span class="title">Nome: </span> <span class="propriety"><?= $membro->pessoa_nome ?></span></p>
-            <p><span class="title">Filiação: </span> <span class="propriety"><?= $membro->nome_pai ?> e <?= $membro->nome_mae ?></span></p>
+            <p><span class="title"><?=($membro->sexo == 'MASCULINO') ? 'Filho ' : 'Filha ' ?>de: </span> <span class="propriety"><?= $membro->nome_pai ?></p>
+            <p><span class="title">e de: </span> <span class="propriety"><?= $membro->nome_mae ?></span></p>
+            <p><span class="title">Categoria: </span> <span class="propriety"><?= $membro->descricao_categoria ?></span></p>
+            <p><span class="title">Data de Nascimento: </span> <span class="propriety"><?= date('d/m/Y', strtotime($membro->data_nascimento)) ?></span></p>
             <div class="sub">
-                <p><span class="title">Cartão de Membro Nº: </span></p>
-                <p><span class="propriety"><?= $membro->descricao_identificacao ?></span></p>
+                <div class="qr-code">
+                    <?= $qr_data ?>
+                </div>
+                <p>Nº <span class="sub-propriety"><?= $membro->descricao_identificacao ?></span></p>
             </div>
         </div>
         <div class="photo">
-            <img style="margin-left: 30px;" src="<?= base_url() . 'fotos/' . $membro->foto ?>" width="190px" height="228px">
+            <img style="margin-left: 28.5px;" src="<?= base_url() . 'fotos/' . $membro->foto ?>" width="190px" height="228px">
         </div>
     </div>
 

@@ -34,6 +34,7 @@ class Membro_Model extends CI_Model {
         $this->db->join('area', 'area.area_id=membro.area_id');
         $this->db->join('tribo', 'tribo.tribo_id=area.tribo_id');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $this->db->join('categoria', 'categoria.categoria_id=membro.categoria_id');
         $this->db->join('identificacao', 'identificacao.pessoa_id=pessoa.pessoa_id');
         $this->db->join('area', 'area.area_id=membro.area_id');
         $this->db->join('classe', 'classe.classe_id=membro.classe_id');

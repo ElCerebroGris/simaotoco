@@ -29,7 +29,7 @@
                         <div class="error" style="display: none;">
 
                         </div>
-                        <div class="card card-success data-foto form-step">
+                        <div class="card card-success data-foto form-step" style="display: none;">
                             <div class="card-header">
                                 <h3 class="card-title">Fotografia</h3>
                             </div>
@@ -58,7 +58,7 @@
                         </div>
                         <!-- /.card -->
 
-                        <div class="card card-success data-eclesis form-step" style="display: none;">
+                        <div class="card card-success data-eclesis form-step">
                             <div class="card-header">
                                 <h3 class="card-title">Dados Eclasisaticos</h3>
                             </div>
@@ -66,22 +66,6 @@
                             <div class="card-body">
                                 <form role="form" method="post" class="form-wizard">
                                     <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for="nome">Tribo</label>
-                                            <input type="hidden" name="action" value="eclesis">
-                                            <select name="tribo" class="form-control select2 filter" data-get="area" style="width: 100%;">
-                                                <option value="">Selecione uma opção</option>
-                                                <?php foreach ($tribos as $n) { ?>
-                                                    <option value="<?= $n->tribo_id ?>"><?= $n->descricao_tribo ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="nome">Area</label>
-                                            <select name="area" class="form-control select2" style="width: 100%;">
-                                                <option value="">Selecione antes uma tribo</option>
-                                            </select>
-                                        </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Igreja Nacional</label>
                                             <select name="igreja_nacional" class="form-control select2 filter" data-get="provincia_eclesiastica" style="width: 100%;">
@@ -110,6 +94,22 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
+                                            <label for="nome">Tribo</label>
+                                            <input type="hidden" name="action" value="eclesis">
+                                            <select name="tribo" class="form-control select2 filter" data-get="area" style="width: 100%;">
+                                                <option value="">Selecione uma opção</option>
+                                                <?php foreach ($tribos as $n) { ?>
+                                                    <option value="<?= $n->tribo_id ?>"><?= $n->descricao_tribo ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="nome">Area</label>
+                                            <select name="area" class="form-control select2" style="width: 100%;">
+                                                <option value="">Selecione antes uma tribo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label for="nome">Categoria</label>
                                             <select name="categoria" class="form-control select2" style="width: 100%;">
                                                 <?php foreach ($categorias as $n) { ?>
@@ -125,13 +125,17 @@
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="nome">Data de admissão</label>
-                                            <input name="data_admissao" type="date" class="form-control" required="">
+                                            <input name="data_admissao" type="date" class="form-control">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="nome">Data de baptismo <sup>(opcional)</sup></label>
                                             <input name="data_baptismo" type="date" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="nome">Local do Baptismo</label>
+                                            <input name="local_baptismo" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row">
