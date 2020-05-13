@@ -113,23 +113,6 @@ class Membro extends CI_Controller
         return true;
     }
 
-    public function teste()
-    {
-
-        $membro = (object) [
-            "pessoa_id" => "23",
-            "tipo_id" => "BI",
-            "ID" => "33333"
-        ];
-
-        // $this->db->where('pessoa_id', $membro->pessoa_id);
-        $this->db->where('tipo_identificacao', $membro->tipo_id);
-        $this->db->where('descricao_identificacao', $membro->ID);
-
-        $membro_id = $this->db->get('identificacao')->result();;
-        var_dump($membro_id);
-    }
-
     public function request()
     {
         $postData = $_REQUEST;
@@ -432,16 +415,17 @@ class Membro extends CI_Controller
             redirect('membro/listar');
         }
 
-        // var_dump($data['membro']);
-        // die();
+        $genero = ($data['membro']->sexo == 'MASCULINO') ? "Filho de: " : "Filha de: ";
 
-        $qr_data = $data['membro']->pessoa_nome . "\n";
-        $qr_data .= $data['membro']->data_nascimento . "\n";
-        $qr_data .= $data['membro']->descricao_identificacao . "\n";
+        $qr_data =  "Nome: " . $data['membro']->pessoa_nome . "\n";
+        $qr_data .= $genero . $data['membro']->nome_pai . "\n";
+        $qr_data .= "E de: " . $data['membro']->nome_mae . "\n";
+        $qr_data .= "Categoria: " . $data['membro']->descricao_categoria . "\n";
+        $qr_data .= "Data de Nascimento: " . $data['membro']->data_nascimento . "\n";
+ 
+        QRcode::png(utf8_encode($qr_data), $QRCodeDir . '/generated/' . $data['membro']->descricao_identificacao . '.png');
 
-        QRcode::png($qr_data, $QRCodeDir . '/generated/'.$data['membro']->descricao_identificacao.'.png');
-
-        $data['qr_data'] = "<img width='90px' src='" . base_url() . "libs/phpqrcode/generated/".$data['membro']->descricao_identificacao.".png'>";
+        $data['qr_data'] = "<img width='90px' src='" . base_url() . "libs/phpqrcode/generated/" . $data['membro']->descricao_identificacao . ".png'>";
 
         $html = $this->load->view('membro/cartao', $data)->output->final_output;
 

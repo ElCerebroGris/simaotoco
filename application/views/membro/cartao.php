@@ -71,7 +71,7 @@
     <div class="main">
         <div class="details">
             <p><span class="title">Nome: </span> <span class="propriety"><?= $membro->pessoa_nome ?></span></p>
-            <p><span class="title">Filiação: </span> <span class="propriety"><?= $membro->nome_pai ?></p>
+            <p><span class="title"><?=($membro->sexo == 'MASCULINO') ? 'Filho ' : 'Filha ' ?>de: </span> <span class="propriety"><?= $membro->nome_pai ?></p>
             <p><span class="title">e de: </span> <span class="propriety"><?= $membro->nome_mae ?></span></p>
             <p><span class="title">Categoria: </span> <span class="propriety"><?= $membro->descricao_categoria ?></span></p>
             <p><span class="title">Data de Nascimento: </span> <span class="propriety"><?= date('d/m/Y', strtotime($membro->data_nascimento)) ?></span></p>
