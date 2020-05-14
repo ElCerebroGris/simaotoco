@@ -31,16 +31,16 @@ $(function() {
     function renderUrl(filtered, id) {
         switch (filtered) {
             case 'area':
-                return 'http://172.16.200.10/membro/areasbytribo/' + id;
+                return 'http://172.16.200.8/membro/areasbytribo/' + id;
                 break;
             case 'provincia_eclesiastica':
-                return 'http://172.16.200.10/membro/peclesiasticasbyigreja/' + id;
+                return 'http://172.16.200.8/membro/peclesiasticasbyigreja/' + id;
                 break;
             case 'paroquia':
-                return 'http://172.16.200.10/membro/paroquiasbypeclesiastica/' + id;
+                return 'http://172.16.200.8/membro/paroquiasbypeclesiastica/' + id;
                 break;
             case 'classe':
-                return 'http://172.16.200.10/membro/classesbyparoquia/' + id;
+                return 'http://172.16.200.8/membro/classesbyparoquia/' + id;
                 break;
             default:
                 break;

@@ -26,13 +26,13 @@ $(function() {
     function renderUrl(filtered) {
         switch (filtered) {
             case '1':
-                return 'http://172.16.200.10/documento/paroquias/';
+                return 'http://172.16.200.8/documento/paroquias/';
                 break;
             case '2':
-                return 'http://172.16.200.10/documento/provincias/';
+                return 'http://172.16.200.8/documento/provincias/';
                 break;
             case '3':
-                return 'http://172.16.200.10/documento/igrejas/';
+                return 'http://172.16.200.8/documento/igrejas/';
                 break;
             default:
                 break;
