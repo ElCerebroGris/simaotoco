@@ -31,16 +31,16 @@ $(function() {
     function renderUrl(filtered, id) {
         switch (filtered) {
             case 'area':
-                return 'http://localhost/gestoasimaotoco/membro/areasbytribo/' + id;
+                return 'http://172.16.200.10/gestoasimaotoco/membro/areasbytribo/' + id;
                 break;
             case 'provincia_eclesiastica':
-                return 'http://localhost/gestoasimaotoco/membro/peclesiasticasbyigreja/' + id;
+                return 'http://172.16.200.10/gestoasimaotoco/membro/peclesiasticasbyigreja/' + id;
                 break;
             case 'paroquia':
-                return 'http://localhost/gestoasimaotoco/membro/paroquiasbypeclesiastica/' + id;
+                return 'http://172.16.200.10/gestoasimaotoco/membro/paroquiasbypeclesiastica/' + id;
                 break;
             case 'classe':
-                return 'http://localhost/gestoasimaotoco/membro/classesbyparoquia/' + id;
+                return 'http://172.16.200.10/gestoasimaotoco/membro/classesbyparoquia/' + id;
                 break;
             default:
                 break;

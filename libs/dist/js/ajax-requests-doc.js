@@ -26,13 +26,13 @@ $(function() {
     function renderUrl(filtered) {
         switch (filtered) {
             case '1':
-                return 'http://localhost/gestoasimaotoco/documento/paroquias/';
+                return 'http://172.16.200.10/gestoasimaotoco/documento/paroquias/';
                 break;
             case '2':
-                return 'http://localhost/gestoasimaotoco/documento/provincias/';
+                return 'http://172.16.200.10/gestoasimaotoco/documento/provincias/';
                 break;
             case '3':
-                return 'http://localhost/gestoasimaotoco/documento/igrejas/';
+                return 'http://172.16.200.10/gestoasimaotoco/documento/igrejas/';
                 break;
             default:
                 break;

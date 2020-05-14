@@ -15,7 +15,7 @@ $(function() {
         var formButton = form.find('button');
 
         $.ajax({
-            url: 'http://localhost/gestoasimaotoco/membro/requestedit',
+            url: 'http://172.16.200.10/gestoasimaotoco/embro/requestedit',
             type: 'POST',
             data: formData,
             cache: false,
@@ -37,7 +37,7 @@ $(function() {
 
                 if (data.finish) {
                     //console.log();
-                    location.replace('http://localhost/gestoasimaotoco/membro/listar')
+                    location.replace('http://172.16.200.10/gestoasimaotoco/membro/listar')
                 }
             },
             error: function(data) {
