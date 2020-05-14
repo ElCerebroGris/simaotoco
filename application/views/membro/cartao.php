@@ -7,7 +7,7 @@
 
     <style>
         body {
-            background-image: url('http://172.16.200.10/gestoasimaotoco/libs/dist/img/card.jpg');
+            background-image: url('http://172.16.200.11/gestoasimaotoco/libs/dist/img/card.jpg');
             background-position: top left;
             background-repeat: no-repeat;
             background-image-resize: 2;
