@@ -8,14 +8,14 @@
                 <section class="content-header">
                     <div class="container-fluid">
                         <?php if ($this->session->flashdata('sms') != null) { ?>
-                            <div class="alert alert-warning">
+                            <div class="callout callout-success alert alert-dismissible">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <?= $this->session->flashdata('sms'); ?>
                             </div>
                         <?php } ?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                            <?php if ($this->session->userdata('nivel') == 7 || $this->session->userdata('nivel') == 1) { ?>
+                            <?php if ($this->session->userdata('nivel') == 1) { ?>
                             <h5 class="mb-2">
                                 <a href="<?= base_url() ?>pagamento/add" class="btn btn-outline-primary btn-sm	">Novo</a>
                             </h5>

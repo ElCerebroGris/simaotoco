@@ -59,7 +59,6 @@ class Membro extends CI_Controller
             $this->session->set_flashdata('sms', 'membro atualizado com sucesso');
             redirect('membro/listar');
         }
-    }
 
     public function desativar($id) {
         $this->verificar_acesso();
