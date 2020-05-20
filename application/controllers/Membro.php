@@ -59,6 +59,7 @@ class Membro extends CI_Controller
             $this->session->set_flashdata('sms', 'membro atualizado com sucesso');
             redirect('membro/listar');
         }
+    }
 
     public function desativar($id) {
         $this->verificar_acesso();
@@ -426,7 +427,6 @@ class Membro extends CI_Controller
             'margin_top' => 6,
             'margin_bottom' => 0
         ]);
-
 
         $this->load->model('membro_model');
         $data['membro'] = $this->membro_model->ver($member_id);
