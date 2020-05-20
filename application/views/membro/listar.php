@@ -54,8 +54,6 @@
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Identificação</th>
-                                                    <th>Paraquia</th>
-                                                    <th>Identificação</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
@@ -64,7 +62,6 @@
                                                     <tr>
                                                         <td><a style="color:black !important" href="<?= base_url('membro/ver/' . $q->membro_id) ?>"><?= $q->pessoa_nome ?></a></td>
                                                         <td><?= $q->descricao_identificacao ?></td>
-                                                        <td><?= $q->descricao_paroquia ?></td>
                                                         <td class="text-center" width="20%">
                                                             <?php if ($q->estado_membro == 0) {?>
                                                                 <a href="<?= base_url('membro/ativar/'.$q->membro_id) ?>" 
