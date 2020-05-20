@@ -59,7 +59,6 @@ class Membro extends CI_Controller
             $this->session->set_flashdata('sms', 'membro atualizado com sucesso');
             redirect('membro/listar');
         }
-    }
 
     public function desativar($id) {
         $this->verificar_acesso();
@@ -254,6 +253,7 @@ class Membro extends CI_Controller
                 $this->session->set_flashdata('sms', 'Cadastro feito com sucesso!');
                 $this->session->unset_userdata('foto_atual');
                 $json['finish'] = true;
+                $json['redirect'] = base_url()."membro/listar";
                 break;
 
             default:
@@ -398,6 +398,7 @@ class Membro extends CI_Controller
                 $this->session->set_flashdata('sms', 'Dados Atualizados com sucesso!');
                 $this->session->unset_userdata('foto_atual');
                 $json['finish'] = true;
+                $json['redirect'] = base_url()."membro/listar";
                 break;
 
             default:

@@ -17,31 +17,18 @@
             margin: 0pt;
         }
 
-        .main h1 {
-            margin-top: 220px;
-            margin-bottom: 40px;
+        .main h1{
+            margin-top: 20px;
             text-align: center;
             font-size: 1.4em;
             text-decoration: underline;
+            font-weight: 500;
         }
 
-        .main p {
-            margin: 0 40px;
+        .main p{
+            margin: 0 20px;
             text-align: justify;
             font-size: 1.2em;
-        }
-
-        .main-footer {
-            margin-top: 20px;
-        }
-
-        .main-footer p {
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .main-footer .p-footer {
-            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -49,7 +36,7 @@
 <body>
     <div id="page-border">
 
-        <!-- <div style="margin: 30px auto; width: 550px; font-size: 10pt; text-align: center; padding-top: 3mm; color: #28a745; ">
+        <div style="margin: 0 auto; width: 550px; font-size: 10pt; text-align: center; padding-top: 3mm; color: #28a745; ">
             <img src="<?= base_url() ?>libs/dist/img/logo.png" width="50px" alt="Logotipo">
             <h1 style="font-size: 12pt;">IGREJA DE NOSSO SENHOR JESUS CRISTO NO MUNDO</h1>
             <p>«OS TOCOÍSTAS»</p>
@@ -109,29 +96,8 @@
             <a mailto="executivocentral8@yahoo.com.br" style="text-decoration:  underline; color: blue;">executivocentral8@yahoo.com.br</a> Sede Social Administrativa e Eclesiástica Universal em Luanda Angola- África Ocidental<br />
             Sede Espiritual Universal “Sadi Zulumongo”Ntaia Maquela do Zombo A Cidade Santa do Grande Rei. Reconhecida pelo Governo Português por Despacho
             nº. 3163-94/72 de 24 de Setembro e pelo Governo de Angola por Despacho nº 396/25 de 16 de Novembro, D.R nº. 158, I Série
-        </div> -->
+        </div>
 
-            <!--mpdf
-<htmlpageheader name="myheader">
-<div style="margin: 0 auto; width: 550px; font-size: 10pt; text-align: center; padding-top: 3mm; color: #28a745; ">
-<img src="<?= base_url() ?>libs/dist/img/logo.png" width="50px" alt="Logotipo">
-<h1 style="font-size: 12pt;">IGREJA DE NOSSO SENHOR JESUS CRISTO NO MUNDO</h1>
-<p>«OS TOCOÍSTAS»</p>
-<p>Relembrada em 25 de Julho de 1949<p>
-<p>Por Sua Santidade Profeta Simão Gonçalves Tôco<p>
-</div>
-</htmlpageheader>
-<htmlpagefooter name="myfooter">
-<div style="margin: 0 auto; width: 550px; font-size: 7pt; text-align: center; padding-top: 3mm; color: #28a745; ">
-Complexo Missionário Tocoísta, Rua Cmte Pedro de Castro Van-Duném “Loy”, Golf I, Tlf 916866264/912294255, Cx-Postl 22141
-<a mailto="executivocentral8@yahoo.com.br" style="text-decoration:  underline; color: blue;">executivocentral8@yahoo.com.br</a> Sede Social Administrativa e Eclesiástica Universal em Luanda Angola- África Ocidental<br/>
-Sede Espiritual Universal “Sadi Zulumongo”Ntaia Maquela do Zombo A Cidade Santa do Grande Rei. Reconhecida pelo Governo Português por Despacho
-nº. 3163-94/72 de 24 de Setembro e pelo Governo de Angola por Despacho nº 396/25 de 16 de Novembro, D.R nº. 158, I Série
-</div>
-</htmlpagefooter>
-<sethtmlpageheader name="myheader" value="on" show-this-page="1" />
-<sethtmlpagefooter name="myfooter" value="on" />
-mpdf-->
     </div>
 </body>
 

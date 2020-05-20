@@ -25,7 +25,6 @@ class Area extends CI_Controller {
 
     public function add() {
         $this->verificar_acesso();
-        $this->verificar_acesso();
         $dados['tribos'] = $this->db->get('tribo')->result();
         $this->load->view('area/add', $dados);
     }

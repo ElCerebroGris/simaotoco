@@ -8,21 +8,21 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="container-fluid">
-                        <?php if ($this->session->flashdata('sms') != null) {?>
-                            <div class="alert alert-warning">
+                        <?php if ($this->session->flashdata('sms') != null) { ?>
+                            <div class="callout callout-success alert alert-dismissible">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <?=$this->session->flashdata('sms');?>
                             </div>
                         <?php }?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-								<?php if ($this->session->userdata('nivel') == 1) {?>
-                                    <h5 class="mb-2">
-                                        <a href="<?=base_url()?>membro/add" class="btn btn-outline-primary btn-sm	">Adicionar</a>
-                                        <a href="<?=base_url()?>casamento" class="btn btn-outline-primary btn-sm">Casamentos</a>
-                                    </h5>
-                                <?php }?>
+								
+								<?php if ($this->session->userdata('nivel') == 1) { ?>
+                            <h5 class="mb-2">
+                                <a href="<?= base_url() ?>membro/add" class="btn btn-outline-primary btn-sm	">Adicionar</a>
+                                <a href="<?= base_url() ?>membro/casamento" class="btn btn-outline-primary btn-sm	">Novo Casamento</a>
+                            </h5>
+                        <?php } ?>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -54,20 +54,17 @@
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Identificação</th>
-                                                    <th>Estado</th>
+                                                    <th>Paraquia</th>
+                                                    <th>Identificação</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="color:black">
                                                 <?php foreach ($membros as $q) {?>
                                                     <tr>
-                                                        <td><a style="color:black !important" href="<?=base_url('membro/ver/' . $q->membro_id)?>"><?=$q->pessoa_nome?></a></td>
-                                                        <td><?=$q->descricao_identificacao?></td>
-                                                        <?php if ($q->estado_membro == 0) {?>
-                                                            <td>Desativado</td>
-                                                        <?php } else {?>
-                                                            <td>Ativado</td>
-                                                        <?php }?>
+                                                        <td><a style="color:black !important" href="<?= base_url('membro/ver/' . $q->membro_id) ?>"><?= $q->pessoa_nome ?></a></td>
+                                                        <td><?= $q->descricao_identificacao ?></td>
+                                                        <td><?= $q->descricao_paroquia ?></td>
                                                         <td class="text-center" width="20%">
                                                             <?php if ($q->estado_membro == 0) {?>
                                                                 <a href="<?= base_url('membro/ativar/'.$q->membro_id) ?>" 

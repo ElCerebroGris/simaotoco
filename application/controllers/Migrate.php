@@ -31,7 +31,7 @@ class Migrate extends CI_Controller
         $this->load->model('record_model');
         //$this->record_model->eliminarTabelas();
 
-        for ($version = 1; $version <= 20; ++$version) {
+        for ($version = 1; $version <= 21; ++$version) {
             if (!$this->migration->version($version)) {
                 echo 'Error' . $this->migration->error_string();
             }

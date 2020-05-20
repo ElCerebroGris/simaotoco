@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Record_Model extends CI_Model {
+class Record_model extends CI_Model {
 
     function __construct() {
 
@@ -15,6 +15,7 @@ class Record_Model extends CI_Model {
 
     function adicionarDados() {
         $sql = "INSERT INTO nivel_usuario (codigo_nivel_usuario, descricao_nivel_usuario) VALUES 
+        (0, 'Todos'),
         (1, 'Administrador'),
         (2, 'Secretario Executivo'),
         (3, 'Gestor de Membros'),

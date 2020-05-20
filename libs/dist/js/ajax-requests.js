@@ -28,33 +28,15 @@ $(function() {
         }
     }
 
-    function renderUrl(filtered, id) {
-        switch (filtered) {
-            case 'area':
-                return 'http://172.16.200.10/gestoasimaotoco/membro/areasbytribo/' + id;
-                break;
-            case 'provincia_eclesiastica':
-                return 'http://172.16.200.10/gestoasimaotoco/membro/peclesiasticasbyigreja/' + id;
-                break;
-            case 'paroquia':
-                return 'http://172.16.200.10/gestoasimaotoco/membro/paroquiasbypeclesiastica/' + id;
-                break;
-            case 'classe':
-                return 'http://172.16.200.10/gestoasimaotoco/membro/classesbyparoquia/' + id;
-                break;
-            default:
-                break;
-        }
-    }
-
     $('html').on('change', 'select.filter', function(e) {
 
         var selector = $(this);
         var id = selector.val() ? selector.val() : '0';
         var filtered = $("select[name=" + selector.data('get') + "]");
+        var url_target = $(this).data('url');
 
         $.ajax({
-            url: renderUrl(selector.data('get'), id),
+            url: url_target + id,
             type: 'GET',
             cache: false,
             processData: false,

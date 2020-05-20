@@ -26,13 +26,13 @@ $(function() {
     function renderUrl(filtered) {
         switch (filtered) {
             case '1':
-                return 'http://172.16.200.10/gestoasimaotoco/documento/paroquias/';
+                return 'http://localhost/itel/gestoasimaotoco/documento/paroquias/';
                 break;
             case '2':
-                return 'http://172.16.200.10/gestoasimaotoco/documento/provincias/';
+                return 'http://localhost/itel/gestoasimaotoco/documento/provincias/';
                 break;
             case '3':
-                return 'http://172.16.200.10/gestoasimaotoco/documento/igrejas/';
+                return 'http://localhost/itel/gestoasimaotoco/documento/igrejas/';
                 break;
             default:
                 break;
@@ -89,6 +89,35 @@ $(function() {
 
                 if (data.success) {
                     filtered.append("<option value=''>Selecione uma opção</option>");
+                    renderOptions(selector, filtered, data.content);
+                }
+            }
+        });
+    });
+
+    $('#filter4').change(function(e) {
+
+        var selector = $(this).val();
+        var filtered = $("#listData4");
+
+        $.ajax({
+            url: renderUrl(selector),
+            type: 'GET',
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(data) {
+
+                filtered.html('');
+                if (data.error) {
+                    filtered.append("<option value='0'>Sem Resultado Disponiveis</option>");
+                    alert('Erro');
+                }
+
+                if (data.success) {
+                    filtered.append("<option value=''>Selecione uma opção</option>");
+                    filtered.append("<option value='0'>Todos</option>");
                     renderOptions(selector, filtered, data.content);
                 }
             }

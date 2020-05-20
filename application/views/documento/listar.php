@@ -9,7 +9,7 @@
                 <section class="content-header">
                     <div class="container-fluid">
                         <?php if ($this->session->flashdata('sms') != null) { ?>
-                            <div class="alert alert-warning">
+                            <div class="callout callout-success alert alert-dismissible">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <?= $this->session->flashdata('sms'); ?>
                             </div>
@@ -21,6 +21,7 @@
                                 <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Novo Geral</a>
                                 <a href="<?= base_url() ?>testificacao/listar" class="btn btn-outline-primary btn-sm  ">Testificação</a>
                                 <a href="<?= base_url() ?>pedido/listar" class="btn btn-outline-primary btn-sm  ">Pedidos de Impressão</a>
+                                <a href="<?= base_url() ?>correspondencia/listar" class="btn btn-outline-primary btn-sm  ">Correspondencia</a>
                             </h5>
                         <?php } ?>
                             </div>
