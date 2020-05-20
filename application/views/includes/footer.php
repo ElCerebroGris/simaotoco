@@ -14,6 +14,9 @@
 <script src="<?= base_url() ?>libs/plugins/select2/js/select2.full.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="<?= base_url() ?>libs/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+<!-- bs-custom-file-input -->
+<script src="<?= base_url() ?>libs/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url() ?>libs/dist/js/adminlte.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -75,6 +78,11 @@
                     "autoWidth": false,
                 });
             });
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+  bsCustomFileInput.init();
+});
 </script>
 
 </body>

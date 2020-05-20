@@ -26,7 +26,8 @@ class Welcome extends CI_Controller {
     public function dashboard() {
         $this->verificar_acesso();
         $this->dados['membros'] = $this->db->get('membro')->result();  
-        $this->dados['usuarios'] = $this->db->get('usuario')->result();  
+        $this->dados['tribos'] = $this->db->get('tribo')->result();
+        $this->dados['igrejas'] = $this->db->get('igreja_nacional')->result();    
         
         $this->load->view('dashboard', $this->dados);
     }

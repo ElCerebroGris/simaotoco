@@ -1,5 +1,5 @@
             <!-- Navbar -->
-            <?php include APPPATH . 'views/includes/header.php'; ?>
+            <?php include APPPATH . 'views/includes/header.php';?>
             <!-- /.navbar -->
 
 
@@ -25,7 +25,7 @@
                 <section class="content">
 
                     <div class="container-fluid">
-                        
+
                         <div class="row">
                             <div class="col-md-3 col-sm-6 col-12">
                                 <div class="info-box">
@@ -33,7 +33,7 @@
 
                                     <div class="info-box-content">
                                         <span class="info-box-text">Total de Membros</span>
-                                        <span class="info-box-number"><?= count($membros) ?></span>
+                                        <span class="info-box-number"><?=count($membros)?></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -46,7 +46,7 @@
 
                                     <div class="info-box-content">
                                         <span class="info-box-text">Total de Tribo</span>
-                                        <span class="info-box-number">12</span>
+                                        <span class="info-box-number"><?=count($tribos)?></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -59,20 +59,7 @@
 
                                     <div class="info-box-content">
                                         <span class="info-box-text">Total de Igrejas Nacionais</span>
-                                        <span class="info-box-number"><?= count($usuarios) ?></span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Total de Documentos</span>
-                                        <span class="info-box-number">12</span>
+                                        <span class="info-box-number"><?=count($igrejas)?></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -87,5 +74,5 @@
             </div>
             <!-- /.content-wrapper -->
 
-            <?php include APPPATH . 'views/includes/footer.php'; ?>
+            <?php include APPPATH . 'views/includes/footer.php';?>
 
