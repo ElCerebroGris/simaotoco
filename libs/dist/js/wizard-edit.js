@@ -13,9 +13,10 @@ $(function() {
         var form = $(this);
         var formData = new FormData(form[0]);
         var formButton = form.find('button');
+        var url_target = $('span.wizard-url').data('url');
 
         $.ajax({
-            url: 'http://localhost/gestoasimaotoco/membro/requestedit',
+            url: url_target,
             type: 'POST',
             data: formData,
             cache: false,
@@ -23,8 +24,6 @@ $(function() {
             contentType: false,
             dataType: 'json',
             success: function(data) {
-                //console.log(data);
-
                 if (data.error) {
                     $('.error').html('<p class="alert alert-danger">' + data.errMessage + '</p>').fadeIn(200);
                 } else {
@@ -36,8 +35,7 @@ $(function() {
                 }
 
                 if (data.finish) {
-                    //console.log();
-                    location.replace('http://localhost/gestoasimaotoco/membro/listar')
+                    location.replace(data.redirect);
                 }
             },
             error: function(data) {
