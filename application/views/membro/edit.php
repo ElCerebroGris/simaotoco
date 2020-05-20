@@ -18,7 +18,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <span class="wizard-url" data-url="<?=base_url()?>membro/requestedit"></span>
         <!-- Main content -->
         <section class="content">
             <?php $membro = (object)$membro; ?>
@@ -71,7 +71,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="nome">Igreja Nacional</label>
-                                            <select name="igreja_nacional" class="form-control select2 filter" data-get="provincia_eclesiastica" style="width: 100%;">
+                                            <select name="igreja_nacional" class="form-control select2 filter" data-get="provincia_eclesiastica" data-url="<?=base_url()?>membro/peclesiasticasbyigreja/" style="width: 100%;">
                                                 <option value="">Selecione uma opção</option>
                                                 <?php foreach ($igreja_nacionais as $n) { ?>
                                                     <option value="<?= $n->igreja_nacional_id ?>" <?php if($n->igreja_nacional_id == $membro->igreja_nacional_id){ echo 'selected';}?>><?= $n->descricao_igreja_nacional ?></option>
@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Provincia Eclesiastica</label>
-                                            <select name="provincia_eclesiastica" class="form-control select2 filter" data-get="paroquia" style="width: 100%;">
+                                            <select name="provincia_eclesiastica" class="form-control select2 filter" data-get="paroquia" data-url="<?=base_url()?>membro/paroquiasbypeclesiastica/" style="width: 100%;">
                                                 <?php foreach ($provincia_eclesiasticas as $n) { ?>
                                                     <option value="<?= $n->provincia_eclesiastica_id ?>" <?php if($n->provincia_eclesiastica_id == $membro->provincia_eclesiastica_id){ echo 'selected';}?>><?= $n->descricao_provincia_eclesiastica ?></option>
                                                 <?php } ?>
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nome">Paroquia</label>
-                                            <select name="paroquia" class="form-control select2 filter" data-get="classe" style="width: 100%;">
+                                            <select name="paroquia" class="form-control select2 filter" data-get="classe" data-url="<?=base_url()?>membro/classesbyparoquia/" style="width: 100%;">
                                                 <?php foreach ($paroquias as $n) { ?>
                                                     <option value="<?= $n->paroquia_id ?>" <?php if($n->paroquia_id == $membro->paroquia_id){ echo 'selected';}?>><?= $n->descricao_paroquia ?></option>
                                                 <?php } ?>
@@ -105,7 +105,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="nome">Tribo</label>
                                             <input type="hidden" name="action" value="eclesis">
-                                            <select name="tribo" class="form-control select2 filter" data-get="area" style="width: 100%;">
+                                            <select name="tribo" class="form-control select2 filter" data-get="area" data-url="<?=base_url()?>membro/areasbytribo/" style="width: 100%;">
                                                 <option value="">Selecione uma opção</option>
                                                 <?php foreach ($tribos as $n) { ?>
                                                     <option value="<?= $n->tribo_id ?>" <?php if($n->tribo_id == $membro->tribo_id){ echo 'selected';}?>><?= $n->descricao_tribo ?></option>
