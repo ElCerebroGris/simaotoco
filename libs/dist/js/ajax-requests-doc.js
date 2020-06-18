@@ -26,13 +26,13 @@ $(function() {
     function renderUrl(filtered) {
         switch (filtered) {
             case '1':
-                return 'http://localhost/itel/gestoasimaotoco/documento/paroquias/';
+                return 'http://localhost/code-behind/tocoista/documento/paroquias/';
                 break;
             case '2':
-                return 'http://localhost/itel/gestoasimaotoco/documento/provincias/';
+                return 'http://localhost/code-behind/tocoista/documento/provincias/';
                 break;
             case '3':
-                return 'http://localhost/itel/gestoasimaotoco/documento/igrejas/';
+                return 'http://localhost/code-behind/tocoista/documento/igrejas/';
                 break;
             default:
                 break;

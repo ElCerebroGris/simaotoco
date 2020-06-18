@@ -20,9 +20,10 @@ class Documento extends CI_Controller
     public function listar()
     {
         $this->verificar_acesso();
+        $this->db->join('usuario', 'usuario.usuario_id=documento.usuario_id');
         $this->db->join('membro', 'membro.membro_id=documento.membro_id');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
-        $this->db->join('usuario', 'usuario.usuario_id=documento.usuario_id');
+        
         $dados['documentos'] = $this->db->get('documento')->result();
         $this->load->view('documento/listar', $dados);
     }
