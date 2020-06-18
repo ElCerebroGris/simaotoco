@@ -34,13 +34,9 @@ $(function() {
                     step(formButton);
                 }
 
-                if (data.finish) { <<
-                    << << < HEAD
+                if (data.finish) {
                     //console.log();
-                    location.replace('http://172.16.200.10/gestoasimaotoco/membro/listar') ===
-                        === =
-                        location.replace(data.redirect); >>>
-                    >>> > fase_1
+                    location.replace(data.redirect);
                 }
             },
             error: function(data) {

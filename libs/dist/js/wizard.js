@@ -1,13 +1,13 @@
-$(function() {
+$(function () {
 
     function step(button) {
-        $('.form-step:visible').fadeOut(200, function() {
+        $('.form-step:visible').fadeOut(200, function () {
             $('.error').html('').fadeOut();
             $('.' + button.data('step')).fadeIn(200);
         });
     }
 
-    $('html').on('submit', 'form.form-wizard', function(e) {
+    $('html').on('submit', 'form.form-wizard', function (e) {
         e.preventDefault();
 
         var form = $(this);
@@ -23,7 +23,7 @@ $(function() {
             processData: false,
             contentType: false,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 //console.log(data);
 
                 if (data.error) {
@@ -36,22 +36,17 @@ $(function() {
                     step(formButton);
                 }
 
-                if (data.finish) { <<
-                    << << < HEAD
-                    //console.log();
-                    location.replace('http://172.16.200.10/gestoasimaotoco/membro/listar') ===
-                        === =
-                        location.replace(data.redirect); >>>
-                    >>> > fase_1
+                if (data.finish) {
+                    location.replace(data.redirect);
                 }
             },
-            error: function(data) {
+            error: function (data) {
                 console.log(data);
             }
         });
     });
 
-    $('html').on('click', 'a[data-step]', function(e) {
+    $('html').on('click', 'a[data-step]', function (e) {
         e.preventDefault();
         step($(this));
     });
