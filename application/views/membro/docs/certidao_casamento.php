@@ -30,6 +30,24 @@
             text-align: justify;
             font-size: 1.2em;
         }
+
+        .main-footer {
+            margin-top: 20px;
+        }
+
+        .main-footer p {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .main-footer .p-footer {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 10pt;
+        }
+        
     </style>
 </head>
 
@@ -42,7 +60,7 @@
             <p>«OS TOCOÍSTAS»</p>
             <p>Relembrada em 25 de Julho de 1949<p>
                     <p>Por Sua Santidade Profeta Simão Gonçalves Tôco<p>
-        </div> -->
+        </div>
 
         <div class="main">
         <?php $dado = explode(' ',$casamento[0]->data_casamento)[0];

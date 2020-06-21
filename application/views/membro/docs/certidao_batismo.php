@@ -73,7 +73,8 @@
                 cumprindo o respectivo ritual vigente
                 nesta Igreja, passando a partir desta data a ostentar a categoria de
                 cristão. <br>
-                Para constar, passou-se-lhe o presente certificado que vai devidamente
+                </p>
+                <p>Para constar, passou-se-lhe o presente certificado que vai devidamente
                 assinado e carimbado.</p>
 
             <div class="main-footer">

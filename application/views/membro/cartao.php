@@ -11,6 +11,7 @@
             background-position: top left;
             background-repeat: no-repeat;
             background-image-resize: 2;
+            text-transform: uppercase;
         }
 
         p {
@@ -64,6 +65,10 @@
             font-weight: bold;
             color: #38760f;
         }
+
+        .text-bold{
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -71,7 +76,7 @@
     <br>
     <div class="main">
         <div class="details">
-            <p><span class="title">Nome: </span> <span class="propriety"><?= $membro->pessoa_nome ?></span></p>
+            <p><span class="title">Nome: </span> <span class="propriety text-bold"><?= $membro->pessoa_nome ?></span></p>
             <p><span class="title"><?= ($membro->sexo == 'MASCULINO') ? 'Filho ' : 'Filha ' ?>de: </span> <span class="propriety"><?= $membro->nome_pai ?></p>
             <p><span class="title">e de: </span> <span class="propriety"><?= $membro->nome_mae ?></span></p>
             <p><span class="title">Categoria: </span> <span class="propriety"><?= $membro->descricao_categoria ?></span></p>

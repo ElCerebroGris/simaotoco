@@ -125,8 +125,8 @@
                 <p>_______________________________________________</p>
                 <p>_______________________________________________</p>
                 </div>
-                <p>O SECRETÁRIO EXECUTIVO CENTRAL INTERINO</p>
-                <p class="assign-name">Reverendo-Pastor SEBASTÃO NLUTA</p>
+                <p>O SECRETÁRIO EXECUTIVO CENTRAL</p>
+                <p class="assign-name">Ancião FRANCISCO DOMINGOS</p>
 
             </div>
         </div>

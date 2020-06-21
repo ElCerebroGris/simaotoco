@@ -464,7 +464,7 @@ class Membro extends CI_Controller
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = 2048;
         $config['max_width'] = 1024;
-        $config['max_height'] = 768;
+        $config['max_height'] = 1024;
         $config['file_name'] = time();
 
         $this->load->library('upload', $config);
