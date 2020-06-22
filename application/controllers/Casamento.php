@@ -51,6 +51,22 @@ class Casamento extends CI_Controller {
             $this->load->model('log_model');
             $this->log_model->adicionar('casamento de '.$data['membro_homem_id'].' adicionado');
 
+            //Atualizar estado civil dos Membros
+            $data2['estado_civil'] = 'CASADO';
+            //Homem
+            $this->db->where('membro_id', $data['membro_homem_id']);
+            $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+            $id_pessoa = $this->db->get('memebro')->result()[0]->pessoa_id;
+            $this->db->where('pessoa_id', $id_pessoa);
+            $this->db->update('pessoa', $data2);
+
+            //Mulher
+            $this->db->where('membro_id', $data['membro_mulher_id']);
+            $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+            $id_pessoa = $this->db->get('memebro')->result()[0]->pessoa_id;
+            $this->db->where('pessoa_id', $id_pessoa);
+            $this->db->update('pessoa', $data2);
+
             $this->session->set_flashdata('sms', 'casamento adicionado com sucesso');
             redirect('casamento/listar');
         }
