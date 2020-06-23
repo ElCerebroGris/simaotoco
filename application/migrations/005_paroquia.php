@@ -9,6 +9,7 @@ class Migration_Paroquia extends CI_Migration
     {
         $this->dbforge->add_field('paroquia_id int(11) NOT NULL PRIMARY KEY auto_increment');
         $this->dbforge->add_field('provincia_eclesiastica_id int(11) NOT NULL');
+        $this->dbforge->add_field('representante_id int(11) DEFAULT NULL');
         $this->dbforge->add_field('descricao_paroquia varchar(35) NOT NULL');
         $this->dbforge->add_field('endereco varchar(100) NOT NULL');
         $this->dbforge->add_field('telefone varchar(30) DEFAULT NULL');

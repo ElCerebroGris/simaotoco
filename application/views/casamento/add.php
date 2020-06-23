@@ -40,7 +40,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Homem</label>
-                                                    <select name="membro_homem_id" class="form-control select2" style="width: 100%;">
+                                                    <select required name="membro_homem_id" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($membros_h as $n) {?>
                                                             <option value="<?=$n->membro_id ?>"><?=$n->pessoa_nome?></option>
                                                         <?php }?>
@@ -49,7 +49,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Mulher</label>
-                                                    <select name="membro_mulher_id" class="form-control select2" style="width: 100%;">
+                                                    <select required name="membro_mulher_id" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($membros_m as $n) {?>
                                                             <option value="<?=$n->membro_id ?>"><?=$n->pessoa_nome?></option>
                                                         <?php }?>
@@ -76,6 +76,8 @@
                                                     <input name="data_casamento" type="date" class="form-control" required="">
                                                 </div>
                                                 <div class="form-group col-md-6">
+                                                    <label for="nome">Numero da folha</label>
+                                                    <input name="numero_folha" type="text" class="form-control" required="">
                                                 </div>
 
                                             </div>

@@ -34,11 +34,21 @@ class Record_model extends CI_Model {
         $this->db->query($sql);
 
         $sql = "INSERT INTO `igreja_nacional` (`descricao_igreja_nacional`, `sigla`, `indicador_telefonico`, `endereco`, `telefone`, `email`) VALUES
-        ('Teste', 'TT', '+000', '', NULL, NULL);";
+        ('Angola-Sede', 'Sede', '+244', '', NULL, NULL);";
         $this->db->query($sql);
 
-        $sql = "INSERT INTO `provincia_eclesiastica` (`igreja_nacional_id`, `descricao_provincia_eclesiastica`, `endereco`, `telefone`, `email`) VALUES
-        (1, 'Teste', '', NULL, NULL);";
+        $sql = "INSERT INTO `provincia_eclesiastica` (`igreja_nacional_id`, `descricao_provincia_eclesiastica`, `codigo`, `endereco`, `telefone`, `email`) VALUES
+        (1, 'Luanda', 'LD','', NULL, NULL), (1, 'Bengo', 'BO','', NULL, NULL),
+        (1, 'Zaire', 'ZE','', NULL, NULL), (1, 'Cabinda', 'CD','', NULL, NULL),
+        (1, 'Uige', 'UE','', NULL, NULL), (1, 'Malanje', 'MJ','', NULL, NULL),
+        (1, 'Kwanza Norte', 'KN','', NULL, NULL), (1, 'Kwanza Sul', 'KS','', NULL, NULL),
+        (1, 'Benguela', 'BG','', NULL, NULL), (1, 'Huila', 'HL','', NULL, NULL),
+        (1, 'Huambo', 'HB','', NULL, NULL), (1, 'Bié', 'BE','', NULL, NULL),
+        (1, 'Cunene', 'CN','', NULL, NULL), (1, 'Pastor Avelino Alberto Quitongo', 'AQ','', NULL, NULL),
+        (1, 'Pastor Anastacio Manuel', 'AM','', NULL, NULL), (1, 'Pastor João Baptista Manuel', 'JM','', NULL, NULL),
+        (1, 'Pastor Israel Paulo Chipala', 'IC','', NULL, NULL), (1, 'Cuando Cubango', 'CC','', NULL, NULL),
+        (1, 'Moxico', 'MC','', NULL, NULL), (1, 'Lunda Sul', 'LS','', NULL, NULL),
+        (1, 'Lunda Norte', 'LN','', NULL, NULL), (1, 'Namibe', 'NB','', NULL, NULL);";
         $this->db->query($sql);
 
         $sql = "INSERT INTO `paroquia` (`provincia_eclesiastica_id`, `descricao_paroquia`, `endereco`, `telefone`, `email`) VALUES

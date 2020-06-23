@@ -51,6 +51,7 @@
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Igreja Nacional</th>
+                                                    <th>Representante</th>
                                                     <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
@@ -60,6 +61,7 @@
                                                     <tr>
                                                         <td><?= $q->descricao_provincia_eclesiastica ?></td>
                                                         <td><?= $q->descricao_igreja_nacional ?></td>
+                                                        <td><?= $q->representante_id ?></td>
                                                         <?php if ($q->estado_provincia_eclesiastica == 0) {?>
                                                             <td>Desativado</td>
                                                         <?php } else {?>

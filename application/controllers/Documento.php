@@ -91,7 +91,7 @@ class Documento extends CI_Controller
 
         //Verificar se o membro é casado
         if($data['tipo_documento'] == 'CERTIDÃO DE CASAMENTO'){
-            $this->db->where('membro_homem_id', $$data['membro_id']);
+            $this->db->where('membro_homem_id', $data['membro_id']);
             $dados['casamento'] = $this->db->get('casamento')->result();
             if(!$dados['casamento']){
                 $this->session->set_flashdata('sms', 'Membro não é casado!!!');

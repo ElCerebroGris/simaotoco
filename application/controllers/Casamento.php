@@ -27,11 +27,13 @@ class Casamento extends CI_Controller {
         $this->verificar_acesso();
         $this->db->where('sexo', 'MASCULINO');
         $this->db->where('estado_membro', 1);
+        $this->db->where('estado_civil !=', 'CASADO');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros_h'] = $this->db->get('membro')->result();
 
         $this->db->where('sexo', 'FEMENINO');
         $this->db->where('estado_membro', 1);
+        $this->db->where('estado_civil !=', 'CASADO');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
         $dados['membros_m'] = $this->db->get('membro')->result();
 
@@ -46,6 +48,7 @@ class Casamento extends CI_Controller {
         $data['madrinha_nome'] = $this->input->post('madrinha_nome');
         $data['padrinhos_casados'] = $this->input->post('padrinhos_casados');
         $data['data_casamento'] = $this->input->post('data_casamento');
+        $data['numero_folha'] = $this->input->post('numero_folha');
 
         if ($this->db->insert('casamento', $data)) {
             $this->load->model('log_model');
@@ -56,14 +59,14 @@ class Casamento extends CI_Controller {
             //Homem
             $this->db->where('membro_id', $data['membro_homem_id']);
             $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
-            $id_pessoa = $this->db->get('memebro')->result()[0]->pessoa_id;
+            $id_pessoa = $this->db->get('membro')->result()[0]->pessoa_id;
             $this->db->where('pessoa_id', $id_pessoa);
             $this->db->update('pessoa', $data2);
 
             //Mulher
             $this->db->where('membro_id', $data['membro_mulher_id']);
             $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
-            $id_pessoa = $this->db->get('memebro')->result()[0]->pessoa_id;
+            $id_pessoa = $this->db->get('membro')->result()[0]->pessoa_id;
             $this->db->where('pessoa_id', $id_pessoa);
             $this->db->update('pessoa', $data2);
 

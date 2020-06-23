@@ -42,12 +42,12 @@
             <p>«OS TOCOÍSTAS»</p>
             <p>Relembrada em 25 de Julho de 1949<p>
                     <p>Por Sua Santidade Profeta Simão Gonçalves Tôco<p>
-        </div> -->
+        </div>
 
         <div class="main">
         <?php $dado = explode(' ',$casamento[0]->data_casamento)[0];
-        $idade = date('y')-explode('-',$homem->data_nascimento)[0];
-        $idade_mulher = date('y')-explode('-',$mulher->data_nascimento)[0];
+        $idade = ('20'.date('y'))-explode('-',$homem->data_nascimento)[0];
+        $idade_mulher = ('20'.date('y'))-explode('-',$mulher->data_nascimento)[0];
         $data = explode(' ',$casamento[0]->data_criacao)[0];
          ?> 
             <h1>CERTIDÃO DE CASAMENTO</h1>
@@ -56,7 +56,8 @@
                 observância do respectivo Ritual em uso nesta Igreja, na presença das
                 testemunhas da terra e dos Céus, aos <?= explode('-', $dado)[2] ?> 
                 de <?= explode('-', $dado)[1] ?> de <?= explode('-', $dado)[0] ?>, com registo as
-                folhas n.º 50, do Livro de Casamento n.º 02/INSJCM/0010, contraiu matrimónio, o
+                folhas n.º <?= $casamento[0]->numero_folha ?>, do Livro de Casamento n.º 
+                <?= $casamento[0]->casamento_id ?>/INSJCM/<?= explode('-', $dado)[0] ?>, contraiu matrimónio, o
                 Irmão <b><?= $homem->pessoa_nome ?></b>, de <?= $idade ?> anos de idade, natural do
                 Município de <?= $homem->municipio_nascimento ?>, 
                 Província de <?= $homem->provincia_nascimento ?>, de 
