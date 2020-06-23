@@ -72,18 +72,19 @@
                 aos <?= $dado1[2] .' de '. $dado1[1] .' de '. $dado1[0] ?>, 
                 cumprindo o respectivo ritual vigente
                 nesta Igreja, passando a partir desta data a ostentar a categoria de
-                cristão. <br>
+                <b>cristão.</b>
                 </p>
+                <br>
                 <p>Para constar, passou-se-lhe o presente certificado que vai devidamente
                 assinado e carimbado.</p>
 
             <div class="main-footer">
                 <p class="p-footer">Luanda, <?= $dado2[0] .' de '. $dado2[1] .' de '. $dado2[2] ?> - 
-                “Ano da Solidariedade, da Leitura e Interpretação da Lei de Deus” - Milénio de Cristo</p>
+                <?=$lema?></p>
 
 
 
-                <p>O PASTOR PROVINCIAL</p>
+                <p>O REPRESENTANTE PROVINCIAL</p>
 
             </div>
         </div>

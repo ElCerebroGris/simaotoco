@@ -15,11 +15,11 @@
                         <?php } ?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                            <?php if ($this->session->userdata('nivel') == 1) { ?>
-                            <h5 class="mb-2">
-                                <a href="<?= base_url() ?>provincia_eclesiastica/add" class="btn btn-outline-success btn-sm">Adicionar</a>
-                            </h5>
-                        <?php } ?>
+                                <?php if ($this->session->userdata('nivel') == 1) { ?>
+                                    <h5 class="mb-2">
+                                        <a href="<?= base_url() ?>provincia_eclesiastica/add" class="btn btn-outline-success btn-sm">Adicionar</a>
+                                    </h5>
+                                <?php } ?>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -36,11 +36,11 @@
                 <section class="content">
 
                     <div class="container-fluid">
-                   
+
                         <div class="row">
                             <div class="col-12">
                                 <!-- Default box -->
-                                <div class="card card-success" >
+                                <div class="card card-success">
                                     <div class="card-header">
                                         <h3 class="card-title">Lista de Provincias Eclesiasticas</h3>
                                     </div>
@@ -50,32 +50,31 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nome</th>
+                                                    <th>Código</th>
                                                     <th>Igreja Nacional</th>
                                                     <th>Estado</th>
                                                     <th>Opções</th>
                                                 </tr>
                                             </thead>
-                                            <tbody  style="color:black">
+                                            <tbody style="color:black">
                                                 <?php foreach ($provincia_eclesiasticas as $q) { ?>
                                                     <tr>
                                                         <td><?= $q->descricao_provincia_eclesiastica ?></td>
+                                                        <td><?= $q->codigo ?></td>
                                                         <td><?= $q->descricao_igreja_nacional ?></td>
-                                                        <?php if ($q->estado_provincia_eclesiastica == 0) {?>
+                                                        <?php if ($q->estado_provincia_eclesiastica == 0) { ?>
                                                             <td>Desativado</td>
-                                                        <?php } else {?>
+                                                        <?php } else { ?>
                                                             <td>Ativado</td>
-                                                        <?php }?>
+                                                        <?php } ?>
                                                         <td class="text-center" width="20%">
-                                                            <?php if ($q->estado_provincia_eclesiastica == 0) {?>
-                                                                <a href="<?= base_url('provincia_eclesiastica/ativar/'.$q->provincia_eclesiastica_id) ?>" 
-                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
-                                                            <?php } else {?>
-                                                                <a href="<?= base_url('provincia_eclesiastica/desativar/'.$q->provincia_eclesiastica_id) ?>" 
-                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
+                                                            <?php if ($q->estado_provincia_eclesiastica == 0) { ?>
+                                                                <a href="<?= base_url('provincia_eclesiastica/ativar/' . $q->provincia_eclesiastica_id) ?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <?php } else { ?>
+                                                                <a href="<?= base_url('provincia_eclesiastica/desativar/' . $q->provincia_eclesiastica_id) ?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-eye-slash"></i></a>
 
-                                                                <a href="<?= base_url('provincia_eclesiastica/editar/'.$q->provincia_eclesiastica_id) ?>" 
-                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
-                                                            <?php }?>
+                                                                <a href="<?= base_url('provincia_eclesiastica/editar/' . $q->provincia_eclesiastica_id) ?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -83,6 +82,7 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>Nome</th>
+                                                    <th>Código</th>
                                                     <th>Igreja Nacional</th>
                                                     <th>Estado</th>
                                                     <th>Opções</th>

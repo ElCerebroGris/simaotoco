@@ -114,7 +114,7 @@
             <?php $dado = explode(' ',$documentos->data_criacao)[0]; ?> 
                 <p class="p-footer">Luanda, <?= explode('-', $dado)[2] ?>
                  de <?= explode('-', $dado)[1] ?> de <?= explode('-', $dado)[0] ?> 
-                - “Ano do Fim dos Muros e de Inicio da Harmonia da Família Tocoísta” - Milénio de Cristo</p>
+                - <?=$lema?></p>
 
 
 

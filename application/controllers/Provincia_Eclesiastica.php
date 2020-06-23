@@ -33,6 +33,7 @@ class Provincia_Eclesiastica extends CI_Controller {
         $this->verificar_acesso();
         $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
         $data['descricao_provincia_eclesiastica'] = $this->input->post('descricao_provincia_eclesiastica');
+        $data['codigo'] = $this->input->post('codigo');
 
         if(!$this->validar($data['descricao_provincia_eclesiastica'], 
         $data['igreja_nacional_id'])){
@@ -49,9 +50,17 @@ class Provincia_Eclesiastica extends CI_Controller {
         }
     }
 
-    public function validar($descricao, $igreja_id){
-        $this->db->where('descricao_provincia_eclesiastica', $descricao);
-        $this->db->where('igreja_nacional_id', $igreja_id);
+    public function validar($descricao, $igreja_id, $id = null){
+
+        if($id){
+            $this->db->where('provincia_eclesiastica_id !=', $id);
+            $this->db->where('descricao_provincia_eclesiastica', $descricao);
+            $this->db->where('igreja_nacional_id', $igreja_id);
+        }else{
+            $this->db->where('descricao_provincia_eclesiastica', $descricao);
+            $this->db->where('igreja_nacional_id', $igreja_id);
+        }
+        
         $dados['provincia_eclesiastica'] = $this->db->get('provincia_eclesiastica')->result();
 
         if(count($dados['provincia_eclesiastica']) == 0){
@@ -77,11 +86,12 @@ class Provincia_Eclesiastica extends CI_Controller {
         $id = $this->input->post('provincia_eclesiastica_id');
         $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
         $data['descricao_provincia_eclesiastica'] = $this->input->post('descricao_provincia_eclesiastica');
+        $data['codigo'] = $this->input->post('codigo');
 
         if(!$this->validar($data['descricao_provincia_eclesiastica'], 
-        $data['igreja_nacional_id'])){
+        $data['igreja_nacional_id'], $id)){
             $this->session->set_flashdata('sms', 'provincia eclesiastica já existente');
-            redirect('provincia_eclesiastica/editar');
+            redirect('provincia_eclesiastica/editar/'.$id);
         }
 
         $this->db->where('provincia_eclesiastica_id', $id);

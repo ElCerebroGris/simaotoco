@@ -51,7 +51,8 @@ class Membro extends CI_Controller
         $this->load->view('membro/add', $dados);
     }
 
-    public function ativar($id) {
+    public function ativar($id)
+    {
         $this->verificar_acesso();
         $data['estado_membro'] = 1;
         $this->db->where('membro_id', $id);
@@ -61,7 +62,8 @@ class Membro extends CI_Controller
         }
     }
 
-    public function desativar($id) {
+    public function desativar($id)
+    {
         $this->verificar_acesso();
         $data['estado_membro'] = 0;
         $this->db->where('membro_id', $id);
@@ -83,7 +85,7 @@ class Membro extends CI_Controller
         $dados['classes'] = $this->db->get('classe')->result();
         $dados['categorias'] = $this->db->get('categoria')->result();
         $dados['funcoes'] = $this->db->get('funcao')->result();
-        
+
         $dados['membro'] = $this->membro_model->ver($id);
 
         if (!$dados['membro']) {
@@ -246,6 +248,12 @@ class Membro extends CI_Controller
                 //Salvar Membro
                 $eclesiastes = $this->session->userdata('eclesiastes');
                 $eclesiastes['pessoa_id'] = $pessoa_id;
+                $province = (object)$this->getProvinceByClass($eclesiastes['classe_id']);
+                $generatedNumber = (object)$this->generateNumber($province->provincia_eclesiastica_id, $province->codigo);
+                $eclesiastes['serie'] = $generatedNumber->serie;
+                $eclesiastes['ordem'] = $generatedNumber->ordem;
+                $eclesiastes['numero_membro'] = $generatedNumber->numero_membro;
+
                 if (!$this->db->insert('membro', $eclesiastes)) {
                     $json['error'] = true;
                     $json['errMessage'] = 'Erro! Impossível avançar.';
@@ -254,7 +262,7 @@ class Membro extends CI_Controller
                 $this->session->set_flashdata('sms', 'Cadastro feito com sucesso!');
                 $this->session->unset_userdata('foto_atual');
                 $json['finish'] = true;
-                $json['redirect'] = base_url()."membro/listar";
+                $json['redirect'] = base_url() . "membro/listar";
                 break;
 
             default:
@@ -399,7 +407,7 @@ class Membro extends CI_Controller
                 $this->session->set_flashdata('sms', 'Dados Atualizados com sucesso!');
                 $this->session->unset_userdata('foto_atual');
                 $json['finish'] = true;
-                $json['redirect'] = base_url()."membro/listar";
+                $json['redirect'] = base_url() . "membro/listar";
                 break;
 
             default:
@@ -409,6 +417,86 @@ class Membro extends CI_Controller
         }
 
         echo json_encode($json);
+    }
+
+    public function getProvinceByClass($classe_id)
+    {
+        $this->db->join('paroquia', 'paroquia.paroquia_id = classe.paroquia_id');
+        $this->db->join('provincia_eclesiastica', 'provincia_eclesiastica.provincia_eclesiastica_id = paroquia.provincia_eclesiastica_id');
+        $this->db->where('classe.classe_id', $classe_id);
+
+        $data = $this->db->get('classe')->result()[0];
+
+        return $data;
+    }
+
+    public function generateNumber($provincia_id, $codigo)
+    {
+        $this->db->select('MAX(membro.membro_id) as id, membro.serie as serie, membro.ordem as ordem, provincia_eclesiastica.codigo as codigo');
+
+        $this->db->join('classe', 'classe.classe_id = membro.classe_id');
+        $this->db->join('paroquia', 'paroquia.paroquia_id = classe.paroquia_id');
+        $this->db->join('provincia_eclesiastica', 'provincia_eclesiastica.provincia_eclesiastica_id = paroquia.provincia_eclesiastica_id');
+        $this->db->where('provincia_eclesiastica.provincia_eclesiastica_id', $provincia_id);
+
+        $data = $this->db->get('membro')->result()[0];
+
+        if (!$data) {
+
+            return $this->setMemberNumber($codigo);
+        }
+
+        $data = $this->setMemberNumber($codigo, $data->serie, $data->ordem);
+        return $data;
+    }
+
+    public function setMemberNumber($codigo, $serie = null, $ordem = null)
+    {
+        $serie = ($serie ?? 1);
+        $ordem = ($ordem ?? 0);
+        $codigo = $codigo;
+
+        if (!($ordem < 999999999)) {
+            $serie = ($serie + 1);
+        }
+
+        $data['serie'] = $serie;
+        //Serie
+        if ($serie <= 9) {
+            $serie = "000" . $serie;
+        } elseif ($serie <= 99) {
+            $serie = "00" . $serie;
+        } elseif ($serie <= 999) {
+            $serie = "0" . $serie;
+        } else {
+            $serie = $serie;
+        }
+
+        $data['ordem'] = ($ordem + 1);
+
+        //Ordem
+        if (($ordem + 1) <= 9) {
+            $ordem = "00000000" . ($ordem + 1);
+        } elseif (($serie + 1) <= 99) {
+            $ordem = "0000000" . ($ordem + 1);
+        } elseif (($serie + 1) <= 999) {
+            $ordem = "000000" . ($ordem + 1);
+        } elseif (($serie + 1) <= 9999) {
+            $ordem = "00000" . ($ordem + 1);
+        } elseif (($serie + 1) <= 99999) {
+            $ordem = "0000" . ($ordem + 1);
+        } elseif (($serie + 1) <= 999999) {
+            $ordem = "000" . ($ordem + 1);
+        } elseif (($serie + 1) <= 9999999) {
+            $ordem = "00" . ($ordem + 1);
+        } elseif (($serie + 1) <= 99999999) {
+            $ordem = "0" . ($ordem + 1);
+        } else {
+            $ordem = ($ordem + 1);
+        }
+
+        $data['numero_membro'] = $serie . $codigo . $ordem;
+        return $data;
     }
 
     public function cartao($member_id)
@@ -443,10 +531,10 @@ class Membro extends CI_Controller
         $qr_data .= "E de: " . $data['membro']->nome_mae . "\n";
         $qr_data .= "Categoria: " . $data['membro']->descricao_categoria . "\n";
         $qr_data .= "Data de Nascimento: " . $data['membro']->data_nascimento . "\n";
- 
-        QRcode::png(utf8_encode($qr_data), $QRCodeDir . '/generated/' . $data['membro']->descricao_identificacao . '.png');
 
-        $data['qr_data'] = "<img width='90px' src='" . base_url() . "libs/phpqrcode/generated/" . $data['membro']->descricao_identificacao . ".png'>";
+        QRcode::png(utf8_encode($qr_data), $QRCodeDir . '/generated/' . $data['membro']->descricao_identificacao . '.png', QR_ECLEVEL_L, 4);
+
+        $data['qr_data'] = "<img width='115px' src='" . base_url() . "libs/phpqrcode/generated/" . $data['membro']->descricao_identificacao . ".png'>";
 
         $html = $this->load->view('membro/cartao', $data)->output->final_output;
 
