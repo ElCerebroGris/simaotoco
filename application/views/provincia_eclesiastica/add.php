@@ -1,5 +1,5 @@
             <!-- Navbar -->
-            <?php include APPPATH . 'views/includes/header.php';?>
+            <?php include APPPATH . 'views/includes/header.php'; ?>
             <!-- /.navbar -->
 
             <!-- Content Wrapper. Contains page content -->
@@ -7,12 +7,12 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="container-fluid">
-                    <?php if ($this->session->flashdata('sms') != null) {?>
+                        <?php if ($this->session->flashdata('sms') != null) { ?>
                             <div class="alert alert-danger">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <?=$this->session->flashdata('sms');?>
+                                <?= $this->session->flashdata('sms'); ?>
                             </div>
-                        <?php }?>
+                        <?php } ?>
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h1>Adicionar Provincia Eclesiastica</h1>
@@ -40,31 +40,33 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?=base_url()?>provincia_eclesiastica/addPost">
+                                    <form role="form" method="post" action="<?= base_url() ?>provincia_eclesiastica/addPost">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-5">
                                                     <label for="nome">Igreja Nacional</label>
                                                     <select name="igreja_nacional" class="form-control select2" style="width: 100%;">
-                                                        <?php foreach ($igreja_nacionais as $n) {?>
+                                                        <?php foreach ($igreja_nacionais as $n) { ?>
                                                             <option value="<?= $n->igreja_nacional_id ?>"><?= $n->descricao_igreja_nacional ?></option>
-                                                        <?php }?>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-5">
                                                     <label for="nome">Descrição</label>
                                                     <input name="descricao_provincia_eclesiastica" type="text" class="form-control" required="">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-2">
+                                                    <label for="nome">Código</label>
+                                                    <input name="codigo" type="text" class="form-control" required="">
                                                 </div>
                                             </div>
                                             <div class="card">
-                                            <button type="submit" class="btn btn-success">Salvar</button>
-                                        </div>
+                                                <button type="submit" class="btn btn-success">Salvar</button>
+                                            </div>
                                         </div>
                                         <!-- /.card-body -->
 
-                                        
+
                                     </form>
                                 </div>
                                 <!-- /.card -->
@@ -77,4 +79,4 @@
             </div>
             <!-- /.content-wrapper -->
 
-            <?php include APPPATH . 'views/includes/footer.php';?>
+            <?php include APPPATH . 'views/includes/footer.php'; ?>

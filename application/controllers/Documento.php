@@ -20,9 +20,10 @@ class Documento extends CI_Controller
     public function listar()
     {
         $this->verificar_acesso();
+        $this->db->join('usuario', 'usuario.usuario_id=documento.usuario_id');
         $this->db->join('membro', 'membro.membro_id=documento.membro_id');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
-        $this->db->join('usuario', 'usuario.usuario_id=documento.usuario_id');
+        
         $dados['documentos'] = $this->db->get('documento')->result();
         $this->load->view('documento/listar', $dados);
     }
@@ -133,6 +134,7 @@ class Documento extends CI_Controller
 
         $this->db->where('membro_homem_id', $membro_id);
         $dados['casamento'] = $this->db->get('casamento')->result();
+        $dados['lema'] = $this->getLema();
 
         $this->load->model('membro_model');
         $dados['homem'] = $this->membro_model->ver($membro_id);
@@ -149,7 +151,7 @@ class Documento extends CI_Controller
     }
 
     public function cerdidaoBaptismo($membro_id)
-    {
+    {   
         $this->verificar_acesso();
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
@@ -163,7 +165,7 @@ class Documento extends CI_Controller
 
         $this->load->model('membro_model');
         $dados['membro'] = $this->membro_model->ver($membro_id);
-
+        $dados['lema'] = $this->getLema();
         $html = $this->load->view('membro/docs/certidao_batismo', $dados)->output->final_output;
 
         $mpdf->SetProtection(array('print'));
@@ -189,7 +191,8 @@ class Documento extends CI_Controller
 
         $this->load->model('membro_model');
         $dados['documentos'] = $this->membro_model->ver($membro_id);
-
+        $dados['lema'] = $this->getLema();
+        
         $html = $this->load->view('membro/docs/testificacao', $dados)->output->final_output;
 
         $mpdf->SetProtection(array('print'));
@@ -198,6 +201,12 @@ class Documento extends CI_Controller
         $mpdf->SetFooter('Asadsaddas', 'E');
         $mpdf->WriteHTML($html);
         $mpdf->Output('cartao_de_membro.pdf', 'I');
+    }
+
+    public function getLema()
+    {
+        $this->db->where('status', 1);
+        return $this->db->get('lema')->result()[0]->lema;
     }
 
 }

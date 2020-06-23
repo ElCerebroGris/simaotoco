@@ -114,7 +114,7 @@
             <?php $dado = explode(' ',$documentos->data_criacao)[0]; ?> 
                 <p class="p-footer">Luanda, <?= explode('-', $dado)[2] ?>
                  de <?= explode('-', $dado)[1] ?> de <?= explode('-', $dado)[0] ?> 
-                - “Ano do Fim dos Muros e de Inicio da Harmonia da Família Tocoísta” - Milénio de Cristo</p>
+                - <?=$lema?></p>
 
 
 
@@ -125,8 +125,8 @@
                 <p>_______________________________________________</p>
                 <p>_______________________________________________</p>
                 </div>
-                <p>O SECRETÁRIO EXECUTIVO CENTRAL INTERINO</p>
-                <p class="assign-name">Reverendo-Pastor SEBASTÃO NLUTA</p>
+                <p>O SECRETÁRIO EXECUTIVO CENTRAL</p>
+                <p class="assign-name">Ancião FRANCISCO DOMINGOS</p>
 
             </div>
         </div>

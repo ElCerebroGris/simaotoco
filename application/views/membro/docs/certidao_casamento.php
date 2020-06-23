@@ -30,6 +30,24 @@
             text-align: justify;
             font-size: 1.2em;
         }
+
+        .main-footer {
+            margin-top: 20px;
+        }
+
+        .main-footer p {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .main-footer .p-footer {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 10pt;
+        }
+        
     </style>
 </head>
 
@@ -84,7 +102,7 @@
 
             <div class="main-footer">
                 <p class="p-footer">Feito em,  <?= explode('-', $data)[2] ?> 
-                de <?= explode('-', $data)[1] ?> de <?= explode('-', $data)[0] ?>- Milénio de Cristo</p>
+                de <?= explode('-', $data)[1] ?> de <?= explode('-', $data)[0] ?> - <?=$lema?> </p>
 
                 <p>O LÍDER ESPIRITUAL</p>
                 <p>Santidade Bispo Dom AFONSO NUNES</p>

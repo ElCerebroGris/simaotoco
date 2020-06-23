@@ -55,6 +55,7 @@
 <script src="<?= base_url() ?>libs/dist/js/ajax-requests-doc.js"></script>
 
 <script>
+    $("form :input").prop("autocomplete", "off");
     $(function () {
     
         //Initialize Select2 Elements

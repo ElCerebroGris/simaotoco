@@ -8,7 +8,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="container-fluid">
-                        <?php if ($this->session->flashdata('sms') != null) {?>
+                    <?php if ($this->session->flashdata('sms') != null) { ?>
                             <div class="callout callout-success alert alert-dismissible">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <?=$this->session->flashdata('sms');?>

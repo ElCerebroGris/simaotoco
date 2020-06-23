@@ -35,6 +35,7 @@ $(function() {
                 }
 
                 if (data.finish) {
+                    //console.log();
                     location.replace(data.redirect);
                 }
             },

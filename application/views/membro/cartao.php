@@ -7,10 +7,11 @@
 
     <style>
         body {
-            background-image: url('<?= base_url() ?>libs/dist/img/card.jpg');
+            background-image: url('<?= base_url() ?>libs/dist/img/card_2.jpg');
             background-position: top left;
             background-repeat: no-repeat;
             background-image-resize: 2;
+            text-transform: uppercase;
         }
 
         p {
@@ -24,7 +25,7 @@
         .details {
             width: 500px;
             float: left;
-            margin-top: 270px;
+            margin-top: 250px;
         }
 
         .details .propriety {
@@ -33,36 +34,40 @@
 
         .details .sub {
             margin-top: 16px;
+            /* background-color: red; */
         }
 
         .details .sub .qr-code {
-            /* margin-top: -20px; */
-            /* background-color: #38760f; */
+            margin-top: -8px;
             width: 24%;
             float: left;
+            padding-right: 27px;
         }
 
         .details .sub p {
-            /* font-weight: bold; */
-            margin-top: 25px;
-            font-size: 2em;
+            margin-top: 44px;
+            font-size: 1.45em;
         }
 
         .details .sub .sub-propriety {
-            color: #38760f;
+            color: #024527;
             font-weight: bold;
         }
 
         .photo {
             width: 220px;
             float: right;
-            margin-top: -38px;
+            margin-top: -18px;
         }
 
         .title {
             font-size: 1.5em;
             font-weight: bold;
-            color: #38760f;
+            color: #024527;
+        }
+
+        .text-bold{
+            font-weight: bold;
         }
     </style>
 </head>
@@ -71,7 +76,7 @@
     <br>
     <div class="main">
         <div class="details">
-            <p><span class="title">Nome: </span> <span class="propriety"><?= $membro->pessoa_nome ?></span></p>
+            <p><span class="title">Nome: </span> <span class="propriety text-bold"><?= $membro->pessoa_nome ?></span></p>
             <p><span class="title"><?= ($membro->sexo == 'MASCULINO') ? 'Filho ' : 'Filha ' ?>de: </span> <span class="propriety"><?= $membro->nome_pai ?></p>
             <p><span class="title">e de: </span> <span class="propriety"><?= $membro->nome_mae ?></span></p>
             <p><span class="title">Categoria: </span> <span class="propriety"><?= $membro->descricao_categoria ?></span></p>
@@ -80,7 +85,7 @@
                 <div class="qr-code">
                     <?= $qr_data ?>
                 </div>
-                <p>Nº <span class="sub-propriety"><?= $membro->descricao_identificacao ?></span></p>
+                <p>Nº <span class="sub-propriety"><?= $membro->numero_membro ?></span></p>
             </div>
         </div>
         <div class="photo">

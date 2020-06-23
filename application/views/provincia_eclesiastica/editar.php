@@ -45,7 +45,7 @@
                                             <div class="row">
                                                 <input value="<?= $provincia_eclesiasticas[0]->provincia_eclesiastica_id ?>" 
                                                 type="hidden" name="provincia_eclesiastica_id" />
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-5">
                                                     <label for="nome">Igreja Nacional</label>
                                                     <select name="igreja_nacional" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($igreja_nacionais as $n) {?>
@@ -55,11 +55,13 @@
                                                         <?php }?>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-5">
                                                     <label for="nome">Descrição</label>
                                                     <input value="<?= $provincia_eclesiasticas[0]->descricao_provincia_eclesiastica ?>" name="descricao_provincia_eclesiastica" type="text" class="form-control" required="">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-2">
+                                                    <label for="nome">Código</label>
+                                                    <input name="codigo" type="text" value="<?= $provincia_eclesiasticas[0]->codigo ?>" class="form-control" required="">
                                                 </div>
                                             </div>
                                             <div class="card">
