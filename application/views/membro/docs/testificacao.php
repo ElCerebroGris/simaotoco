@@ -91,8 +91,9 @@
                 <p>O LÍDER ESPIRITUAL</p>
                 <p>MAYAMONA</p>
             </div>
-
-            <h2>TESTIFICAÇÃO Nº 036/EP/0020</h2>
+            <?php $dado = explode(' ',$documentos->data_criacao)[0]; ?> 
+            
+            <h2>TESTIFICAÇÃO Nº <?= $documentos->testificacao_id ?>/EP/<?= explode('-', $dado)[0] ?></h2>
 
             <p>Para conhecimento e devidos efeitos, de acordo com o seu pedido,
                 testifica-se que, segue a <?= $documentos->destino_tipo ?> de 
@@ -111,7 +112,7 @@
             </p>
 
             <div class="main-footer">
-            <?php $dado = explode(' ',$documentos->data_criacao)[0]; ?> 
+            
                 <p class="p-footer">Luanda, <?= explode('-', $dado)[2] ?>
                  de <?= explode('-', $dado)[1] ?> de <?= explode('-', $dado)[0] ?> 
                 - <?=$lema?></p>

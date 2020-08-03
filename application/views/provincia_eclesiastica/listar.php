@@ -63,7 +63,7 @@
                                                         <td><?= $q->descricao_provincia_eclesiastica ?></td>
                                                         <td><?= $q->codigo ?></td>
                                                         <td><?= $q->descricao_igreja_nacional ?></td>
-                                                        <td><?= $q->representante_id ?></td>
+                                                        <td><?= $q->pessoa_nome ?></td>
                                                         <?php if ($q->estado_provincia_eclesiastica == 0) {?>
                                                             <td>Desativado</td>
                                                         <?php } else { ?>

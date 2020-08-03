@@ -34,42 +34,37 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form" method="post" action="<?=base_url()?>pagamento/addPost">
+                                    <form role="form" method="post" action="<?=base_url()?>pagamento/addCaixaPost">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Membro</label>
                                                     <select name="membro" class="form-control select2" style="width: 100%;">
                                                         <?php foreach ($membros as $n) {?>
-                                                            <option value="<?= $n->membro_id ?>"><?= $n->pessoa_nome ?></option>
+                                                            <option value="<?=$n->membro_id?>"><?=$n->pessoa_nome?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>
+
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Tipo de Pagamento</label>
-                                                    <select name="tipo_pagamento" class="form-control select2" style="width: 100%;">
-                                                        <option value="DIZIMO">DIZIMO</option>
-                                                        <option value="QUOTA">QUOTA</option>
-                                                        <option value="OUTRO">OUTRO</option>
+                                                    <select id="tipo_pagamento" name="tipo_pagamento" data-url="<?=base_url()?>pagamento/getTipos/" class="form-control" style="width: 100%;">
+                                                        <option value="0">Selecione o tipo</option>
+                                                        <option value="DESPESA">Despesa</option>
+                                                        <option value="RECEITA">Receita</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Tipo</label>
+                                                    <select id="tipo" name="tipo" class="form-control" style="width: 100%;">
+                                                        <option value="0">Selecione um tipo de pagamento</option>
                                                     </select>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Valor</label>
                                                     <input name="valor" type="text" class="form-control" required="">
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <label for="nome">Mês de referencia</label>
-                                                    <input name="mes_referencia" type="month" class="form-control" required="">
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <label for="nome">Modo de Pagamento</label>
-                                                    <select name="modo_pagamento" class="form-control select2" style="width: 100%;">
-                                                        <option value="CAIXA">Caixa</option>
-                                                        <option value="BANCO">Banco</option>
-                                                    </select>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
@@ -82,7 +77,12 @@
                                                         <option value="OUTRO">OUTRO</option>
                                                     </select>
                                                 </div>
-                                                
+
+                                                <div class="form-group col-md-12">
+                                                    <label for="comment">Descrição:</label>
+                                                    <textarea name="descricao" class="form-control" rows="5" id="descricao"></textarea>
+                                                </div>
+
                                             </div>
                                             <div class="card">
                                             <button type="submit" class="btn btn-success">Salvar</button>
@@ -90,7 +90,7 @@
                                         </div>
                                         <!-- /.card-body -->
 
-                                       
+
                                     </form>
                                 </div>
                                 <!-- /.card -->

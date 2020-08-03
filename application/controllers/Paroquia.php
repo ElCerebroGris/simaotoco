@@ -19,6 +19,8 @@ class Paroquia extends CI_Controller {
         $this->verificar_acesso();
         $this->db->join('provincia_eclesiastica',
          'provincia_eclesiastica.provincia_eclesiastica_id=paroquia.provincia_eclesiastica_id');
+        $this->db->join('membro', 'membro.membro_id = paroquia.representante_id', 'left');
+        $this->db->join('pessoa', 'pessoa.pessoa_id = membro.pessoa_id', 'left');
         $dados['paroquias'] = $this->db->get('paroquia')->result();
         $this->load->view('paroquia/listar', $dados);
     }
@@ -26,6 +28,7 @@ class Paroquia extends CI_Controller {
     public function add() {
         $this->verificar_acesso();
         $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
+
         $this->load->view('paroquia/add', $dados);
     }
 
@@ -70,20 +73,24 @@ class Paroquia extends CI_Controller {
         $dados['paroquias'] = $this->db->get('paroquia')->result();
 
         $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
+
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('paroquia/editar', $dados);
     }
 
     public function editarPost() {
         $this->verificar_acesso();
         $id = $this->input->post('paroquia_id');
+        $data['representante_id'] = $this->input->post('representante_id');
         $data['provincia_eclesiastica_id'] = $this->input->post('provincia_eclesiastica');
         $data['descricao_paroquia'] = $this->input->post('descricao_paroquia');
 
-        if(!$this->validar($data['descricao_paroquia'], 
-        $data['provincia_eclesiastica_id'])){
+        /*
+        if(!$this->validar($data['descricao_paroquia'], $data['provincia_eclesiastica_id'])){
             $this->session->set_flashdata('sms', 'paroquia já existente');
             redirect('paroquia/editar');
-        }
+        }*/
 
         $this->db->where('paroquia_id', $id);
         if ($this->db->update('paroquia', $data)) {

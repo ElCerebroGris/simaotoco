@@ -19,7 +19,7 @@ class Migrate extends CI_Controller
     {
         // load migration library
         //$this->load->library('migration');
-        if (!$this->migration->version(18)) {
+        if (!$this->migration->version(16)) {
             echo 'Error' . $this->migration->error_string();
         } else {
             echo 'Migrations ran successfully!';

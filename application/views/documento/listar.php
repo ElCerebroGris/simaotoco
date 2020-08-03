@@ -20,7 +20,7 @@
                             <a href="<?= base_url() ?>documento/add" class="btn btn-outline-primary btn-sm  ">Novo Geral</a>
                             <a href="<?= base_url() ?>testificacao/listar" class="btn btn-outline-primary btn-sm  ">Testificação</a>
                             <a href="<?= base_url() ?>pedido/listar" class="btn btn-outline-primary btn-sm  ">Pedidos de Impressão</a>
-                            <a href="<?= base_url() ?>correspondencia/listar" class="btn btn-outline-primary btn-sm  ">Correspondencia</a>
+                            <!--<a href="<?= base_url() ?>correspondencia/listar" class="btn btn-outline-primary btn-sm  ">Correspondencia</a>-->
                         </h5>
                     <?php } ?>
                 </div>

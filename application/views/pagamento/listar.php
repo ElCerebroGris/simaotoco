@@ -18,6 +18,8 @@
                                 <?php if ($this->session->userdata('nivel') == 1) { ?>
                                     <h5 class="mb-2">
                                         <a href="<?= base_url() ?>pagamento/add" class="btn btn-outline-primary btn-sm	">Novo</a>
+                                        <a href="<?= base_url() ?>pagamento/addCaixa" class="btn btn-outline-primary btn-sm	">Nova Despesa/Receita</a>
+                                        <a target="blank" href="<?= base_url() ?>pagamento/relatorios" class="btn btn-outline-primary btn-sm	">Relatorios</a>
                                     </h5>
                                 <?php } ?>
                             </div>
@@ -53,6 +55,7 @@
                                                     <th>Membro</th>
                                                     <th>Usuário</th>
                                                     <th>Data</th>
+                                                    <th>Opções</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="color:black">
@@ -62,6 +65,10 @@
                                                         <td><?= $q->pessoa_nome ?></td>
                                                         <td><?= $q->nome_usuario ?></td>
                                                         <td><?= $q->data_criacao ?></td>
+                                                        <td>
+                                                        <a target="blank" href="<?= base_url('pagamento/recibo/'.$q->pagamento_id) ?>" 
+                                                                class="btn btn-outline-secondary btn-sm"><i class="fa fa-print"></i></a>
+                                                        </td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
@@ -71,6 +78,7 @@
                                                     <th>Membro</th>
                                                     <th>Usuário</th>
                                                     <th>Data</th>
+                                                    <th>Opções</th>
                                                 </tr>
                                             </tfoot>
                                         </table>

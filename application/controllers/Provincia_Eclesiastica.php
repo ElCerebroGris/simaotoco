@@ -19,6 +19,9 @@ class Provincia_Eclesiastica extends CI_Controller {
         $this->verificar_acesso();
         $this->db->join('igreja_nacional', 
         'igreja_nacional.igreja_nacional_id=provincia_eclesiastica.igreja_nacional_id');
+
+        $this->db->join('membro', 'membro.membro_id = provincia_eclesiastica.representante_id', 'left');
+        $this->db->join('pessoa', 'pessoa.pessoa_id = membro.pessoa_id', 'left');
         $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
         $this->load->view('provincia_eclesiastica/listar', $dados);
     }
@@ -78,6 +81,9 @@ class Provincia_Eclesiastica extends CI_Controller {
         $dados['provincia_eclesiasticas'] = $this->db->get('provincia_eclesiastica')->result();
 
         $dados['igreja_nacionais'] = $this->db->get('igreja_nacional')->result();
+
+        $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
+        $dados['membros'] = $this->db->get('membro')->result();
         $this->load->view('provincia_eclesiastica/editar', $dados);
     }
 
@@ -86,6 +92,7 @@ class Provincia_Eclesiastica extends CI_Controller {
         $id = $this->input->post('provincia_eclesiastica_id');
         $data['igreja_nacional_id'] = $this->input->post('igreja_nacional');
         $data['descricao_provincia_eclesiastica'] = $this->input->post('descricao_provincia_eclesiastica');
+        $data['representante_id'] = $this->input->post('representante_id');
         $data['codigo'] = $this->input->post('codigo');
 
         if(!$this->validar($data['descricao_provincia_eclesiastica'], 

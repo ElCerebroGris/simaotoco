@@ -58,6 +58,17 @@
                                                     <label for="nome">Descrição</label>
                                                     <input value="<?= $paroquias[0]->descricao_paroquia ?>" name="descricao_paroquia" type="text" class="form-control" required="">
                                                 </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="nome">Representante</label>
+                                                    <select name="representante_id" class="form-control select2" style="width: 100%;">
+                                                            <option value="">Nenhum</option>
+                                                        <?php foreach ($membros as $n) {?>
+                                                            <option value="<?= $n->membro_id ?>"
+                                                            <?= $n->membro_id==$paroquias[0]->representante_id ? 'selected':'' ?> >
+                                                            <?= $n->pessoa_nome ?></option>
+                                                        <?php }?>
+                                                    </select>
+                                                </div>
                                                 
                                             </div>
                                             <div class="card">

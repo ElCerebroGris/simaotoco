@@ -48,7 +48,8 @@
                                                 <div class="form-group col-md-5">
                                                     <label for="nome">Igreja Nacional</label>
                                                     <select name="igreja_nacional" class="form-control select2" style="width: 100%;">
-                                                        <?php foreach ($igreja_nacionais as $n) {?>
+                                                          
+                                                    <?php foreach ($igreja_nacionais as $n) {?>
                                                             <option value="<?= $n->igreja_nacional_id ?>"
                                                             <?= $n->igreja_nacional_id==$provincia_eclesiasticas[0]->igreja_nacional_id ? 'selected':'' ?>
                                                             ><?= $n->descricao_igreja_nacional ?></option>
@@ -62,6 +63,17 @@
                                                 <div class="form-group col-md-2">
                                                     <label for="nome">Código</label>
                                                     <input name="codigo" type="text" value="<?= $provincia_eclesiasticas[0]->codigo ?>" class="form-control" required="">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="nome">Representante</label>
+                                                    <select name="representante_id" class="form-control select2" style="width: 100%;">
+                                                        <option value="">Nenhum</option>  
+                                                        <?php foreach ($membros as $n) {?>
+                                                            <option value="<?= $n->membro_id ?>"
+                                                            <?= $n->membro_id==$provincia_eclesiasticas[0]->representante_id ? 'selected':'' ?> >
+                                                            <?= $n->pessoa_nome ?></option>
+                                                        <?php }?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="card">
