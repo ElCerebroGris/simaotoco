@@ -26,13 +26,13 @@ $(function() {
     function renderUrl(filtered) {
         switch (filtered) {
             case '1':
-                return 'http://localhost/itel/gestoasimaotoco/documento/paroquias/';
+                return '/documento/paroquias/';
                 break;
             case '2':
-                return 'http://localhost/itel/gestoasimaotoco/documento/provincias/';
+                return '/documento/provincias/';
                 break;
             case '3':
-                return 'http://localhost/itel/gestoasimaotoco/documento/igrejas/';
+                return '/documento/igrejas/';
                 break;
             default:
                 break;
@@ -42,10 +42,11 @@ $(function() {
     $('#filter2').change(function(e) {
 
         var selector = $(this).val();
+        var url_target = $(this).data('url');
         var filtered = $("#listData2");
 
         $.ajax({
-            url: renderUrl(selector),
+            url: url_target + renderUrl(selector),
             type: 'GET',
             cache: false,
             processData: false,
@@ -70,10 +71,11 @@ $(function() {
     $('#filter3').change(function(e) {
 
         var selector = $(this).val();
+        var url_target = $(this).data('url');
         var filtered = $("#listData3");
 
         $.ajax({
-            url: renderUrl(selector),
+            url: url_target + renderUrl(selector),
             type: 'GET',
             cache: false,
             processData: false,
@@ -98,10 +100,11 @@ $(function() {
     $('#filter4').change(function(e) {
 
         var selector = $(this).val();
+        var url_target = $(this).data('url');
         var filtered = $("#listData4");
 
         $.ajax({
-            url: renderUrl(selector),
+            url: url_target + renderUrl(selector),
             type: 'GET',
             cache: false,
             processData: false,

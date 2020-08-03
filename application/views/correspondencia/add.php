@@ -58,7 +58,7 @@
                                         <div class="row">
                                         <div class="form-group col-md-6">
                                                 <label>Para:</label>
-                                                <select id="filter4" name="destino_tipo" class="form-control select2" style="width: 100%;">
+                                                <select id="filter4" data-url="<?=base_url()?>" name="destino_tipo" class="form-control select2" style="width: 100%;">
                                                         <option value="0">Selecione a Destino</option>
                                                         <option value="1">PAROQUIA</option>
                                                         <option value="2">PROVINCIA ECLESIASTICA</option>

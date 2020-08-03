@@ -55,7 +55,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label>DE:</label>
-                                                <select id="filter2" name="origem_tipo" class="form-control select2" style="width: 100%;">
+                                                <select id="filter2" data-url="<?=base_url()?>" name="origem_tipo" class="form-control select2" style="width: 100%;">
                                                         <option value="0">Selecione a Origem</option>        
                                                         <option value="1">PAROQUIA</option>
                                                         <option value="2">PROVINCIA ECLESIASTICA</option>
@@ -64,7 +64,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>PARA:</label>
-                                                <select data-url="<?=base_url()?>membro/peclesiasticasbyigreja/" id="filter3" name="destino_tipo" class="form-control select2" style="width: 100%;">
+                                                <select id="filter3" data-url="<?=base_url()?>" name="destino_tipo" class="form-control select2" style="width: 100%;">
                                                         <option value="0">Selecione a Destino</option>         
                                                         <option value="1">PAROQUIA</option>
                                                         <option value="2">PROVINCIA ECLESIASTICA</option>
