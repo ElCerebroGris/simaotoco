@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Correspondencia_model extends CI_Model
+class correspondencia_model extends CI_Model
 {
 
     public function __construct()

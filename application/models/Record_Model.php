@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Record_model extends CI_Model {
+class record_model extends CI_Model {
 
     function __construct() {
 

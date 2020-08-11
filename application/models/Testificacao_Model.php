@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Testificacao_model extends CI_Model {
+class testificacao_model extends CI_Model {
 
     function __construct() {
 

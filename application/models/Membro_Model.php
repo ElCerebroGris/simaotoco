@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Membro_model extends CI_Model {
+class membro_model extends CI_Model {
 
     function __construct() {
 

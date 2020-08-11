@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Log_model extends CI_Model {
+class log_model extends CI_Model {
 
     function __construct() {
 

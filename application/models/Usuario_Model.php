@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Usuario_model extends CI_Model {
+class usuario_model extends CI_Model {
 
     function __construct() {
 
@@ -20,7 +20,7 @@ class Usuario_model extends CI_Model {
         $data['senha'] = $this->input->post('senha');
         $data['data_criacao'] = date('d/m') . '/20' . date('y');
         
-        $this->load->model('Log_Model', 'log_model');
+        $this->load->model('log_model', 'log_model');
         $sms = 'adicionou o usuario ' .$data['nome_usuario'] . ' no sistema';
         $this->log_model->adicionar('Adicionar', $sms);
 
