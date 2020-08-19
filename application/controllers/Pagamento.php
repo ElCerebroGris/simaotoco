@@ -25,13 +25,13 @@ class Pagamento extends CI_Controller
             $json['error'] = true;
             $json['content'] = array();
             echo json_encode($json);
-        } else if ($id == 1) {
+        } else if ($id == 2) {
             $data = array(
                 array("Oferta_dominical", "Oferta dominical"),
                 array("Oferta_voluntarias", "Oferta voluntárias"),
                 array("Oferta_culto_4_feira", "Oferta culto 4ª feira"),
                 array("Oferta_culto_6_feira", "Oferta culto 6ª feira"),
-                array("Oferta_culto_Sábado", "Oferta culto Sábado"),
+                array("Oferta_culto_Sabado", "Oferta culto Sábado"),
                 array("Oferta_Santa_Ceia", "Oferta Santa Ceia"),
                 array("Oferta_Jejum", "Oferta Jejum"),
             );
@@ -47,7 +47,6 @@ class Pagamento extends CI_Controller
             $json['content'] = $data;
             echo json_encode($json);
         }
-
     }
 
     public function listar()
@@ -75,6 +74,7 @@ class Pagamento extends CI_Controller
         $data['membro_id'] = $this->input->post('membro');
         $data['usuario_id'] = $this->session->userdata('id_usuario');
         $data['tipo_pagamento'] = $this->input->post('tipo_pagamento');
+        $data['tipo'] = ucwords($this->input->post('tipo_pagamento'));
         $data['modo_pagamento'] = $this->input->post('modo_pagamento');
         $data['valor'] = $this->input->post('valor');
         $data['mes_referencia'] = $this->input->post('mes_referencia');
@@ -126,4 +126,184 @@ class Pagamento extends CI_Controller
         $this->load->view('pagamento/relatorio');
     }
 
+    public function gerarRelatorio($testificacao_id = null)
+    {
+        // $this->verificar_acesso();
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'margin_left' => 5,
+            'margin_right' => 5,
+            'margin_top' => 5,
+            'margin_bottom' => 5,
+            'margin_header' => 10,
+            'margin_footer' => 10,
+            'orientation' => 'L'
+        ]);
+
+        $data = array_map('trim', $_POST);
+        $data = array_map('strip_tags', $data);
+        $data = array_map('htmlspecialchars', $data);
+        $data = (object)$data;
+
+        $start_date = date("Y-m-d", strtotime($data->data_inicio));
+        $end_date = date("Y-m-d", strtotime($data->data_fim));
+        $dados['data_inicio'] = date('d/m/Y', strtotime($start_date));
+        $dados['data_fim'] = date('d/m/Y', strtotime($end_date));
+
+        $this->db->select('
+                            pessoa.pessoa_nome as nome_membro, 
+                            provincia_eclesiastica.descricao_provincia_eclesiastica as provincia, 
+                            paroquia.descricao_paroquia as paroquia, 
+                            classe.descricao_classe as classe,
+                            tribo.descricao_tribo	 as tribo,
+                            area.descricao_area as area,
+                            pagamento.mes_referencia as mes,
+                            pagamento.valor as valor,
+                            pagamento.moeda as moeda,
+                            pagamento.tipo as tipo,
+                            pagamento.tipo_pagamento as tipo_pagamento,
+                            pagamento.modo_pagamento as modo_pagamento
+                            ');
+
+        $this->db->join('membro', 'membro.membro_id = pagamento.membro_id');
+        $this->db->join('pessoa', 'pessoa.pessoa_id = membro.pessoa_id');
+
+        $this->db->join('classe', 'classe.classe_id = membro.classe_id');
+        $this->db->join('paroquia', 'paroquia.paroquia_id = classe.paroquia_id');
+        $this->db->join('provincia_eclesiastica', 'provincia_eclesiastica.provincia_eclesiastica_id = paroquia.provincia_eclesiastica_id');
+
+        $this->db->join('area', 'area.area_id = membro.area_id');
+        $this->db->join('tribo', 'tribo.tribo_id = area.tribo_id');
+
+        if ($data->tipo == "1") {
+            $this->db->where_in("tipo_pagamento", ["DIZIMO", "QUOTA", "RECEITA", "DESPESA"]);
+        } elseif ($data->tipo == "2") {
+            $this->db->where("tipo_pagamento", "DIZIMO");
+            $dados['tipo'] = "DIZIMOS";
+        } elseif ($data->tipo == "3") {
+            $dados['tipo'] = "QUOTAS";
+            $this->db->where("tipo_pagamento", "QUOTA");
+        }
+
+        $this->db->where("date(pagamento.data_criacao) BETWEEN '{$start_date}' AND '{$end_date}'");
+
+        $this->db->order_by('pagamento_id DESC');
+
+        $dados['pagamentos'] = $this->db->get('pagamento')->result();
+
+        if ($data->tipo == "2" || $data->tipo == "3") {
+            $html = $this->load->view('membro/docs/controle', $dados)->output->final_output;
+        } else {
+            if ($data->tipo == "1") {
+                $dados["pagamentos"] = $this->orderFolhaCaixa($dados['pagamentos']);
+            }
+            $dados['tipo'] = "FOLHA DE CAIXA";
+            $html = $this->load->view('membro/docs/pagamento', $dados)->output->final_output;
+        }
+
+        $mpdf->SetProtection(array('print'));
+        $mpdf->SetTitle($dados['tipo']);
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->SetFooter('Asadsaddas', 'E');
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('cartao_de_membro.pdf', 'I');
+    }
+
+    public function orderFolhaCaixa($data)
+    {
+        if (!count($data)) {
+            return $data;
+        }
+
+        $newData = [];
+        $incomeTypes = [
+            'DIZIMO' => 'Dizimo',
+            'QUOTA' => 'Quota',
+            'OUTRO' => 'Outro',
+            'Oferta_dominical' => 'Oferta dominical',
+            'Oferta_voluntarias' => 'Oferta voluntárias',
+            'Oferta_culto_4_feira' => 'Oferta culto 4ª feira',
+            'Oferta_culto_6_feira' => 'Oferta voluntárias',
+            'Oferta_culto_Sabado' => 'Oferta Culdo de Sábado',
+            'Oferta_Santa_Ceia' => 'Oferta Santa Ceia',
+            'Oferta_Jejum' => 'Oferta Jejum'
+        ];
+
+        $outcomeTypes= [
+            'Material_de_Escritorio_Gastaveis' => 'Material de Escritório - Gastaveis',
+            'Material_de_Escritorio_Equipamentos' => 'Material de Escritório - Equipamentos'
+        ];
+
+        foreach ($incomeTypes as $keyType => $type) {
+
+            $newData['income'][$keyType]['type'] = $type;
+            $newData['income'][$keyType]['kz'] = 0;
+            $newData['income'][$keyType]['usd'] = 0;
+            $newData['income'][$keyType]['euro'] = 0;
+            $newData['income'][$keyType]['zar'] = 0;
+            $newData['income'][$keyType]['other_coin'] = 0;
+
+            foreach ($data as  $payment) {
+
+                if ($payment->tipo == $keyType) {
+
+                    switch ($payment->moeda) {
+                        case 'AKZ':
+                            $newData['income'][$keyType]['kz'] = $newData['income'][$keyType]['kz'] += $payment->valor;
+                            break;
+                        case 'USD':
+                            $newData['income'][$keyType]['usd'] = $newData['income'][$keyType]['usd'] += $payment->valor;
+                            break;
+                        case 'EURO':
+                            $newData['income'][$keyType]['euro'] = $newData['income'][$keyType]['euro']  += $payment->valor;
+                            break;
+                        case 'ZAR':
+                            $newData['income'][$keyType]['zar'] = $newData['income'][$keyType]['zar'] += $payment->valor;
+                            break;
+
+                        default:
+                            $newData['income'][$keyType]['other_coin'] = $newData['income'][$keyType]['other_coin'] += $payment->valor;
+                            break;
+                    }
+                }
+            }
+        }
+
+        foreach ($outcomeTypes as $keyType => $type) {
+
+            $newData['outcome'][$keyType]['type'] = $type;
+            $newData['outcome'][$keyType]['kz'] = 0;
+            $newData['outcome'][$keyType]['usd'] = 0;
+            $newData['outcome'][$keyType]['euro'] = 0;
+            $newData['outcome'][$keyType]['zar'] = 0;
+            $newData['outcome'][$keyType]['other_coin'] = 0;
+
+            foreach ($data as  $payment) {
+
+                if ($payment->tipo == $keyType) {
+
+                    switch ($payment->moeda) {
+                        case 'AKZ':
+                            $newData['outcome'][$keyType]['kz'] = $newData['outcome'][$keyType]['kz'] += $payment->valor;
+                            break;
+                        case 'USD':
+                            $newData['outcome'][$keyType]['usd'] = $newData['outcome'][$keyType]['usd'] += $payment->valor;
+                            break;
+                        case 'EURO':
+                            $newData['outcome'][$keyType]['euro'] = $newData['outcome'][$keyType]['euro']  += $payment->valor;
+                            break;
+                        case 'ZAR':
+                            $newData['outcome'][$keyType]['zar'] = $newData['outcome'][$keyType]['zar'] += $payment->valor;
+                            break;
+
+                        default:
+                            $newData['outcome'][$keyType]['other_coin'] = $newData['outcome'][$keyType]['other_coin'] += $payment->valor;
+                            break;
+                    }
+                }
+            }
+        }
+        
+        return $newData;
+    }
 }

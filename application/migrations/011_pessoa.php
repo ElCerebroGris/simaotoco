@@ -9,7 +9,7 @@ class Migration_Pessoa extends CI_Migration
     {
         $this->dbforge->add_field('pessoa_id int(11) NOT NULL PRIMARY KEY auto_increment');
         $this->dbforge->add_field('nacionalidade_id int(11) NOT NULL');
-        $this->dbforge->add_field('pessoa_nome varchar(100) NOT NULL UNIQUE');
+        $this->dbforge->add_field('pessoa_nome varchar(100) NOT NULL');
         $this->dbforge->add_field('nome_pai varchar(100) NOT NULL');
         $this->dbforge->add_field('nome_mae varchar(100) NOT NULL');
         $this->dbforge->add_field('data_nascimento varchar(30) NOT NULL');
