@@ -126,42 +126,4 @@ $(function() {
             }
         });
     });
-
-    $('#tipo_pagamento').change(function(e) {
-
-        var url_target = $(this).data('url');
-        var selector = $(this).val();
-        var tipo = $("#tipo");
-
-        var id = 0;
-        if (selector == 'DESPESA') {
-            id = 1
-        } else if (selector == 'RECEITA') {
-            id = 2
-        }
-
-        $.ajax({
-            url: url_target + id,
-            type: 'GET',
-            cache: false,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function(data) {
-
-                tipo.html('');
-                if (data.error) {
-                    tipo.append("<option value='0'>Sem Resultado Disponiveis</option>");
-                }
-
-                if (data.success) {
-                    tipo.append("<option value=''>Selecione uma opção</option>");
-                    $.each(data.content, function(key, value) {
-                        tipo.append("<option value='" + value[0] + "'>" + value[1] + "</option>");
-                    });
-                }
-            }
-        });
-    });
-
 });

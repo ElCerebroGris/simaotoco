@@ -16,8 +16,9 @@ class Migration_Pagamento extends CI_Migration
         $this->dbforge->add_field('moeda varchar(10)');
         $this->dbforge->add_field('tipo varchar(50) DEFAULT NULL');
         $this->dbforge->add_field('descricao varchar(100) DEFAULT NULL');
-        $this->dbforge->add_field('modo_pagamento enum(\'CAIXA\',\'BANCO\',\'OUTRO\') 
-        DEFAULT \'OUTRO\'');
+        $this->dbforge->add_field('modo_pagamento varchar(100)');
+        $this->dbforge->add_field('referencia_transacao varchar(100) DEFAULT NULL');
+        $this->dbforge->add_field('data_transacao varchar(100) DEFAULT NULL');
         $this->dbforge->add_field('data_criacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP');
         $this->dbforge->add_field('data_atualizacao timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
         $this->dbforge->create_table('pagamento');

@@ -24,6 +24,12 @@
                 <section class="content">
 
                     <div class="container-fluid">
+                    <?php if ($this->session->flashdata('sms') != null) { ?>
+                            <div class="callout callout-danger alert alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?= $this->session->flashdata('sms'); ?>
+                            </div>
+                        <?php } ?>
                         <div class="row">
                             <!-- left column -->
                             <div class="col-md-12">
@@ -47,7 +53,7 @@
                                                 </div>
 
                                                 <div class="form-group col-md-6">
-                                                    <label for="nome">Tipo de Pagamento</label>
+                                                    <label for="nome">Operação</label>
                                                     <select id="tipo_pagamento" name="tipo_pagamento" data-url="<?=base_url()?>pagamento/getTipos/" class="form-control" style="width: 100%;">
                                                         <option value="0">Selecione o tipo</option>
                                                         <option value="DESPESA">Despesa</option>
@@ -58,13 +64,33 @@
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Tipo</label>
                                                     <select id="tipo" name="tipo" class="form-control" style="width: 100%;">
-                                                        <option value="0">Selecione um tipo de pagamento</option>
+                                                        <option value="0">Selecione uma operação</option>
                                                     </select>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Valor</label>
                                                     <input name="valor" type="text" class="form-control" required="">
+                                                </div>
+
+                                                <div class="form-group col-md-6 transacao">
+                                                    <label for="nome">Referencia da transação</label>
+                                                    <input name="referencia_transacao" type="text" class="form-control">
+                                                </div>
+
+                                                <div class="form-group col-md-6 transacao">
+                                                    <label for="nome">Data da transação</label>
+                                                    <input name="data_transacao" type="date" class="form-control">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Modo</label>
+                                                    <select name="modo_pagamento" class="form-control select2" style="width: 100%;">
+                                                        <option value="CAIXA">Caixa</option>
+                                                        <option value="TRANSFERENCIA">Transferencia</option>
+                                                        <option value="DEPOSITO">Deposito</option>
+                                                        <option value="TPA">TPA</option>
+                                                    </select>
                                                 </div>
 
                                                 <div class="form-group col-md-6">

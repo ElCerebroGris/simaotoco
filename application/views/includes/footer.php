@@ -53,6 +53,7 @@
 <script src="<?= base_url() ?>libs/dist/js/ajax-requests.js"></script>
 
 <script src="<?= base_url() ?>libs/dist/js/ajax-requests-doc.js"></script>
+<script src="<?= base_url() ?>libs/dist/js/ajax-requests-paga.js"></script>
 
 <script>
     $("form :input").prop("autocomplete", "off");
