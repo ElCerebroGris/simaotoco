@@ -135,9 +135,9 @@ $(function() {
 
         var id = 0;
         if (selector == 'DESPESA') {
-            id = 1
-        } else if (selector == 'RECEITA') {
             id = 2
+        } else if (selector == 'RECEITA') {
+            id = 1
         }
 
         $.ajax({

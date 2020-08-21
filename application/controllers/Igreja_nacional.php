@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Igreja_Nacional extends CI_Controller {
+class Igreja_nacional extends CI_Controller {
 
     public function verificar_acesso() {
         if (!$this->session->userdata('logado')) {

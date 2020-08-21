@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Provincia_Eclesiastica extends CI_Controller {
+class provincia_eclesiastica extends CI_Controller {
 
     public function verificar_acesso() {
         if (!$this->session->userdata('logado')) {

@@ -45,7 +45,7 @@
         }
 
         .details .sub p {
-            margin-top: 44px;
+            margin-top: 50px;
             font-size: 1.45em;
         }
 
@@ -85,7 +85,7 @@
                 <div class="qr-code">
                     <?= $qr_data ?>
                 </div>
-                <p>Nº <span class="sub-propriety"><?= $membro->numero_membro ?></span></p>
+                <p style="font-size:  1.3em;">Nº <span class="sub-propriety"><?= $membro->numero_membro ?></span></p>
             </div>
         </div>
         <div class="photo">
