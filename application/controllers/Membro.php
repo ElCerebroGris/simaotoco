@@ -432,17 +432,17 @@ class Membro extends CI_Controller
 
     public function generateNumber($provincia_id, $codigo)
     {
-        $this->db->select('MAX(membro.membro_id) as id, membro.serie as serie, membro.ordem as ordem, provincia_eclesiastica.codigo as codigo');
+        $this->db->select('membro.membro_id as id, membro.serie as serie, membro.ordem as ordem, provincia_eclesiastica.codigo as codigo');
 
         $this->db->join('classe', 'classe.classe_id = membro.classe_id');
         $this->db->join('paroquia', 'paroquia.paroquia_id = classe.paroquia_id');
         $this->db->join('provincia_eclesiastica', 'provincia_eclesiastica.provincia_eclesiastica_id = paroquia.provincia_eclesiastica_id');
         $this->db->where('provincia_eclesiastica.provincia_eclesiastica_id', $provincia_id);
+        $this->db->order_by('membro.membro_id DESC');
 
         $data = $this->db->get('membro')->result()[0];
 
         if (!$data) {
-
             return $this->setMemberNumber($codigo);
         }
 
@@ -459,7 +459,7 @@ class Membro extends CI_Controller
         if (!($ordem < 999999999)) {
             $serie = ($serie + 1);
         }
-
+        
         $data['serie'] = $serie;
         //Serie
         if ($serie <= 9) {
@@ -524,6 +524,7 @@ class Membro extends CI_Controller
             redirect('membro/listar');
         }
 
+        
         $genero = ($data['membro']->sexo == 'MASCULINO') ? "Filho de: " : "Filha de: ";
 
         $qr_data =  "Nome: " . $data['membro']->pessoa_nome . "\n";
