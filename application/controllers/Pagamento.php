@@ -26,26 +26,16 @@ class Pagamento extends CI_Controller
             $json['content'] = array();
             echo json_encode($json);
         } else if ($id == 2) {
-            $data = array(
-                array("Dizimo", "Dizimo"),
-                array("Quota", "Quota"),
-                array("Oferta_dominical", "Oferta dominical"),
-                array("Oferta_voluntarias", "Oferta voluntárias"),
-                array("Oferta_culto_4_feira", "Oferta culto 4ª feira"),
-                array("Oferta_culto_6_feira", "Oferta culto 6ª feira"),
-                array("Oferta_culto_Sabado", "Oferta culto Sábado"),
-                array("Oferta_Santa_Ceia", "Oferta Santa Ceia"),
-                array("Oferta_Jejum", "Oferta Jejum"),
-                array("Outro", "Outro"),
-            );
+            $this->db->where('tipo', 'RECEITA');
+            $this->db->where('estado_tipo', 1);
+            $data = $this->db->get('tipo_pagamento')->result();
             $json['success'] = true;
             $json['content'] = $data;
             echo json_encode($json);
         } else {
-            $data = array(
-                array("Material_de_Escritorio_Gastaveis", "Material de Escritório - Gastaveis"),
-                array("Material_de_Escritorio_Equipamentos", "Material de Escritório - Equipamentos"),
-            );
+            $this->db->where('tipo', 'DESPESA');
+            $this->db->where('estado_tipo', 1);
+            $data = $this->db->get('tipo_pagamento')->result();
             $json['success'] = true;
             $json['content'] = $data;
             echo json_encode($json);
@@ -71,12 +61,61 @@ class Pagamento extends CI_Controller
         }
     }
 
+    public function tipos()
+    {
+        $this->verificar_acesso();
+        $dados['tipos'] = $this->db->get('tipo_pagamento')->result();
+        $this->load->view('pagamento/tipos', $dados);
+    }
+
+    public function addTipoPost()
+    {
+        $this->verificar_acesso();
+        $data['tipo'] = $this->input->post('tipo');
+        $data['descricao'] = $this->input->post('descricao');;
+
+        if($data['tipo']=='0'){
+            $this->session->set_flashdata('sms', 'Selecione um tipo...');
+            redirect('pagamento/tipos');
+        }
+
+        if ($this->db->insert('tipo_pagamento', $data)) {
+            $this->load->model('log_model');
+            $this->log_model->adicionar('tipo pagamento de ' . $data['descricao']);
+
+            $this->session->set_flashdata('sms', 'Tipo de Pagamento registrado com sucesso');
+            redirect('pagamento/tipos');
+        }
+    }
+
+    public function ativar_tipo($id) {
+        $this->verificar_acesso();
+        $data['estado_tipo'] = 1;
+        $this->db->where('tipo_pagamento_id', $id);
+        if ($this->db->update('tipo_pagamento', $data)) {
+            $this->session->set_flashdata('sms', 'tipo de pagamento atualizado com sucesso');
+            redirect('pagamento/tipos');
+        }
+    }
+
+    public function desativar_tipo($id) {
+        $this->verificar_acesso();
+        $data['estado_tipo'] = 0;
+        $this->db->where('tipo_pagamento_id', $id);
+        if ($this->db->update('tipo_pagamento', $data)) {
+            $this->session->set_flashdata('sms', 'tipo de pagamento atualizado com sucesso');
+            redirect('pagamento/tipos');
+        }
+    }
+
     public function listar()
     {
         $this->verificar_acesso();
+        $this->db->select('tipo_pagamento.tipo, tipo_pagamento.descricao, pessoa.pessoa_nome,
+        pagamento.valor, pagamento.moeda, pagamento.data_criacao, pagamento.pagamento_id');
         $this->db->join('membro', 'membro.membro_id=pagamento.membro_id');
         $this->db->join('pessoa', 'pessoa.pessoa_id=membro.pessoa_id');
-        $this->db->join('usuario', 'usuario.usuario_id=pagamento.usuario_id');
+        $this->db->join('tipo_pagamento', 'tipo_pagamento.tipo_pagamento_id=pagamento.tipo_pagamento');
         $dados['pagamentos'] = $this->db->get('pagamento')->result();
         $this->load->view('pagamento/listar', $dados);
     }
@@ -96,7 +135,6 @@ class Pagamento extends CI_Controller
         $data['membro_id'] = $this->input->post('membro');
         $data['usuario_id'] = $this->session->userdata('id_usuario');
         $data['tipo_pagamento'] = $this->input->post('tipo_pagamento');
-        $data['tipo'] = $this->input->post('tipo');
         $data['descricao'] = $this->input->post('descricao');
         $data['valor'] = $this->input->post('valor');
         $data['moeda'] = $this->input->post('moeda');

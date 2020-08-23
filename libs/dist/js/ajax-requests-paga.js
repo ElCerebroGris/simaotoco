@@ -10,10 +10,10 @@ $(function() {
 
         var id = 0;
         if (selector == 'DESPESA') {
-            id = 2;
+            id = 1;
             $(".transacao").hide();
         } else if (selector == 'RECEITA') {
-            id = 1;
+            id = 2;
             $(".transacao").show();
         }
 
@@ -34,7 +34,7 @@ $(function() {
                 if (data.success) {
                     tipo.append("<option value=''>Selecione uma opção</option>");
                     $.each(data.content, function(key, value) {
-                        tipo.append("<option value='" + value[0] + "'>" + value[1] + "</option>");
+                        tipo.append("<option value='" + value.tipo_pagamento_id + "'>" + value.descricao + "</option>");
                     });
                 }
             }

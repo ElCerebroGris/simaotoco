@@ -19,6 +19,7 @@
                                     <h5 class="mb-2">
                                         <a href="<?=base_url()?>pagamento/addCaixa" class="btn btn-outline-primary btn-sm	">Novo</a>
                                         <a target="blank" href="<?=base_url()?>pagamento/relatorios" class="btn btn-outline-primary btn-sm	">Relatorios</a>
+                                        <a href="<?=base_url()?>pagamento/tipos" class="btn btn-outline-primary btn-sm	">Gestão de Tipos</a>
                                     </h5>
                                 <?php }?>
                             </div>
@@ -61,8 +62,8 @@
                                             <tbody style="color:black">
                                                 <?php foreach ($pagamentos as $q) {?>
                                                     <tr>
-                                                        <td><?=$q->tipo_pagamento?></td>
                                                         <td><?=$q->tipo?></td>
+                                                        <td><?=$q->descricao?></td>
                                                         <td><?=$q->pessoa_nome?></td>
                                                         <td><?=$q->valor . ' ' . $q->moeda?></td>
                                                         <td><?=$q->data_criacao?></td>

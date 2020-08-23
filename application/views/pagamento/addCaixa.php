@@ -63,7 +63,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="nome">Tipo</label>
-                                                    <select id="tipo" name="tipo" class="form-control" style="width: 100%;">
+                                                    <select id="tipo" name="tipo_pagamento" class="form-control" style="width: 100%;">
                                                         <option value="0">Selecione uma operação</option>
                                                     </select>
                                                 </div>

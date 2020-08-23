@@ -12,9 +12,8 @@ class Migration_Pagamento extends CI_Migration
         $this->dbforge->add_field('usuario_id int(11) NOT NULL');
         $this->dbforge->add_field('mes_referencia varchar(30) DEFAULT NULL');
         $this->dbforge->add_field('valor float NOT NULL');
-        $this->dbforge->add_field('tipo_pagamento varchar(30)');
+        $this->dbforge->add_field('tipo_pagamento int(11)');
         $this->dbforge->add_field('moeda varchar(10)');
-        $this->dbforge->add_field('tipo varchar(50) DEFAULT NULL');
         $this->dbforge->add_field('descricao varchar(100) DEFAULT NULL');
         $this->dbforge->add_field('modo_pagamento varchar(100)');
         $this->dbforge->add_field('referencia_transacao varchar(100) DEFAULT NULL');

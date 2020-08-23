@@ -86,6 +86,12 @@ class Record_model extends CI_Model {
         $sql = "INSERT INTO `usuario` (`membro_id`, `nome_usuario`, `senha`, `email`, `codigo_nivel_usuario`) VALUES
         (1, 'admin', 'admin', '', 1);";
         $this->db->query($sql);
+
+        $sql = "INSERT INTO tipo_pagamento (descricao, tipo) VALUES 
+        ('Dizimo', 'RECEITA'),
+        ('Quota', 'RECEITA'),
+        ('Materias de escritorio', 'DESPESA');";
+        $this->db->query($sql);
     }
 
     function eliminarTabelas() {
